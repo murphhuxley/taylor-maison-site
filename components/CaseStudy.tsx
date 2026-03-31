@@ -3,8 +3,8 @@
 import { useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import Link from 'next/link'
 import type { Project } from '@/lib/projects'
+import TransitionLink from './TransitionLink'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -196,9 +196,9 @@ export default function CaseStudy({ project, nextProject }: CaseStudyProps) {
         <span className="case-next__label section-label" style={{ opacity: 0, visibility: 'hidden' }}>
           Next project
         </span>
-        <Link href={`/work/${nextProject.slug}`} className="case-next__link" style={{ opacity: 0, visibility: 'hidden' }}>
+        <TransitionLink href={`/work/${nextProject.slug}`} className="case-next__link" style={{ opacity: 0, visibility: 'hidden' }}>
           <h2 className="case-next__title">{nextProject.title}</h2>
-        </Link>
+        </TransitionLink>
         <span className="case-next__category" style={{ opacity: 0, visibility: 'hidden' }}>
           {nextProject.category}
         </span>

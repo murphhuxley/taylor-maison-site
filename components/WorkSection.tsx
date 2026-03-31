@@ -1,10 +1,10 @@
 'use client'
 
-import Link from 'next/link'
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { projects } from '@/lib/projects'
+import TransitionLink from './TransitionLink'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -73,13 +73,13 @@ export default function WorkSection() {
               className={`work-entry ${index % 2 === 1 ? 'work-entry--reverse' : ''}`}
               style={{ opacity: 0, visibility: 'hidden' }}
             >
-              <Link href={`/work/${project.slug}`} className="work-entry__media">
+              <TransitionLink href={`/work/${project.slug}`} className="work-entry__media">
                 <img
                   src={project.thumbnail}
                   alt={project.title}
                   className="work-entry__image"
                 />
-              </Link>
+              </TransitionLink>
 
               <div className="work-entry__content">
                 <div className="work-entry__meta">
@@ -96,9 +96,9 @@ export default function WorkSection() {
                   </p>
                 </div>
 
-                <Link href={`/work/${project.slug}`} className="work-entry__link">
+                <TransitionLink href={`/work/${project.slug}`} className="work-entry__link">
                   Read case study
-                </Link>
+                </TransitionLink>
               </div>
             </article>
           ))}

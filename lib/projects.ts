@@ -78,7 +78,7 @@ export const projects: Project[] = [
           {
             label: 'Services overview',
             aspect: '4/3',
-            image: '/images/projects/roman-sanford/services.png',
+            image: '/images/projects/roman-sanford/services-page.png',
           },
           {
             label: 'Photo gallery',
@@ -173,7 +173,7 @@ export const projects: Project[] = [
       'A multi-century comic universe — from world-building to 3D web reader — built from a blank page.',
     color: '#17352b',
     url: 'https://www.genuineundeadcomics.com',
-    thumbnail: '/images/projects/genuine-undead/hero.png',
+    thumbnail: '/images/projects/genuine-undead/homepage.png',
     headline:
       'Creative direction, narrative architecture, and digital world-building for an original comic universe.',
     audience:
@@ -199,7 +199,7 @@ export const projects: Project[] = [
           {
             label: 'Homepage and universe',
             aspect: '16/9',
-            image: '/images/projects/genuine-undead/hero.png',
+            image: '/images/projects/genuine-undead/homepage.png',
           },
         ],
       },
@@ -238,7 +238,7 @@ export const projects: Project[] = [
     description:
       'A brand that captures what a perfect Hamptons afternoon actually feels like — built for the people who host them.',
     color: '#536648',
-    thumbnail: '/images/projects/hampton-garden-party/hero.png',
+    thumbnail: '/images/projects/hampton-garden-party/homepage.png',
     headline:
       'A Hamptons-facing brand system designed to sell a feeling before the client asks for details.',
     audience:
@@ -262,9 +262,9 @@ export const projects: Project[] = [
         layout: 'full',
         items: [
           {
-            label: 'Hero atmosphere',
+            label: 'Homepage atmosphere',
             aspect: '16/9',
-            image: '/images/projects/hampton-garden-party/hero.png',
+            image: '/images/projects/hampton-garden-party/homepage.png',
           },
         ],
       },

@@ -2,6 +2,9 @@
 
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
+import dynamic from 'next/dynamic'
+
+const Ferrofluid = dynamic(() => import('./Ferrofluid'), { ssr: false })
 
 const notes = [
   {
@@ -10,18 +13,12 @@ const notes = [
   },
   {
     label: 'Based in',
-    value: 'Southampton, NY — serving the Hamptons and greater Suffolk County.',
+    value: 'Southampton, NY — available for select remote and in-person engagements.',
   },
   {
     label: 'Projects',
     value: 'Advisory engagements, full builds, focused refreshes, and ongoing retainers.',
   },
-]
-
-const showcaseProjects = [
-  { src: '/images/projects/hampton-garden-party/hero.png', alt: 'Hampton Garden Party', modifier: 'primary' },
-  { src: '/images/projects/roman-sanford/services-page.png', alt: 'Roman Sanford Services', modifier: 'secondary' },
-  { src: '/images/projects/genuine-undead/hero.png', alt: 'Genuine Undead', modifier: 'tertiary' },
 ]
 
 export default function Hero() {
@@ -44,19 +41,6 @@ export default function Hero() {
         }
       )
         .fromTo(
-          '.hero__frame',
-          { autoAlpha: 0, y: 48 },
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 1.1,
-            ease: 'power3.out',
-            stagger: 0.12,
-            clearProps: 'all',
-          },
-          '-=0.6'
-        )
-        .fromTo(
           '.hero__note',
           { autoAlpha: 0, y: 20 },
           {
@@ -76,6 +60,15 @@ export default function Hero() {
 
   return (
     <section id="top" ref={sectionRef} className="hero">
+      <video
+        className="hero__video-bg"
+        autoPlay
+        muted
+        loop
+        playsInline
+        src="/video/hero-bg.mp4"
+        ref={(el) => { if (el) el.playbackRate = 0.4 }}
+      />
       <div className="hero__inner">
         <span className="hero__eyebrow section-label" style={{ opacity: 0, visibility: 'hidden' }}>
           Taylor Maison
@@ -101,26 +94,8 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="hero__showcase">
-            {showcaseProjects.map((project) => (
-              <div
-                key={project.alt}
-                className={`hero__frame hero__frame--${project.modifier}`}
-                style={{ opacity: 0, visibility: 'hidden' }}
-              >
-                <div className="hero__frame-chrome">
-                  <span className="hero__frame-dot" />
-                  <span className="hero__frame-dot" />
-                  <span className="hero__frame-dot" />
-                </div>
-                <img
-                  src={project.src}
-                  alt={project.alt}
-                  className="hero__frame-img"
-                  loading="eager"
-                />
-              </div>
-            ))}
+          <div className="hero__visual">
+            <Ferrofluid />
           </div>
         </div>
 

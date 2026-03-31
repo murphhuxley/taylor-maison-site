@@ -257,6 +257,67 @@ hooeem's 6-phase action plan for individuals maps directly to what TMC sells to 
 
 ---
 
+---
+
+## Case Study: Oliver Henry / LarryLoop — The Productization Playbook
+
+*Source: @oliverhenry X article (681❤️, 410K👁, 3.5K bookmarks). March 21, 2026.*
+
+### What He Built
+
+Oliver Henry built "Larry," an AI agent on OpenClaw that automates TikTok content marketing. Larry generates slideshows, posts them, tracks performance, and iterates. Results: 1.6M TikTok views, hundreds of paying subscribers, runs his entire content marketing while he spends 60 seconds/day adding music.
+
+### The Two-Tier Model
+
+| Tier | Product | Audience | Pricing |
+|------|---------|----------|---------|
+| Power users | **LarryBrain** (skills marketplace) | OpenClaw users (10K) | Free skill |
+| Everyone else | **LarryLoop** (SaaS dashboard) | Non-technical (7M article readers) | Paid SaaS |
+
+The free skill on LarryBrain is the hook. It builds community, gets him known, creates social proof. LarryLoop (larryloop.com) is the revenue engine — same AI, zero friction, sign in with Google.
+
+### The Feedback Loop (Core IP)
+
+```
+Generate content → Post → Track what happened → Learn from data → Generate better content
+```
+
+The critical differentiator: he tracks **revenue**, not just views. Stripe/RevenueCat integration tells him which post with 5K views drove 8 paying subscribers vs which post with 200K views drove zero. Content optimization against money, not vanity metrics.
+
+### How This Maps to Taylor Maison Creative
+
+| Oliver's Journey | Our Equivalent |
+|---|---|
+| Built Larry for his own apps | Built Murph/Reed/HuxCap for Taylor's businesses |
+| Free skill on LarryBrain (10K users) | Free base skills on ClawHub |
+| LarryLoop SaaS for everyone else | Forkable orgs: managed agent ops for clients |
+| "I hated marketing, so I automated it" | "Hamptons businesses hate digital, so we handle it" |
+| Revenue attribution (Stripe → content) | Dashboard + reporting in retainer |
+| Content self-improves via feedback loop | Reed should self-improve via performance data |
+
+### Key Quote
+
+"For the 10,000 people who already use OpenClaw, that's nothing. But for the other 6,990,000 people? They didn't know what OpenClaw was."
+
+This is the Starter vs Premium tier gap. The skill is the hook. The managed service is the revenue.
+
+### What to Steal
+
+1. **Feedback loop as product** — Reed needs revenue attribution, not just impressions
+2. **Two-tier distribution** — free skill (community) + paid managed service (revenue)
+3. **The "60 seconds a day" pitch** — quantify the time savings for prospects
+4. **Content that compounds** — "Week 1 learning, Month 1 knows your audience, Month 3 it's a machine"
+
+### Oliver's Full Body of Work (Study List)
+
+- Original Larry article: x.com/oliverhenry/status/2022011925903667547 (7M views)
+- LarryBrain: larrybrain.com (skills marketplace)
+- LarryLoop: larryloop.com (SaaS product)
+- Larry's X account: @LarryClawerence
+- Larry's community: x.com/i/communities/2020254386430300547
+
+---
+
 *This is the plan. Now we build.*
 
-*Maintained by Murph Huxley. Last updated: March 12, 2026.*
+*Maintained by Murph Huxley. Last updated: March 22, 2026.*
