@@ -164,6 +164,23 @@ Play once only. Do NOT add `toggleActions` or make animations repeatable unless 
 ### Nav Interaction -- Undecided
 Cursor hover behavior over nav links not decided. Don't change without asking Taylor.
 
+## Design Learnings (hard-won, March 2026)
+
+### Process
+- **Don't chase award-site complexity.** Elevate by pushing one core idea at a time while protecting what already feels tasteful and restrained.
+- **When negative feedback says the older version was better:** STOP iterating the current branch. Rebuild from the spine of the last version that felt coherent.
+- **Hero copy must be specific** to the business, not ad-like. Verify at real desktop viewport dimensions before calling a redesign better.
+- **If a hero module needs explanation, it's overdesigned.** One project, one caption. Everything else goes to the work section below.
+
+### Positioning
+- **Keep homepage positioning broad and aspirational.** Don't over-specify geography and industry categories. Let portfolio work imply range.
+
+### Orb / 3D Interaction
+- **"Alive" means visible intent.** Start with too much energy, dial back — not the other way. Subtle polish is invisible if it doesn't register.
+- **"Gravitational" = localized surface deformation near cursor.** NOT whole-object drift. Keep the orb anchored, concentrate movement at the pointer-facing area.
+- **Don't push to literal ferrofluid spikes.** Target is controlled, elegant reactivity — not maximum simulation fidelity. Spikes read as ugly and gimmicky.
+- **Identify the interaction mechanic first, visual style second.** When Taylor references a visual effect, nail the mechanic before styling. Never ship a barely reactive approximation.
+
 ## Known Issues / TODOs
 - **Mobile nav:** No hamburger menu; nav hides at <900px. Needs mobile nav.
 - **/about page:** Not yet built.
