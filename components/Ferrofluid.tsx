@@ -181,7 +181,7 @@ export default function Ferrofluid() {
     >
       {visible && (
         <Canvas
-          camera={{ position: [0, 0, 4.1], fov: 36 }}
+          camera={{ position: [0, 0, 2.7], fov: 36 }}
           dpr={[1, 2]}
           gl={{ alpha: true, antialias: true }}
           style={{ background: 'transparent' }}

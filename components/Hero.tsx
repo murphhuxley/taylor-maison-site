@@ -132,26 +132,6 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="hero__marquee" aria-hidden="true">
-        <div className="hero__marquee-track">
-          <span>Roman Sanford</span>
-          <em>—</em>
-          <span>RS Black</span>
-          <em>—</em>
-          <span>Genuine Undead</span>
-          <em>—</em>
-          <span>Hampton Garden Party</span>
-          <em>—</em>
-          <span>Roman Sanford</span>
-          <em>—</em>
-          <span>RS Black</span>
-          <em>—</em>
-          <span>Genuine Undead</span>
-          <em>—</em>
-          <span>Hampton Garden Party</span>
-          <em>—</em>
-        </div>
-      </div>
     </section>
   )
 }

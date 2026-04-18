@@ -212,13 +212,7 @@ main > section,
   padding-right: var(--container-padding);
 }
 
-/* Full-bleed sections break out of container */
-main > section.hero {
-  width: 100%;
-  max-width: none;
-  padding-left: 0;
-  padding-right: 0;
-}
+/* Full-bleed hero — the .hero rule handles the breakout itself */
 
 .header {
   position: fixed;
@@ -504,7 +498,7 @@ main > section.hero {
 }
 
 .hero__top-strip {
-  width: min(100%, var(--container-max));
+  width: min(100%, 1580px);
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -522,15 +516,16 @@ main > section.hero {
 .hero__top-strip span:first-child { color: var(--text-secondary); }
 
 .hero__type {
-  width: min(100%, var(--container-max));
+  width: min(100%, 1580px);
   margin: 0 auto;
-  padding: 0;
+  padding: 0 clamp(0.5rem, 2vw, 1.5rem);
+  align-self: center;
 }
 
 .hero__title {
   font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(3.4rem, 11vw, 12.5rem);
+  font-weight: 800;
+  font-size: clamp(3.8rem, 12.5vw, 14.5rem);
   line-height: 0.88;
   letter-spacing: -0.05em;
   color: var(--text-primary);
@@ -610,7 +605,7 @@ main > section.hero {
 
 /* Bottom row: lede + actions + signal */
 .hero__bottom {
-  width: min(100%, var(--container-max));
+  width: min(100%, 1580px);
   margin: clamp(2rem, 4vw, 3rem) auto 0;
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) auto;
@@ -686,41 +681,6 @@ main > section.hero {
 @keyframes hero-pulse {
   0%, 100% { transform: scale(1); opacity: 1; }
   50%      { transform: scale(1.4); opacity: 0.6; }
-}
-
-/* Marquee band of client names */
-.hero__marquee {
-  position: relative;
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-top: clamp(2.5rem, 5vw, 4.5rem);
-  padding: 1rem 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  overflow: hidden;
-  white-space: nowrap;
-}
-.hero__marquee-track {
-  display: inline-flex;
-  gap: 3rem;
-  animation: hero-marquee 38s linear infinite;
-  font-family: var(--font-display);
-  font-size: clamp(1.1rem, 1.6vw, 1.5rem);
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  color: var(--text-primary);
-  padding-left: 3rem;
-}
-.hero__marquee-track span { opacity: 0.88; }
-.hero__marquee-track em {
-  font-style: italic;
-  color: var(--accent);
-  font-weight: 400;
-  opacity: 0.75;
-}
-@keyframes hero-marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
 }
 
 @media (max-width: 900px) {
@@ -1812,10 +1772,10 @@ main > section.hero {
 }
 .contact-page__inner {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(320px, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(440px, 1.35fr);
   gap: clamp(2.5rem, 5vw, 5rem);
   align-items: center;
-  min-height: 72vh;
+  min-height: 82vh;
 }
 .contact-page__copy {
   display: grid;
@@ -1909,7 +1869,7 @@ main > section.hero {
 .contact-page__visual {
   position: relative;
   aspect-ratio: 1;
-  min-height: 420px;
+  min-height: 680px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1929,7 +1889,7 @@ main > section.hero {
 
 @media (max-width: 900px) {
   .contact-page__inner { grid-template-columns: 1fr; }
-  .contact-page__visual { min-height: 320px; order: -1; }
+  .contact-page__visual { min-height: 420px; order: -1; }
   .contact-page__meta { grid-template-columns: 1fr; }
 }
 
