@@ -1,55 +1,69 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import type { Project } from '@/lib/projects'
 import TransitionLink from './TransitionLink'
+import CreatureGlyph from './CreatureGlyph'
 
 gsap.registerPlugin(ScrollTrigger)
 
 interface CaseStudyProps {
   project: Project
   nextProject: Project
+  index: number
+  total: number
 }
 
-export default function CaseStudy({ project, nextProject }: CaseStudyProps) {
+export default function CaseStudy({ project, nextProject, index, total }: CaseStudyProps) {
+  const rootRef = useRef<HTMLDivElement>(null)
+
+  const idxDisplay = String(index + 1).padStart(2, '0')
+  const totalDisplay = String(total).padStart(2, '0')
+  const nextIdxDisplay = String(((index + 1) % total) + 1).padStart(2, '0')
+
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Hero intro — plays once on mount
       gsap.fromTo(
-        '.case-hero__category, .case-hero__title, .case-hero__headline, .case-hero__meta',
-        { autoAlpha: 0, y: 24 },
+        '.case-hero__row',
+        { autoAlpha: 0, y: 28 },
         {
           autoAlpha: 1,
           y: 0,
-          duration: 0.85,
+          duration: 0.9,
           ease: 'power3.out',
-          stagger: 0.08,
+          stagger: 0.09,
           clearProps: 'all',
+          delay: 0.1,
         }
       )
 
-      gsap.fromTo(
-        '.case-overview__sidebar, .case-overview__text, .case-impact__intro, .case-impact__card, .case-challenge__inner > *, .case-next > *',
-        { autoAlpha: 0, y: 30 },
-        {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.8,
-          ease: 'power3.out',
-          stagger: 0.1,
-          clearProps: 'all',
-          scrollTrigger: {
-            trigger: '.case-overview',
-            start: 'top 80%',
-          },
-        }
-      )
+      // Editorial body: per-block reveal on scroll
+      gsap.utils.toArray<HTMLElement>('.case-reveal').forEach((el) => {
+        gsap.fromTo(
+          el,
+          { autoAlpha: 0, y: 32 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.85,
+            ease: 'power3.out',
+            clearProps: 'all',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 85%',
+            },
+          }
+        )
+      })
 
+      // Gallery images: soft scale-in
       gsap.utils.toArray<HTMLElement>('.case-image').forEach((el) => {
         gsap.fromTo(
           el,
-          { autoAlpha: 0, y: 44, scale: 1.04 },
+          { autoAlpha: 0, y: 40, scale: 1.03 },
           {
             autoAlpha: 1,
             y: 0,
@@ -59,112 +73,129 @@ export default function CaseStudy({ project, nextProject }: CaseStudyProps) {
             clearProps: 'all',
             scrollTrigger: {
               trigger: el,
-              start: 'top 86%',
+              start: 'top 88%',
             },
           }
         )
       })
+    }, rootRef)
+
+    // ScrollTrigger.refresh() after images load — fixes the "gallery never appears"
+    // issue where triggers were measured before images took up their final layout space.
+    const imgs = rootRef.current?.querySelectorAll<HTMLImageElement>('img') ?? []
+    let pending = imgs.length
+    const markLoaded = () => {
+      pending -= 1
+      if (pending <= 0) ScrollTrigger.refresh()
+    }
+    imgs.forEach((img) => {
+      if (img.complete) markLoaded()
+      else {
+        img.addEventListener('load', markLoaded, { once: true })
+        img.addEventListener('error', markLoaded, { once: true })
+      }
     })
 
-    return () => ctx.revert()
-  }, [])
+    // Safety net — ensure triggers are fresh after the page transition settles,
+    // even if image loads are cached or out of order.
+    const t1 = window.setTimeout(() => ScrollTrigger.refresh(), 350)
+    const t2 = window.setTimeout(() => ScrollTrigger.refresh(), 1400)
+
+    return () => {
+      window.clearTimeout(t1)
+      window.clearTimeout(t2)
+      ctx.revert()
+    }
+  }, [project.slug])
 
   return (
-    <>
+    <div ref={rootRef}>
       <section className="case-hero" style={{ backgroundColor: project.color }}>
         <div className="case-hero__media">
-          <img src={project.thumbnail} alt={project.title} className="case-hero__image" />
+          <img src={project.thumbnail} alt="" className="case-hero__image" />
         </div>
+        <div className="case-hero__scrim" aria-hidden="true" />
+
         <div className="case-hero__content">
-          <span className="case-hero__category" style={{ opacity: 0, visibility: 'hidden' }}>
-            {project.category}
-          </span>
-          <h1 className="case-hero__title" style={{ opacity: 0, visibility: 'hidden' }}>
-            {project.title}
-          </h1>
-          <p className="case-hero__headline" style={{ opacity: 0, visibility: 'hidden' }}>
-            {project.headline}
-          </p>
-          <div className="case-hero__meta" style={{ opacity: 0, visibility: 'hidden' }}>
-            <span>{project.year}</span>
-            <span>{project.services.join(' · ')}</span>
-            {project.url && (
-              <a href={project.url} target="_blank" rel="noopener noreferrer">
-                View live
-              </a>
-            )}
+          <div
+            className="case-hero__row case-hero__row--top"
+            style={{ opacity: 0, visibility: 'hidden' }}
+          >
+            <span className="case-hero__eyebrow">Case study</span>
+            <span className="case-hero__index">
+              {idxDisplay}
+              <CreatureGlyph className="creature--light">{' / '}</CreatureGlyph>
+              {totalDisplay}
+            </span>
           </div>
-        </div>
-      </section>
 
-      <section className="case-overview">
-        <div className="case-overview__inner">
-          <div className="case-overview__sidebar" style={{ opacity: 0, visibility: 'hidden' }}>
-            <div className="case-overview__meta-item">
-              <span className="case-overview__meta-label">Audience</span>
-              <span className="case-overview__meta-value">{project.audience}</span>
-            </div>
-            <div className="case-overview__meta-item">
-              <span className="case-overview__meta-label">Signature move</span>
-              <span className="case-overview__meta-value">{project.signatureMove}</span>
-            </div>
-            <div className="case-overview__meta-item">
-              <span className="case-overview__meta-label">Services</span>
-              {project.services.map((service) => (
-                <span key={service} className="case-overview__meta-value">
-                  {service}
-                </span>
-              ))}
-            </div>
-            {project.url && (
-              <div className="case-overview__meta-item">
-                <span className="case-overview__meta-label">Live</span>
-                <a
-                  href={project.url}
-                  className="case-overview__meta-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Visit site
-                </a>
+          <div className="case-hero__row case-hero__row--title" style={{ opacity: 0, visibility: 'hidden' }}>
+            <span className="case-hero__category">{project.category}</span>
+            <h1 className="case-hero__title">{project.title}</h1>
+          </div>
+
+          <div className="case-hero__row case-hero__row--footer" style={{ opacity: 0, visibility: 'hidden' }}>
+            <p className="case-hero__headline">{project.headline}</p>
+            <div className="case-hero__meta">
+              <div className="case-hero__meta-item">
+                <span className="case-hero__meta-label">Year</span>
+                <span className="case-hero__meta-value">{project.year}</span>
               </div>
-            )}
-          </div>
-
-          <div className="case-overview__text" style={{ opacity: 0, visibility: 'hidden' }}>
-            <p className="case-overview__brief">{project.brief}</p>
+              <div className="case-hero__meta-item">
+                <span className="case-hero__meta-label">Discipline</span>
+                <span className="case-hero__meta-value">{project.services.slice(0, 2).join(' · ')}</span>
+              </div>
+              {project.url && (
+                <div className="case-hero__meta-item">
+                  <span className="case-hero__meta-label">Live</span>
+                  <a
+                    className="case-hero__meta-link"
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Visit site
+                    <span aria-hidden="true" className="case-hero__meta-arrow">→</span>
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="case-impact">
-        <div className="case-impact__intro" style={{ opacity: 0, visibility: 'hidden' }}>
-          <span className="section-label">What changed</span>
-          <p className="case-impact__text">{project.impact}</p>
+      <section className="case-brief">
+        <div className="case-brief__inner">
+          <span className="case-label case-reveal">Brief</span>
+          <p className="case-brief__lede case-reveal">{project.brief}</p>
         </div>
+      </section>
 
-        <div className="case-impact__grid">
-          {project.highlights.map((highlight) => (
-            <article
-              key={highlight.label}
-              className="case-impact__card"
-              style={{ opacity: 0, visibility: 'hidden' }}
-            >
-              <span className="case-impact__label">{highlight.label}</span>
-              <p className="case-impact__value">{highlight.value}</p>
-            </article>
-          ))}
+      <section className="case-ribbon">
+        <div className="case-ribbon__inner">
+          <div className="case-ribbon__item case-reveal">
+            <span className="case-ribbon__label">Audience</span>
+            <p className="case-ribbon__value">{project.audience}</p>
+          </div>
+          <div className="case-ribbon__item case-reveal">
+            <span className="case-ribbon__label">Signature move</span>
+            <p className="case-ribbon__value">{project.signatureMove}</p>
+          </div>
+          <div className="case-ribbon__item case-reveal">
+            <span className="case-ribbon__label">Services</span>
+            <ul className="case-ribbon__list">
+              {project.services.map((s) => (
+                <li key={s}>{s}</li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 
       <section className="case-challenge">
         <div className="case-challenge__inner">
-          <span className="section-label" style={{ opacity: 0, visibility: 'hidden' }}>
-            The challenge
-          </span>
-          <p className="case-challenge__text" style={{ opacity: 0, visibility: 'hidden' }}>
-            {project.challenge}
-          </p>
+          <span className="case-label case-reveal">The challenge</span>
+          <p className="case-challenge__text case-reveal">{project.challenge}</p>
         </div>
       </section>
 
@@ -172,7 +203,7 @@ export default function CaseStudy({ project, nextProject }: CaseStudyProps) {
         {project.gallery.map((group, gi) => (
           <div key={gi} className={`case-gallery case-gallery--${group.layout}`}>
             {group.items.map((item, ii) => (
-              <div
+              <figure
                 key={ii}
                 className="case-image"
                 style={{
@@ -185,24 +216,43 @@ export default function CaseStudy({ project, nextProject }: CaseStudyProps) {
                 {item.image && (
                   <img src={item.image} alt={item.label} className="case-image__img" />
                 )}
-                <span className="case-image__label">{item.label}</span>
-              </div>
+                <figcaption className="case-image__label">{item.label}</figcaption>
+              </figure>
             ))}
           </div>
         ))}
       </section>
 
-      <section className="case-next">
-        <span className="case-next__label section-label" style={{ opacity: 0, visibility: 'hidden' }}>
-          Next project
-        </span>
-        <TransitionLink href={`/work/${nextProject.slug}`} className="case-next__link" style={{ opacity: 0, visibility: 'hidden' }}>
-          <h2 className="case-next__title">{nextProject.title}</h2>
-        </TransitionLink>
-        <span className="case-next__category" style={{ opacity: 0, visibility: 'hidden' }}>
-          {nextProject.category}
-        </span>
+      <section className="case-impact">
+        <div className="case-impact__inner">
+          <span className="case-label case-reveal">What changed</span>
+          <p className="case-impact__text case-reveal">{project.impact}</p>
+          <div className="case-impact__grid">
+            {project.highlights.map((h) => (
+              <div key={h.label} className="case-impact__card case-reveal">
+                <span className="case-impact__card-label">{h.label}</span>
+                <p className="case-impact__card-value">{h.value}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
-    </>
+
+      <TransitionLink href={`/work/${nextProject.slug}`} className="case-next">
+        <div className="case-next__inner">
+          <span className="case-next__label case-reveal">Next project</span>
+          <div className="case-next__row case-reveal">
+            <span className="case-next__idx">{nextIdxDisplay}</span>
+            <h2 className="case-next__title">{nextProject.title}</h2>
+            <span className="case-next__arrow" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+          </div>
+          <span className="case-next__meta case-reveal">{nextProject.category}</span>
+        </div>
+      </TransitionLink>
+    </div>
   )
 }

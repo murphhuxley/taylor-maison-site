@@ -43,7 +43,12 @@ export default async function ProjectPage({
       <SmoothScroll />
       <Header />
       <main id="top">
-        <CaseStudy project={project} nextProject={nextProject} />
+        <CaseStudy
+          project={project}
+          nextProject={nextProject}
+          index={idx}
+          total={projects.length}
+        />
       </main>
       <Footer />
     </>
