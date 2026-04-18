@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Variant A-aspirational — Poetic headline + pillar strip</title>
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f4f0e8;
+    --bg-strong: #ece6de;
+    --text-primary: #15181b;
+    --text-secondary: #5f5951;
+    --text-muted: #8a8278;
+    --line: rgba(21, 24, 27, 0.12);
+    --line-strong: rgba(21, 24, 27, 0.2);
+    --accent: #6f8190;
+    --accent-bright: #8aa2b2;
+    --font-display: 'Cabinet Grotesk', 'Helvetica Neue', sans-serif;
+    --font-body: 'Satoshi', 'Helvetica Neue', sans-serif;
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: var(--font-body);
+    color: var(--text-primary);
+    background:
+      radial-gradient(circle at 18% 0%, rgba(255, 255, 255, 0.74), transparent 22%),
+      linear-gradient(180deg, #f8f5ef 0%, #f4f0e8 56%, #eee7de 100%);
+    overflow-x: hidden;
+  }
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none;
+    opacity: 0.012;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    z-index: 1000;
+  }
+
+  .header { position: fixed; inset: 0 0 auto 0; z-index: 200; padding: 1rem clamp(1.25rem, 4vw, 3.5rem) 0; }
+  .header__shell {
+    width: min(100%, 1320px); margin: 0 auto;
+    display: grid; grid-template-columns: auto 1fr auto; align-items: center;
+    gap: 1rem; padding: 0.7rem 0.85rem;
+    border: 1px solid var(--line); border-radius: 14px;
+    background: rgba(248, 245, 239, 0.88); backdrop-filter: blur(16px);
+    box-shadow: 0 10px 24px rgba(22, 24, 29, 0.04);
+  }
+  .brand { display: inline-flex; align-items: center; gap: 0.9rem; }
+  .brand__mark {
+    width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center;
+    border: 1px solid var(--line-strong); border-radius: 999px; background: rgba(255, 255, 255, 0.92);
+    font-family: var(--font-display); font-size: 0.9rem; letter-spacing: 0.18em; font-weight: 700;
+  }
+  .brand__name { font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+  .nav { display: inline-flex; gap: 0.35rem; justify-self: center; }
+  .nav a {
+    padding: 0 0.9rem; min-height: 42px; display: inline-flex; align-items: center;
+    border-radius: 999px; font-size: 0.8rem; text-transform: uppercase;
+    letter-spacing: 0.14em; color: var(--text-secondary); text-decoration: none;
+  }
+  .cta {
+    padding: 0 1.05rem; min-height: 42px; display: inline-flex; align-items: center;
+    border-radius: 999px; background: var(--text-primary); color: var(--bg);
+    font-size: 0.82rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .hero {
+    position: relative; min-height: 100vh;
+    padding: calc(7rem + 2vw) clamp(1.25rem, 4vw, 3.5rem) clamp(2rem, 4vw, 3rem);
+    display: grid; grid-template-rows: 1fr auto;
+  }
+
+  .hero__top-strip {
+    position: absolute;
+    top: calc(7.2rem + 1vw);
+    left: clamp(1.25rem, 4vw, 3.5rem); right: clamp(1.25rem, 4vw, 3.5rem);
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--line-strong);
+    padding-top: 0.9rem;
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--text-muted);
+  }
+  .hero__top-strip span { color: var(--text-secondary); }
+
+  .hero__type {
+    align-self: center;
+    width: min(100%, 1580px);
+    margin: 0 auto;
+    padding: 0 clamp(0.5rem, 2vw, 1.5rem);
+  }
+
+  .hero__title {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(3.8rem, 12.5vw, 14.5rem);
+    line-height: 0.88;
+    letter-spacing: -0.05em;
+    color: var(--text-primary);
+    display: grid; gap: 0;
+  }
+  .hero__title-line {
+    display: block;
+    opacity: 0;
+    transform: translateY(1.2em);
+    animation: rise 1s var(--ease-out) forwards;
+  }
+  .hero__title-line:nth-child(1) { animation-delay: 0.2s; }
+  .hero__title-line:nth-child(2) { animation-delay: 0.34s; padding-left: 8vw; }
+  @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+
+  .creature {
+    display: inline-block;
+    position: relative;
+    color: var(--c, var(--accent));
+    transform:
+      translate(var(--tx, 0px), var(--ty, 0px))
+      rotate(var(--rot, 0deg))
+      scale(var(--s, 1));
+    transition:
+      transform 0.28s cubic-bezier(0.2, 1, 0.3, 1),
+      color 0.3s;
+    will-change: transform, color;
+    transform-origin: center;
+  }
+  .creature::after {
+    content: '';
+    position: absolute;
+    inset: -0.22em;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(111,129,144,0.2), transparent 62%);
+    opacity: var(--aura, 0);
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  /* Pillar strip directly below the headline */
+  .hero__pillars {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    margin-top: clamp(2rem, 4vw, 3rem);
+    padding-top: clamp(1.2rem, 2vw, 1.8rem);
+    border-top: 1px solid var(--line-strong);
+    opacity: 0;
+    animation: rise 0.9s var(--ease-out) forwards 0.6s;
+  }
+  .hero__pillar {
+    display: grid;
+    gap: 0.5rem;
+  }
+  .hero__pillar-idx {
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .hero__pillar-name {
+    font-family: var(--font-display);
+    font-size: clamp(1.15rem, 1.6vw, 1.55rem);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 1.1;
+  }
+  .hero__pillar-desc {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    max-width: 22rem;
+  }
+
+  .hero__bottom {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) auto;
+    gap: clamp(2rem, 4vw, 3rem);
+    align-items: end;
+    padding-top: clamp(1.5rem, 3vw, 2.5rem);
+    border-top: 1px solid var(--line-strong);
+    margin-top: clamp(2rem, 4vw, 3rem);
+    opacity: 0;
+    animation: rise 0.9s var(--ease-out) forwards 0.85s;
+  }
+  .hero__lede {
+    max-width: 34rem;
+    font-size: clamp(1rem, 1.15vw, 1.12rem);
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+  .hero__actions { display: flex; gap: 0.8rem; align-items: center; }
+  .hero__actions a {
+    padding: 0 1.2rem; min-height: 48px;
+    border-radius: 999px; display: inline-flex; align-items: center;
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    text-decoration: none;
+  }
+  .hero__actions a:first-child { background: var(--text-primary); color: var(--bg); }
+  .hero__actions a:last-child {
+    color: var(--text-primary); border: 1px solid var(--line-strong);
+    background: rgba(255,255,255,0.56);
+  }
+  .hero__signal {
+    display: grid; justify-items: end; gap: 0.35rem;
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--text-muted); font-weight: 700;
+  }
+  .hero__signal-pin {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--accent);
+    box-shadow: 0 0 0 4px rgba(111, 129, 144, 0.14);
+    animation: pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% {transform:scale(1);opacity:1} 50%{transform:scale(1.4);opacity:0.6} }
+  .hero__signal strong { color: var(--text-primary); }
+
+  .marquee-band {
+    position: relative; margin-top: clamp(2.5rem, 5vw, 4.5rem);
+    padding: 1rem 0;
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    overflow: hidden; white-space: nowrap;
+  }
+  .marquee-track {
+    display: inline-flex; gap: 3rem;
+    animation: marquee 38s linear infinite;
+    font-family: var(--font-display); font-size: clamp(1.1rem, 1.6vw, 1.5rem);
+    font-weight: 500; letter-spacing: -0.01em; color: var(--text-primary);
+  }
+  .marquee-track span { opacity: 0.88; }
+  .marquee-track em { font-style: italic; color: var(--accent); font-weight: 400; opacity: 0.75; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  @media (max-width: 900px) {
+    .nav { display: none; }
+    .header__shell { grid-template-columns: auto auto; justify-content: space-between; }
+    .hero__title-line:nth-child(2) { padding-left: 0; }
+    .hero__pillars { grid-template-columns: 1fr; gap: 1rem; }
+    .hero__bottom { grid-template-columns: 1fr; gap: 1.5rem; }
+    .hero__actions { justify-content: flex-start; }
+    .hero__signal { justify-items: start; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header__shell">
+    <div class="brand">
+      <span class="brand__mark">TM</span>
+      <span class="brand__name">Taylor Maison</span>
+    </div>
+    <nav class="nav">
+      <a href="#work">Work</a><a href="#services">Services</a><a href="#about">About</a><a href="#contact">Contact</a>
+    </nav>
+    <a class="cta" href="#contact">Start a project</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero__top-strip">
+    <span>Taylor Maison — Creative Direction · Websites · AI Workflows</span>
+    <span>Southampton, NY · Est. 2024</span>
+  </div>
+
+  <div class="hero__type">
+    <h1 class="hero__title">
+      <span class="hero__title-line">Taste<span class="creature">,</span> applied to</span>
+      <span class="hero__title-line">whatever&rsquo;s next<span class="creature">.</span></span>
+    </h1>
+
+    <div class="hero__pillars">
+      <div class="hero__pillar">
+        <span class="hero__pillar-idx">01</span>
+        <span class="hero__pillar-name">Brand direction</span>
+        <p class="hero__pillar-desc">Strategy and visual identity for businesses that care how they present.</p>
+      </div>
+      <div class="hero__pillar">
+        <span class="hero__pillar-idx">02</span>
+        <span class="hero__pillar-name">Custom websites</span>
+        <p class="hero__pillar-desc">Design + build for marketing sites, portfolios, and product storytelling.</p>
+      </div>
+      <div class="hero__pillar">
+        <span class="hero__pillar-idx">03</span>
+        <span class="hero__pillar-name">AI workflows</span>
+        <p class="hero__pillar-desc">Getting non-technical teams fluent with AI tooling — real workflows, not hype.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__bottom">
+    <p class="hero__lede">
+      Built around clarity, restraint, and knowing what to leave out —
+      whether that&rsquo;s a wordmark, a homepage, or how your team actually uses AI.
+    </p>
+    <div class="hero__actions">
+      <a href="#work">Selected work</a>
+      <a href="#contact">Start a conversation</a>
+    </div>
+    <div class="hero__signal">
+      <span class="hero__signal-pin" aria-hidden="true"></span>
+      <span><strong>Taking on 2 new engagements</strong></span>
+      <span>Q2 · 2026</span>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-band" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Roman Sanford</span><em>—</em>
+    <span>RS Black</span><em>—</em>
+    <span>Genuine Undead</span><em>—</em>
+    <span>Hampton Garden Party</span><em>—</em>
+    <span>Roman Sanford</span><em>—</em>
+    <span>RS Black</span><em>—</em>
+    <span>Genuine Undead</span><em>—</em>
+    <span>Hampton Garden Party</span><em>—</em>
+    <span>Roman Sanford</span><em>—</em>
+    <span>RS Black</span><em>—</em>
+    <span>Genuine Undead</span><em>—</em>
+    <span>Hampton Garden Party</span><em>—</em>
+  </div>
+</div>
+
+<script>
+  const creatures = document.querySelectorAll('.creature');
+
+  let rects = [];
+  function cacheRects() {
+    rects = Array.from(creatures).map(el => {
+      const r = el.getBoundingClientRect();
+      return { el, cx: r.left + r.width / 2, cy: r.top + r.height / 2 };
+    });
+  }
+  window.addEventListener('load', cacheRects);
+  window.addEventListener('resize', cacheRects);
+  window.addEventListener('scroll', cacheRects, { passive: true });
+  setTimeout(cacheRects, 600);
+  setTimeout(cacheRects, 1500);
+
+  const INFLUENCE = 520;
+  const MAX_PULL = 22;
+  const MAX_SCALE = 1.4;
+  const MAX_ROT = 14;
+
+  let mx = window.innerWidth / 2;
+  let my = -500;
+  document.addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; });
+
+  function tick() {
+    for (const { el, cx, cy } of rects) {
+      const dx = mx - cx;
+      const dy = my - cy;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < INFLUENCE) {
+        const f = 1 - dist / INFLUENCE;
+        const ease = f * f;
+        const tx = (dx / dist) * MAX_PULL * ease;
+        const ty = (dy / dist) * MAX_PULL * ease;
+        const scale = 1 + (MAX_SCALE - 1) * ease;
+        const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+        const rot = (angle / 180) * MAX_ROT * ease;
+        el.style.setProperty('--tx', tx.toFixed(2) + 'px');
+        el.style.setProperty('--ty', ty.toFixed(2) + 'px');
+        el.style.setProperty('--rot', rot.toFixed(2) + 'deg');
+        el.style.setProperty('--s', scale.toFixed(3));
+        el.style.setProperty('--aura', ease.toFixed(3));
+        const hex = ease > 0.5 ? 'var(--accent-bright)' : 'var(--accent)';
+        el.style.setProperty('--c', hex);
+      } else {
+        el.style.setProperty('--tx', '0px');
+        el.style.setProperty('--ty', '0px');
+        el.style.setProperty('--rot', '0deg');
+        el.style.setProperty('--s', '1');
+        el.style.setProperty('--aura', '0');
+        el.style.setProperty('--c', 'var(--accent)');
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+</script>
+
+</body>
+</html>

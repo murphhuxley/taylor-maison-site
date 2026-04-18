@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hero variants — side by side</title>
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f4f0e8;
+    --text-primary: #15181b;
+    --text-secondary: #5f5951;
+    --text-muted: #8a8278;
+    --accent: #6f8190;
+    --line: rgba(21, 24, 27, 0.12);
+    --line-strong: rgba(21, 24, 27, 0.2);
+    --font-display: 'Cabinet Grotesk', 'Helvetica Neue', sans-serif;
+    --font-body: 'Satoshi', 'Helvetica Neue', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; }
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    background: #efe9df;
+    color: var(--text-primary);
+  }
+  header.page-head {
+    padding: 1.5rem 2rem 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.25rem;
+  }
+  header.page-head p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  .warn {
+    background: #15181b;
+    color: #f4f0e8;
+    padding: 0.65rem 2rem;
+    font-size: 0.76rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .warn::before {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px rgba(111, 129, 144, 0.22);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.6; }
+  }
+  .warn em {
+    font-style: italic;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    color: rgba(244, 240, 232, 0.7);
+  }
+
+  .tabs {
+    display: flex;
+    gap: 0.25rem;
+    padding: 1rem 2rem 0;
+    background: rgba(255,255,255,0.4);
+  }
+  .tab {
+    padding: 0.7rem 1.2rem;
+    border: 1px solid var(--line-strong);
+    border-bottom: 0;
+    background: #efe9df;
+    border-radius: 10px 10px 0 0;
+    font-family: var(--font-body);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: var(--text-secondary);
+  }
+  .tab.active {
+    background: #fff;
+    color: var(--text-primary);
+  }
+
+  .controls {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.9rem 2rem;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: #fff;
+  }
+  .controls button {
+    padding: 0.55rem 1rem;
+    border: 1px solid var(--line-strong);
+    background: #fff;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text-primary);
+  }
+  .controls button.active {
+    background: var(--text-primary);
+    color: var(--bg);
+    border-color: var(--text-primary);
+  }
+  .controls .spacer { flex: 1; }
+  .controls .note {
+    align-self: center;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+  }
+  .grid.pair {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid.pair .card-frame iframe {
+    transform: scale(0.62);
+    width: 161.3%;
+    height: 161.3%;
+  }
+  .grid.single,
+  .grid.pair.single {
+    grid-template-columns: 1fr;
+  }
+  .grid.pair.single .card-frame iframe {
+    transform: none;
+    width: 100%;
+    height: 100%;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--line-strong);
+    border-radius: 14px;
+    background: #fff;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(17, 15, 11, 0.05);
+  }
+  .card-head {
+    padding: 1rem 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .card-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: -0.02em;
+  }
+  .card-bet {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .card-desc {
+    padding: 0.8rem 1.2rem 0.9rem;
+    font-size: 0.84rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+  .card-frame {
+    position: relative;
+    aspect-ratio: 16 / 11;
+    border-top: 1px solid var(--line);
+    background: #efe9df;
+    overflow: hidden;
+  }
+  .grid.single .card-frame {
+    aspect-ratio: auto;
+    height: calc(100vh - 310px);
+    min-height: 600px;
+  }
+  .card-frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    transform-origin: top left;
+  }
+  .grid:not(.single) .card-frame iframe {
+    transform: scale(0.55);
+    width: 181.8%;
+    height: 181.8%;
+  }
+  .card-foot {
+    padding: 0.8rem 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--line);
+    background: rgba(0,0,0,0.02);
+  }
+  .card-foot a {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--text-primary);
+    padding-bottom: 2px;
+  }
+  .card-foot span {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+  @media (max-width: 1180px) {
+    .grid { grid-template-columns: 1fr; }
+    .grid:not(.single) .card-frame iframe {
+      transform: none;
+      width: 100%; height: 100%;
+    }
+    .grid:not(.single) .card-frame {
+      aspect-ratio: auto;
+      height: 70vh;
+    }
+    .grid.pair { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="page-head">
+  <h1>Hero variants — side by side</h1>
+  <p>Three bets on how to unstick the landing page, three micro-iterations of the chosen direction, and two pillar-aware drafts that name all three services.</p>
+</header>
+
+<div class="warn">
+  Do NOT decide from these thumbnails. Open each variant in its own tab at full width. <em>Scale is the whole point.</em>
+</div>
+
+<div class="tabs">
+  <button class="tab active" data-panel="originals">Original 3 bets</button>
+  <button class="tab" data-panel="a-iters">A iterations (surprise + delight)</button>
+  <button class="tab" data-panel="pillars">Pillar-aware drafts</button>
+</div>
+
+<!-- ========== ORIGINAL 3 ========== -->
+<div class="panel active" data-panel-id="originals">
+  <div class="controls">
+    <button class="v-btn active" data-view="all" data-group="originals">View all 3</button>
+    <button class="v-btn" data-view="a" data-group="originals">Variant A only</button>
+    <button class="v-btn" data-view="b" data-group="originals">Variant B only</button>
+    <button class="v-btn" data-view="c" data-group="originals">Variant C only</button>
+    <span class="spacer"></span>
+    <span class="note">Tip: open each in its own tab for real evaluation</span>
+  </div>
+
+  <div class="grid" id="grid-originals">
+    <div class="card" data-variant="a">
+      <div class="card-head">
+        <span class="card-title">A — Editorial type</span>
+        <span class="card-bet">Type is the hero</span>
+      </div>
+      <p class="card-desc">
+        Orb recedes. Massive display type dominates above the fold, broken across 4 lines
+        with a right-shift and indent play. Client marquee below.
+      </p>
+      <div class="card-frame">
+        <iframe src="variant-a-editorial.html" loading="eager" title="Variant A"></iframe>
+      </div>
+      <div class="card-foot">
+        <a href="variant-a-editorial.html" target="_blank" rel="noopener">Open variant A →</a>
+        <span>Magazine-cover energy</span>
+      </div>
+    </div>
+
+    <div class="card" data-variant="b">
+      <div class="card-head">
+        <span class="card-title">B — Cinematic reveal</span>
+        <span class="card-bet">Entrance is the moment</span>
+      </div>
+      <p class="card-desc">
+        Orb stays the centerpiece. The page <em>loads</em> as a sequence: dark curtain
+        lifts, orb materializes, type slides up. Reload to replay.
+      </p>
+      <div class="card-frame">
+        <iframe src="variant-b-cinematic-reveal.html" loading="eager" title="Variant B"></iframe>
+      </div>
+      <div class="card-foot">
+        <a href="variant-b-cinematic-reveal.html" target="_blank" rel="noopener">Open variant B →</a>
+        <span>Film-title sequence energy</span>
+      </div>
+    </div>
+
+    <div class="card" data-variant="c">
+      <div class="card-head">
+        <span class="card-title">C — Magnetic type</span>
+        <span class="card-bet">Type is the interaction</span>
+      </div>
+      <p class="card-desc">
+        No orb above the fold. The headline itself is the mechanic — each letter has
+        a magnetic relationship to your cursor.
+      </p>
+      <div class="card-frame">
+        <iframe src="variant-c-magnetic-type.html" loading="eager" title="Variant C"></iframe>
+      </div>
+      <div class="card-foot">
+        <a href="variant-c-magnetic-type.html" target="_blank" rel="noopener">Open variant C →</a>
+        <span>Move your cursor over the type</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== A ITERATIONS ========== -->
+<div class="panel" data-panel-id="a-iters">
+  <div class="controls">
+    <button class="v-btn active" data-view="all" data-group="a-iters">View all 3</button>
+    <button class="v-btn" data-view="a1" data-group="a-iters">A-1 only</button>
+    <button class="v-btn" data-view="a2" data-group="a-iters">A-2 only</button>
+    <button class="v-btn" data-view="a3" data-group="a-iters">A-3 only</button>
+    <span class="spacer"></span>
+    <span class="note">Each keeps A's editorial composition. Only the delight mechanic differs.</span>
+  </div>
+
+  <div class="grid" id="grid-a-iters">
+    <div class="card" data-variant="a1">
+      <div class="card-head">
+        <span class="card-title">A-1 — Ambient drift</span>
+        <span class="card-bet">Type breathes</span>
+      </div>
+      <p class="card-desc">
+        Every letter has a very small cursor pull. The hero feels alive but you can't
+        quite say why — the subtlest bet, maximum restraint.
+      </p>
+      <div class="card-frame">
+        <iframe src="variant-a1-ambient-drift.html" loading="eager" title="Variant A-1"></iframe>
+      </div>
+      <div class="card-foot">
+        <a href="variant-a1-ambient-drift.html" target="_blank" rel="noopener">Open A-1 →</a>
+        <span>Move slowly across the type</span>
+      </div>
+    </div>
+
+    <div class="card" data-variant="a2">
+      <div class="card-head">
+        <span class="card-title">A-2 — Accent creatures</span>
+        <span class="card-bet">& and . come alive</span>
+      </div>
+      <p class="card-desc">
+        Letters stay still. Only the italic <em>&amp;</em> and the silvery <em>.</em>
+        react to the cursor — pulling, rotating, brightening. Two tiny signatures.
+      </p>
+      <div class="card-frame">
+        <iframe src="variant-a2-accent-creatures.html" loading="eager" title="Variant A-2"></iframe>
+      </div>
+      <div class="card-foot">
+        <a href="variant-a2-accent-creatures.html" target="_blank" rel="noopener">Open A-2 →</a>
+        <span>Move near the & and the period</span>
+      </div>
+    </div>
+
+    <div class="card" data-variant="a3">
+      <div class="card-head">
+        <span class="card-title">A-3 — Word scramble</span>
+        <span class="card-bet">Words shatter + reform</span>
+      </div>
+      <p class="card-desc">
+        Each headline word briefly scrambles into random chars and resolves when your
+        cursor crosses it. Loudest of the three, most "effect," most show-off.
+      </p>
+      <div class="card-frame">
+        <iframe src="variant-a3-word-scramble.html" loading="eager" title="Variant A-3"></iframe>
+      </div>
+      <div class="card-foot">
+        <a href="variant-a3-word-scramble.html" target="_blank" rel="noopener">Open A-3 →</a>
+        <span>Sweep cursor across each word</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== PILLAR-AWARE DRAFTS ========== -->
+<div class="panel" data-panel-id="pillars">
+  <div class="controls">
+    <button class="v-btn active" data-view="all" data-group="pillars">View both</button>
+    <button class="v-btn" data-view="ap" data-group="pillars">Pillars only</button>
+    <button class="v-btn" data-view="aa" data-group="pillars">Aspirational only</button>
+    <span class="spacer"></span>
+    <span class="note">Both name all three services. Different temperatures.</span>
+  </div>
+
+  <div class="grid pair" id="grid-pillars">
+    <div class="card" data-variant="ap">
+      <div class="card-head">
+        <span class="card-title">A-P — Three pillars, declared</span>
+        <span class="card-bet">Directness</span>
+      </div>
+      <p class="card-desc">
+        Headline becomes three short lines, numbered 01/02/03: <em>Brand direction. /
+        Custom websites. / AI workflows.</em> All three periods are A-2 creatures.
+        Leaves no ambiguity about what the business is.
+      </p>
+      <div class="card-frame">
+        <iframe src="variant-a-pillars.html" loading="eager" title="Variant A-Pillars"></iframe>
+      </div>
+      <div class="card-foot">
+        <a href="variant-a-pillars.html" target="_blank" rel="noopener">Open A-Pillars →</a>
+        <span>Spec-sheet clarity</span>
+      </div>
+    </div>
+
+    <div class="card" data-variant="aa">
+      <div class="card-head">
+        <span class="card-title">A-A — Aspirational + pillar strip</span>
+        <span class="card-bet">Taste first, services second</span>
+      </div>
+      <p class="card-desc">
+        Two-line aspirational headline <em>"Taste, applied to / whatever's next."</em>
+        holds the top. A labeled 01/02/03 strip below names the three pillars explicitly.
+        Comma and period are creatures.
+      </p>
+      <div class="card-frame">
+        <iframe src="variant-a-aspirational.html" loading="eager" title="Variant A-Aspirational"></iframe>
+      </div>
+      <div class="card-foot">
+        <a href="variant-a-aspirational.html" target="_blank" rel="noopener">Open A-Aspirational →</a>
+        <span>Magazine voice + full disclosure</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Tab switching
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.panel');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const target = tab.dataset.panel;
+      document.querySelector(`[data-panel-id="${target}"]`).classList.add('active');
+    });
+  });
+
+  // View (all vs single) within each panel
+  document.querySelectorAll('.v-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const group = btn.dataset.group;
+      const view = btn.dataset.view;
+      // Reset buttons in same group
+      document.querySelectorAll(`.v-btn[data-group="${group}"]`).forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const grid = document.getElementById('grid-' + group);
+      if (view === 'all') {
+        grid.classList.remove('single');
+        grid.querySelectorAll('.card').forEach(c => c.style.display = '');
+      } else {
+        grid.classList.add('single');
+        grid.querySelectorAll('.card').forEach(c => {
+          c.style.display = c.dataset.variant === view ? '' : 'none';
+        });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
