@@ -91,7 +91,10 @@ export default function Hero() {
             Taste<CreatureGlyph>,</CreatureGlyph> applied to
           </span>
           <span className="hero__title-line" style={{ opacity: 0, visibility: 'hidden' }}>
-            whatever&rsquo;s next<CreatureGlyph>.</CreatureGlyph>
+            whatever&rsquo;s
+          </span>
+          <span className="hero__title-line" style={{ opacity: 0, visibility: 'hidden' }}>
+            next<CreatureGlyph>.</CreatureGlyph>
           </span>
         </h1>
 
