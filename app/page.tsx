@@ -1,10 +1,8 @@
 import Header from '@/components/Header'
 import Hero from '@/components/Hero'
 import WorkSection from '@/components/WorkSection'
-import VoiceMoment from '@/components/VoiceMoment'
-import ServicesSection from '@/components/ServicesSection'
+import EngagementsSection from '@/components/EngagementsSection'
 import AboutSection from '@/components/AboutSection'
-import ContactSection from '@/components/ContactSection'
 import Footer from '@/components/Footer'
 import SmoothScroll from '@/components/SmoothScroll'
 
@@ -16,10 +14,8 @@ export default function Home() {
       <main>
         <Hero />
         <WorkSection />
-        <VoiceMoment />
-        <ServicesSection />
+        <EngagementsSection />
         <AboutSection />
-        <ContactSection />
       </main>
       <Footer />
     </>

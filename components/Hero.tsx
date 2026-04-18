@@ -2,22 +2,23 @@
 
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
-import dynamic from 'next/dynamic'
+import CreatureGlyph from './CreatureGlyph'
 
-const Ferrofluid = dynamic(() => import('./Ferrofluid'), { ssr: false })
-
-const notes = [
+const pillars = [
   {
-    label: 'Scope',
-    value: 'Brand direction, custom websites, and workflow consulting.',
+    idx: '01',
+    name: 'Brand direction',
+    desc: 'Strategy and visual identity for businesses that care how they present.',
   },
   {
-    label: 'Based in',
-    value: 'Southampton, NY — available for select remote and in-person engagements.',
+    idx: '02',
+    name: 'Custom websites',
+    desc: 'Design + build for marketing sites, portfolios, and product storytelling.',
   },
   {
-    label: 'Projects',
-    value: 'Advisory engagements, full builds, focused refreshes, and ongoing retainers.',
+    idx: '03',
+    name: 'AI workflows',
+    desc: 'Getting non-technical teams fluent with AI tooling — real workflows, not hype.',
   },
 ]
 
@@ -26,32 +27,51 @@ export default function Hero() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ delay: 0.2 })
+      const tl = gsap.timeline({ delay: 0.15 })
 
       tl.fromTo(
-        '.hero__eyebrow, .hero__title, .hero__lede, .hero__actions',
-        { autoAlpha: 0, y: 34 },
-        {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.95,
-          ease: 'power3.out',
-          stagger: 0.08,
-          clearProps: 'all',
-        }
+        '.hero__top-strip',
+        { autoAlpha: 0, y: 14 },
+        { autoAlpha: 1, y: 0, duration: 0.65, ease: 'power3.out', clearProps: 'all' }
       )
         .fromTo(
-          '.hero__note',
-          { autoAlpha: 0, y: 20 },
+          '.hero__title-line',
+          { autoAlpha: 0, y: 80 },
           {
             autoAlpha: 1,
             y: 0,
-            duration: 0.7,
+            duration: 1.1,
             ease: 'power3.out',
-            stagger: 0.06,
+            stagger: 0.12,
             clearProps: 'all',
           },
-          '-=0.5'
+          '-=0.2'
+        )
+        .fromTo(
+          '.hero__pillar',
+          { autoAlpha: 0, y: 30 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.85,
+            ease: 'power3.out',
+            stagger: 0.08,
+            clearProps: 'all',
+          },
+          '-=0.55'
+        )
+        .fromTo(
+          '.hero__bottom > *',
+          { autoAlpha: 0, y: 22 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.75,
+            ease: 'power3.out',
+            stagger: 0.08,
+            clearProps: 'all',
+          },
+          '-=0.4'
         )
     }, sectionRef)
 
@@ -59,53 +79,74 @@ export default function Hero() {
   }, [])
 
   return (
-    <section id="top" ref={sectionRef} className="hero">
-      <video
-        className="hero__video-bg"
-        autoPlay
-        muted
-        loop
-        playsInline
-        src="/video/hero-bg.mp4"
-        ref={(el) => { if (el) el.playbackRate = 0.4 }}
-      />
-      <div className="hero__inner">
-        <span className="hero__eyebrow section-label" style={{ opacity: 0, visibility: 'hidden' }}>
-          Taylor Maison
-        </span>
+    <section id="top" ref={sectionRef} className="hero hero--editorial">
+      <div className="hero__top-strip" style={{ opacity: 0, visibility: 'hidden' }}>
+        <span>Taylor Maison — Creative Direction · Websites · AI Workflows</span>
+        <span>Southampton, NY · Est. 2024</span>
+      </div>
 
-        <div className="hero__main">
-          <div className="hero__copy">
-            <h1 className="hero__title" style={{ opacity: 0, visibility: 'hidden' }}>
-              Creative direction and custom websites.
-            </h1>
-            <p className="hero__lede" style={{ opacity: 0, visibility: 'hidden' }}>
-              Brand consulting, websites, and workflow support for businesses
-              that care how they present. Built around clarity, restraint, and
-              knowing what to leave out.
-            </p>
-            <div className="hero__actions" style={{ opacity: 0, visibility: 'hidden' }}>
-              <a href="#work" className="hero__button hero__button--primary">
-                Selected work
-              </a>
-              <a href="#contact" className="hero__button hero__button--secondary">
-                Start a conversation
-              </a>
-            </div>
-          </div>
+      <div className="hero__type">
+        <h1 className="hero__title">
+          <span className="hero__title-line" style={{ opacity: 0, visibility: 'hidden' }}>
+            Taste<CreatureGlyph>,</CreatureGlyph> applied to
+          </span>
+          <span className="hero__title-line" style={{ opacity: 0, visibility: 'hidden' }}>
+            whatever&rsquo;s next<CreatureGlyph>.</CreatureGlyph>
+          </span>
+        </h1>
 
-          <div className="hero__visual">
-            <Ferrofluid />
-          </div>
-        </div>
-
-        <div className="hero__notes">
-          {notes.map((note) => (
-            <div key={note.label} className="hero__note" style={{ opacity: 0, visibility: 'hidden' }}>
-              <span className="hero__note-label">{note.label}</span>
-              <p className="hero__note-value">{note.value}</p>
+        <div className="hero__pillars">
+          {pillars.map((p) => (
+            <div key={p.idx} className="hero__pillar" style={{ opacity: 0, visibility: 'hidden' }}>
+              <span className="hero__pillar-idx">{p.idx}</span>
+              <span className="hero__pillar-name">{p.name}</span>
+              <p className="hero__pillar-desc">{p.desc}</p>
             </div>
           ))}
+        </div>
+      </div>
+
+      <div className="hero__bottom">
+        <p className="hero__lede" style={{ opacity: 0, visibility: 'hidden' }}>
+          Built around clarity, restraint, and knowing what to leave out —
+          whether that&rsquo;s a wordmark, a homepage, or how your team actually
+          uses AI.
+        </p>
+        <div className="hero__actions" style={{ opacity: 0, visibility: 'hidden' }}>
+          <a href="/work" className="hero__button hero__button--primary">
+            Selected work
+          </a>
+          <a href="/contact" className="hero__button hero__button--secondary">
+            Start a conversation
+          </a>
+        </div>
+        <div className="hero__signal" style={{ opacity: 0, visibility: 'hidden' }}>
+          <span className="hero__signal-pin" aria-hidden="true" />
+          <span>
+            <strong>Taking on 2 new engagements</strong>
+          </span>
+          <span>Q2 · 2026</span>
+        </div>
+      </div>
+
+      <div className="hero__marquee" aria-hidden="true">
+        <div className="hero__marquee-track">
+          <span>Roman Sanford</span>
+          <em>—</em>
+          <span>RS Black</span>
+          <em>—</em>
+          <span>Genuine Undead</span>
+          <em>—</em>
+          <span>Hampton Garden Party</span>
+          <em>—</em>
+          <span>Roman Sanford</span>
+          <em>—</em>
+          <span>RS Black</span>
+          <em>—</em>
+          <span>Genuine Undead</span>
+          <em>—</em>
+          <span>Hampton Garden Party</span>
+          <em>—</em>
         </div>
       </div>
     </section>
