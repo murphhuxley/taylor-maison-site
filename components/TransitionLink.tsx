@@ -15,6 +15,11 @@ function isModifiedEvent(event: MouseEvent<HTMLAnchorElement>) {
   return event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0
 }
 
+function normalizePath(path: string) {
+  const cleanPath = path.split(/[?#]/)[0] || '/'
+  return cleanPath !== '/' ? cleanPath.replace(/\/$/, '') : cleanPath
+}
+
 export default function TransitionLink({
   children,
   href,
@@ -37,6 +42,12 @@ export default function TransitionLink({
     href.startsWith('mailto:') ||
     href.startsWith('tel:')
 
+  const isSameInternalPath =
+    !isExternal &&
+    !isSamePageHash &&
+    href.startsWith('/') &&
+    normalizePath(href) === normalizePath(pathname)
+
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
     onClick?.(event)
 
@@ -47,6 +58,12 @@ export default function TransitionLink({
       isExternal ||
       isSamePageHash
     ) {
+      return
+    }
+
+    if (isSameInternalPath) {
+      event.preventDefault()
+      window.scrollTo({ top: 0, behavior: 'smooth' })
       return
     }
 

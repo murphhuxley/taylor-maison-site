@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>TM Monogram · Four constructions — Taylor Maison</title>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin="anonymous" />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&f[]=satoshi@400,500&display=swap" />
+<style>
+  :root {
+    --bg: #f4f0e8;
+    --bg-strong: #ece6de;
+    --text-primary: #15181b;
+    --text-muted: #8a8278;
+    --text-secondary: #5f5951;
+    --line: rgba(21, 24, 27, 0.12);
+    --charcoal: #0d1015;
+    --font-display: 'Cabinet Grotesk', 'Helvetica Neue', sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: 'Satoshi', 'Helvetica Neue', sans-serif;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: clamp(2rem, 5vw, 5rem) clamp(1.5rem, 4vw, 3.5rem);
+  }
+
+  header.page {
+    padding-bottom: 1.6rem;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  .meta {
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .intro {
+    max-width: 760px;
+    color: var(--text-secondary);
+    font-size: 1.02rem;
+    line-height: 1.55;
+    margin-bottom: clamp(3rem, 5vw, 5rem);
+  }
+  .intro strong { color: var(--text-primary); font-weight: 500; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.4rem, 2.5vw, 2.2rem);
+  }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: clamp(2rem, 3vw, 2.8rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+  }
+
+  .card__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .card__name {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .card__tag {
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* ── showcase row: hero mark on light + on dark ── */
+  .hero-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+  }
+  .hero-panel {
+    aspect-ratio: 1/1;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 2px;
+  }
+  .hero-panel--light {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    color: var(--text-primary);
+  }
+  .hero-panel--dark {
+    background: var(--charcoal);
+    color: var(--bg);
+  }
+
+  /* ── sizes row: favicon down to card ── */
+  .size-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    gap: 1.2rem;
+    padding-top: 1.2rem;
+    border-top: 1px dashed var(--line);
+    color: var(--text-primary);
+  }
+  .size-cell { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+  .size-cell__label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+
+  /* ── lockup with wordmark ── */
+  .lockup {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1.2rem 1rem;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+  }
+  .lockup__wm {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.9rem;
+    line-height: 0.88;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    display: flex; flex-direction: column;
+  }
+
+  .note {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+  .note strong { color: var(--text-primary); font-weight: 500; }
+
+  .back {
+    display: inline-block;
+    margin-top: clamp(3rem, 5vw, 4rem);
+    font-size: 0.82rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2px;
+  }
+  .back:hover { color: var(--text-primary); border-color: var(--text-primary); }
+
+  /* ─────────────────────────────────────────────
+     MONOGRAM CONSTRUCTIONS
+     Each uses a parametric --mk-size so they scale
+     predictably from favicon (16px) to hero (96px).
+  ───────────────────────────────────────────── */
+
+  /* shared base */
+  .mk {
+    font-family: var(--font-display);
+    font-weight: 800;
+    color: currentColor;
+    display: inline-block;
+    line-height: 1;
+  }
+
+  /* ── 1 · STACKED ── T directly over M, both equal width ── */
+  .mk-stacked {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 0.82;
+    letter-spacing: -0.02em;
+    font-size: var(--mk-size, 80px);
+  }
+  .mk-stacked > span {
+    display: block;
+  }
+  .mk-stacked > span:first-child {
+    /* T is naturally narrower than M in Cabinet Grotesk — widen via letter-spacing on the single char has no effect; use transform scaleX to match M's width */
+    transform: scaleX(1.18);
+    transform-origin: center;
+  }
+
+  /* ── 2 · CROSSED ── T and M share a vertical stem ── */
+  .mk-crossed {
+    position: relative;
+    font-size: var(--mk-size, 80px);
+    line-height: 1;
+    display: inline-block;
+    width: calc(var(--mk-size, 80px) * 1.35);
+    height: var(--mk-size, 80px);
+    letter-spacing: -0.04em;
+  }
+  .mk-crossed__t,
+  .mk-crossed__m {
+    position: absolute;
+    top: 0;
+    line-height: 1;
+    font-size: inherit;
+  }
+  .mk-crossed__t {
+    left: 0;
+  }
+  /* M sits so that its left stem overlaps the T's stem.
+     T's vertical stem is at ~ 48% of the T's glyph width.
+     We shift M to the left so M's left edge sits at ~ T's stem x. */
+  .mk-crossed__m {
+    /* T character width ~0.58em; stem x ~0.29em. Shift M so its left edge sits at 0.29em. */
+    left: calc(var(--mk-size, 80px) * 0.26);
+  }
+
+  /* ── 3 · ANCHORED ── TM on a baseline with a signature rule under ── */
+  .mk-anchored {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: var(--mk-size, 80px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .mk-anchored__row {
+    display: inline-flex;
+    align-items: baseline;
+    line-height: 0.9;
+  }
+  .mk-anchored__rule {
+    width: 100%;
+    height: calc(var(--mk-size, 80px) * 0.08);
+    background: currentColor;
+    margin-top: calc(var(--mk-size, 80px) * 0.08);
+  }
+
+  /* ── 4 · PUNCTUATED ── T · M with a bold center dot ── */
+  .mk-punct {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--mk-size, 80px) * 0.2);
+    font-size: var(--mk-size, 80px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .mk-punct__dot {
+    width: calc(var(--mk-size, 80px) * 0.18);
+    height: calc(var(--mk-size, 80px) * 0.18);
+    border-radius: 50%;
+    background: currentColor;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="page">
+    <h1 class="title">TM Monogram · Four constructions</h1>
+    <span class="meta">Round 3 · 2026-04-18</span>
+  </header>
+
+  <p class="intro">
+    Drawn from your own initials in Cabinet Grotesk 800 — same typeface as the wordmark, so the anchor and the voice come from the same architecture. <strong>Four different locks:</strong> stacked totem, crossed ligature, anchored signature, punctuated initials. All four are proprietary the moment they're rendered in your typeface. None exist anywhere else. Pick the one that reads like Taylor Maison.
+  </p>
+
+  <div class="grid">
+
+    <!-- 1 · STACKED -->
+    <div class="card">
+      <div class="card__head">
+        <h2 class="card__name">1 · Stacked</h2>
+        <span class="card__tag">Totem — vertical lock</span>
+      </div>
+      <div class="hero-row">
+        <div class="hero-panel hero-panel--light">
+          <span class="mk mk-stacked" style="--mk-size: 88px;">
+            <span>T</span><span>M</span>
+          </span>
+        </div>
+        <div class="hero-panel hero-panel--dark">
+          <span class="mk mk-stacked" style="--mk-size: 88px;">
+            <span>T</span><span>M</span>
+          </span>
+        </div>
+      </div>
+      <div class="size-row">
+        <div class="size-cell">
+          <span class="mk mk-stacked" style="--mk-size: 16px;"><span>T</span><span>M</span></span>
+          <span class="size-cell__label">16</span>
+        </div>
+        <div class="size-cell">
+          <span class="mk mk-stacked" style="--mk-size: 24px;"><span>T</span><span>M</span></span>
+          <span class="size-cell__label">24</span>
+        </div>
+        <div class="size-cell">
+          <span class="mk mk-stacked" style="--mk-size: 40px;"><span>T</span><span>M</span></span>
+          <span class="size-cell__label">40</span>
+        </div>
+        <div class="size-cell">
+          <span class="mk mk-stacked" style="--mk-size: 64px;"><span>T</span><span>M</span></span>
+          <span class="size-cell__label">64</span>
+        </div>
+      </div>
+      <div class="lockup">
+        <span class="mk mk-stacked" style="--mk-size: 34px;"><span>T</span><span>M</span></span>
+        <span class="lockup__wm"><span>TAYLOR</span><span>MAISON</span></span>
+      </div>
+      <p class="note">
+        <strong>The move:</strong> T directly above M, both scaled to equal visual width. Reads like a compressed version of the stacked wordmark — monogram as a shrunken echo of the full name.<br/>
+        <strong>Tradeoff:</strong> cleanest read at small sizes. Least "distinctive glyph" feeling because it's close to just smaller type.
+      </p>
+    </div>
+
+    <!-- 2 · CROSSED -->
+    <div class="card">
+      <div class="card__head">
+        <h2 class="card__name">2 · Crossed</h2>
+        <span class="card__tag">Ligature — shared stem</span>
+      </div>
+      <div class="hero-row">
+        <div class="hero-panel hero-panel--light">
+          <span class="mk mk-crossed" style="--mk-size: 88px;">
+            <span class="mk-crossed__t">T</span><span class="mk-crossed__m">M</span>
+          </span>
+        </div>
+        <div class="hero-panel hero-panel--dark">
+          <span class="mk mk-crossed" style="--mk-size: 88px;">
+            <span class="mk-crossed__t">T</span><span class="mk-crossed__m">M</span>
+          </span>
+        </div>
+      </div>
+      <div class="size-row">
+        <div class="size-cell">
+          <span class="mk mk-crossed" style="--mk-size: 16px;"><span class="mk-crossed__t">T</span><span class="mk-crossed__m">M</span></span>
+          <span class="size-cell__label">16</span>
+        </div>
+        <div class="size-cell">
+          <span class="mk mk-crossed" style="--mk-size: 24px;"><span class="mk-crossed__t">T</span><span class="mk-crossed__m">M</span></span>
+          <span class="size-cell__label">24</span>
+        </div>
+        <div class="size-cell">
+          <span class="mk mk-crossed" style="--mk-size: 40px;"><span class="mk-crossed__t">T</span><span class="mk-crossed__m">M</span></span>
+          <span class="size-cell__label">40</span>
+        </div>
+        <div class="size-cell">
+          <span class="mk mk-crossed" style="--mk-size: 64px;"><span class="mk-crossed__t">T</span><span class="mk-crossed__m">M</span></span>
+          <span class="size-cell__label">64</span>
+        </div>
+      </div>
+      <div class="lockup">
+        <span class="mk mk-crossed" style="--mk-size: 34px;"><span class="mk-crossed__t">T</span><span class="mk-crossed__m">M</span></span>
+        <span class="lockup__wm"><span>TAYLOR</span><span>MAISON</span></span>
+      </div>
+      <p class="note">
+        <strong>The move:</strong> T and M overlap so the T's vertical stem disappears into the left-leg of the M. One fused glyph instead of two letters — how Chanel's two C's, YSL's stacked letters work. True ligature.<br/>
+        <strong>Tradeoff:</strong> most distinctive option. Reads slightly slower ("what letter is that?") but that hesitation is the point — it's earned recognition.
+      </p>
+    </div>
+
+    <!-- 3 · ANCHORED -->
+    <div class="card">
+      <div class="card__head">
+        <h2 class="card__name">3 · Anchored</h2>
+        <span class="card__tag">Underlined — signature rule</span>
+      </div>
+      <div class="hero-row">
+        <div class="hero-panel hero-panel--light">
+          <span class="mk mk-anchored" style="--mk-size: 68px;">
+            <span class="mk-anchored__row">TM</span>
+            <span class="mk-anchored__rule"></span>
+          </span>
+        </div>
+        <div class="hero-panel hero-panel--dark">
+          <span class="mk mk-anchored" style="--mk-size: 68px;">
+            <span class="mk-anchored__row">TM</span>
+            <span class="mk-anchored__rule"></span>
+          </span>
+        </div>
+      </div>
+      <div class="size-row">
+        <div class="size-cell">
+          <span class="mk mk-anchored" style="--mk-size: 14px;"><span class="mk-anchored__row">TM</span><span class="mk-anchored__rule"></span></span>
+          <span class="size-cell__label">16</span>
+        </div>
+        <div class="size-cell">
+          <span class="mk mk-anchored" style="--mk-size: 22px;"><span class="mk-anchored__row">TM</span><span class="mk-anchored__rule"></span></span>
+          <span class="size-cell__label">24</span>
+        </div>
+        <div class="size-cell">
+          <span class="mk mk-anchored" style="--mk-size: 36px;"><span class="mk-anchored__row">TM</span><span class="mk-anchored__rule"></span></span>
+          <span class="size-cell__label">40</span>
+        </div>
+        <div class="size-cell">
+          <span class="mk mk-anchored" style="--mk-size: 56px;"><span class="mk-anchored__row">TM</span><span class="mk-anchored__rule"></span></span>
+          <span class="size-cell__label">64</span>
+        </div>
+      </div>
+      <div class="lockup">
+        <span class="mk mk-anchored" style="--mk-size: 28px;"><span class="mk-anchored__row">TM</span><span class="mk-anchored__rule"></span></span>
+        <span class="lockup__wm"><span>TAYLOR</span><span>MAISON</span></span>
+      </div>
+      <p class="note">
+        <strong>The move:</strong> TM set on a baseline with a deliberate heavy rule beneath — reads like a letterhead signature block. Editorial, publishing, literary.<br/>
+        <strong>Tradeoff:</strong> clearest "signature" feel. The underline is the signature move, like an auteur signing a page. Slightly horizontal — needs rectangular real estate, not a square avatar crop.
+      </p>
+    </div>
+
+    <!-- 4 · PUNCTUATED -->
+    <div class="card">
+      <div class="card__head">
+        <h2 class="card__name">4 · Punctuated</h2>
+        <span class="card__tag">T · M — pearl absorbed</span>
+      </div>
+      <div class="hero-row">
+        <div class="hero-panel hero-panel--light">
+          <span class="mk mk-punct" style="--mk-size: 72px;">
+            <span>T</span><span class="mk-punct__dot"></span><span>M</span>
+          </span>
+        </div>
+        <div class="hero-panel hero-panel--dark">
+          <span class="mk mk-punct" style="--mk-size: 72px;">
+            <span>T</span><span class="mk-punct__dot"></span><span>M</span>
+          </span>
+        </div>
+      </div>
+      <div class="size-row">
+        <div class="size-cell">
+          <span class="mk mk-punct" style="--mk-size: 14px;"><span>T</span><span class="mk-punct__dot"></span><span>M</span></span>
+          <span class="size-cell__label">16</span>
+        </div>
+        <div class="size-cell">
+          <span class="mk mk-punct" style="--mk-size: 22px;"><span>T</span><span class="mk-punct__dot"></span><span>M</span></span>
+          <span class="size-cell__label">24</span>
+        </div>
+        <div class="size-cell">
+          <span class="mk mk-punct" style="--mk-size: 36px;"><span>T</span><span class="mk-punct__dot"></span><span>M</span></span>
+          <span class="size-cell__label">40</span>
+        </div>
+        <div class="size-cell">
+          <span class="mk mk-punct" style="--mk-size: 56px;"><span>T</span><span class="mk-punct__dot"></span><span>M</span></span>
+          <span class="size-cell__label">64</span>
+        </div>
+      </div>
+      <div class="lockup">
+        <span class="mk mk-punct" style="--mk-size: 28px;"><span>T</span><span class="mk-punct__dot"></span><span>M</span></span>
+        <span class="lockup__wm"><span>TAYLOR</span><span>MAISON</span></span>
+      </div>
+      <p class="note">
+        <strong>The move:</strong> T and M separated by a bold interpunct — the dot survives from the original pearl idea, but now it's punctuation inside typography, not a standalone shape. A signature rhythm.<br/>
+        <strong>Tradeoff:</strong> horizontal, requires width. Strongest at medium sizes; at 16px the dot can visually merge with the letters. Plays elegantly with typographic culture (manuscript · middle dots · bullet separators).
+      </p>
+    </div>
+
+  </div>
+
+  <a href="./system.html" class="back">← Back to system sheet</a>
+
+</div>
+
+<script>
+  // Reveal after fonts load to avoid a Helvetica flash — monogram construction relies on Cabinet Grotesk glyph metrics.
+  if (document.fonts && document.fonts.load) {
+    document.fonts.load('800 88px "Cabinet Grotesk"').catch(function(){});
+  }
+</script>
+
+</body>
+</html>

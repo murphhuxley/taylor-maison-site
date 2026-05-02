@@ -2,7 +2,7 @@ import { projects } from '@/lib/projects'
 import { notFound } from 'next/navigation'
 import CaseStudy from '@/components/CaseStudy'
 import Header from '@/components/Header'
-import Footer from '@/components/Footer'
+import GlassPill from '@/components/GlassPill'
 import SmoothScroll from '@/components/SmoothScroll'
 
 export function generateStaticParams() {
@@ -43,14 +43,9 @@ export default async function ProjectPage({
       <SmoothScroll />
       <Header />
       <main id="top">
-        <CaseStudy
-          project={project}
-          nextProject={nextProject}
-          index={idx}
-          total={projects.length}
-        />
+        <CaseStudy project={project} nextProject={nextProject} />
       </main>
-      <Footer />
+      <GlassPill />
     </>
   )
 }

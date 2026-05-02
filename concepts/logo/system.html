@@ -1,0 +1,896 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Design sheet — Taylor Maison identity system</title>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin="anonymous" />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&f[]=satoshi@300,400,500,700,900&display=swap" />
+<style>
+  :root {
+    --bg: #f4f0e8;
+    --bg-strong: #ece6de;
+    --text-primary: #15181b;
+    --text-secondary: #5f5951;
+    --text-muted: #8a8278;
+    --accent: #6f8190;
+    --line: rgba(21, 24, 27, 0.12);
+    --charcoal: #0d1015;
+    --font-display: 'Cabinet Grotesk', 'Helvetica Neue', sans-serif;
+    --font-body: 'Satoshi', 'Helvetica Neue', sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text-primary); font-family: var(--font-body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  /* SVG text font-family must be set via CSS (not attribute) to track webfont loads. */
+  .wm-text { font-family: 'Cabinet Grotesk', 'Helvetica Neue', sans-serif; font-weight: 800; font-size: 140px; }
+
+  .wrap { max-width: 1420px; margin: 0 auto; padding: clamp(2.5rem, 6vw, 6rem) clamp(1.5rem, 4vw, 4rem); }
+
+  /* ── Header ── */
+  .eyebrow { font-family: var(--font-body); font-weight: 500; text-transform: uppercase; letter-spacing: 0.24em; font-size: 0.78rem; color: var(--text-muted); }
+  .kicker { font-family: var(--font-display); font-weight: 800; font-size: clamp(2.8rem, 6vw, 5.8rem); line-height: 1; letter-spacing: -0.025em; margin: 0.4rem 0 1.6rem; color: var(--text-primary); }
+  .lead { font-size: clamp(1.05rem, 1.5vw, 1.18rem); color: var(--text-secondary); max-width: 72ch; line-height: 1.62; }
+  .lead em { font-style: italic; color: var(--text-primary); }
+
+  /* ── Split hero — F and B side by side ── */
+  .hero {
+    margin-top: clamp(3.2rem, 5vw, 5rem);
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 0;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } }
+  .hero__cell {
+    padding: clamp(4rem, 9vw, 8rem) clamp(2rem, 5vw, 5rem);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+    background: var(--bg);
+    position: relative;
+    min-height: 420px;
+  }
+  .hero__cell + .hero__cell { border-left: 1px solid var(--line); }
+  @media (max-width: 900px) { .hero__cell + .hero__cell { border-left: 0; border-top: 1px solid var(--line); } }
+  .hero__label {
+    position: absolute; top: clamp(1.2rem, 2.5vw, 2rem); left: 50%; transform: translateX(-50%);
+    font-size: 0.78rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--text-muted);
+  }
+  .hero__caption {
+    position: absolute; bottom: clamp(1.2rem, 2.5vw, 2rem); left: 50%; transform: translateX(-50%);
+    font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted);
+    text-align: center;
+    white-space: nowrap;
+  }
+  .hero__wm { width: 100%; max-width: 560px; height: auto; display: block; color: var(--text-primary); }
+  .hero__pearl { width: clamp(180px, 26vw, 280px); height: auto; display: block; color: var(--text-primary); }
+
+  /* ── Two marks / two jobs ── */
+  .roles {
+    margin-top: clamp(4rem, 6vw, 5.5rem);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: clamp(1.2rem, 2.5vw, 2rem);
+  }
+  @media (max-width: 820px) { .roles { grid-template-columns: 1fr; } }
+  .role {
+    padding: clamp(2rem, 4vw, 3rem);
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    display: flex; flex-direction: column; gap: 1.2rem;
+  }
+  .role__tag { font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--text-muted); }
+  .role__title { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.6rem, 2.6vw, 2.2rem); letter-spacing: -0.02em; margin: 0; }
+  .role__idea { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 1.05rem; color: var(--text-primary); margin: 0; }
+  .role__body { color: var(--text-secondary); font-size: 0.96rem; line-height: 1.62; margin: 0; }
+  .role__use {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 0.4rem;
+    font-size: 0.92rem;
+  }
+  .role__use li {
+    padding: 0.5rem 0.8rem;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    display: flex; align-items: center; gap: 0.6rem;
+    color: var(--text-primary);
+  }
+  .role__use li::before {
+    content: '';
+    display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--text-primary);
+    flex-shrink: 0;
+  }
+
+  /* ── Section heading ── */
+  .section-heading {
+    margin-top: clamp(4rem, 6vw, 5.5rem);
+    display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap;
+    padding-bottom: 1rem; border-bottom: 1px solid var(--line);
+  }
+  .section-heading h2 {
+    font-family: var(--font-display); font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.6rem);
+    letter-spacing: -0.02em; margin: 0; line-height: 1;
+  }
+  .section-heading span { font-size: 0.82rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+  .section-sub { margin-top: 1.2rem; color: var(--text-secondary); max-width: 72ch; font-size: 1rem; line-height: 1.62; }
+  .section-sub em { font-style: italic; color: var(--text-primary); }
+
+  /* ── Lockups ── */
+  .lockup-grid {
+    margin-top: clamp(2rem, 3vw, 2.6rem);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1rem, 2vw, 1.6rem);
+  }
+  @media (max-width: 980px) { .lockup-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 620px) { .lockup-grid { grid-template-columns: 1fr; } }
+  .lockup {
+    padding: clamp(2.5rem, 4vw, 3.4rem) clamp(1.6rem, 3vw, 2.4rem);
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    display: flex; flex-direction: column; gap: 1.4rem;
+    min-height: 300px;
+  }
+  .lockup__label { font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--text-muted); }
+  .lockup__stage { flex: 1; display: flex; align-items: center; justify-content: center; }
+  .lockup__caption { font-size: 0.85rem; color: var(--text-secondary); margin: 0; line-height: 1.5; }
+
+  .lockup-stacked { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; }
+  .lockup-stacked__pearl { width: 56px; height: 56px; }
+  .lockup-stacked__wm { width: 180px; height: auto; }
+
+  .lockup-horiz { display: flex; align-items: center; gap: 1.1rem; }
+  .lockup-horiz__pearl { width: 56px; height: 56px; flex-shrink: 0; }
+  .lockup-horiz__wm { width: 180px; height: auto; }
+
+  .lockup-rule {
+    display: flex; flex-direction: column; align-items: center; gap: 0.9rem;
+    font-family: var(--font-display); font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .lockup-rule__wm { font-size: 1.4rem; letter-spacing: 0.08em; }
+  .lockup-rule__rule {
+    width: 64px; height: 1px; background: currentColor; opacity: 0.5;
+  }
+  .lockup-rule__pearl { width: 34px; height: 34px; }
+  .lockup-rule__meta { font-family: var(--font-body); font-weight: 500; font-size: 0.72rem; letter-spacing: 0.24em; color: var(--text-muted); margin-top: 0.2rem; }
+
+  /* ── Scale library ── */
+  .scale-lib {
+    margin-top: clamp(2rem, 3vw, 2.6rem);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1rem, 2vw, 1.6rem);
+  }
+  .scale-block {
+    padding: clamp(1.6rem, 3vw, 2.4rem);
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+  }
+  .scale-block__head {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+    margin-bottom: 1.6rem;
+    flex-wrap: wrap;
+  }
+  .scale-block__title { font-family: var(--font-display); font-weight: 800; font-size: 1.15rem; letter-spacing: -0.005em; margin: 0; }
+  .scale-block__sub { font-size: 0.88rem; color: var(--text-secondary); margin: 0; }
+
+  .scale-row {
+    display: flex; align-items: flex-end; gap: clamp(1.5rem, 3vw, 2.5rem);
+    overflow-x: auto;
+    padding: 1rem 0 0.4rem;
+  }
+  .scale-row__item { display: flex; flex-direction: column; align-items: center; gap: 0.7rem; flex-shrink: 0; color: var(--text-primary); }
+  .scale-row__item svg { display: block; }
+  .scale-row__label { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); }
+
+  /* ── Favicon grid ── */
+  .favicon-grid {
+    margin-top: clamp(2rem, 3vw, 2.6rem);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: clamp(1rem, 2vw, 1.6rem);
+  }
+  .favi-cell {
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 2rem 1.4rem;
+    display: flex; flex-direction: column; align-items: center; gap: 1.2rem;
+  }
+  .favi-cell__label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+  .favi-cell__box {
+    aspect-ratio: 1/1;
+    width: 100%;
+    max-width: 120px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 16%;
+  }
+  .favi-cell__box--ios { border-radius: 22%; }
+  .favi-cell__box--dark { background: var(--charcoal); border-color: var(--charcoal); color: #f4f0e8; }
+
+  /* ── In context ── */
+  .contexts {
+    margin-top: clamp(2rem, 3vw, 2.6rem);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.2rem, 2.5vw, 2rem);
+  }
+  @media (max-width: 820px) { .contexts { grid-template-columns: 1fr; } }
+  .context-card {
+    padding: clamp(1.6rem, 3vw, 2.4rem);
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    display: flex; flex-direction: column; gap: 1.2rem;
+  }
+  .context-card__label { font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--text-muted); }
+
+  .ctx-header {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    padding: 1rem 1.3rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    border-radius: 2px;
+  }
+  .ctx-header__brand {
+    display: flex; align-items: center; gap: 0.65rem;
+  }
+  .ctx-header__brand-wm {
+    font-family: var(--font-display); font-weight: 800;
+    font-size: 0.86rem; letter-spacing: 0.04em; line-height: 0.9;
+    display: flex; flex-direction: column;
+  }
+  .ctx-header__brand-pearl { width: 22px; height: 22px; flex-shrink: 0; color: var(--text-primary); }
+  .ctx-header__nav { display: flex; gap: 1.1rem; font-size: 0.8rem; color: var(--text-secondary); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* Business card — front (wordmark) + back (pearl), matches F-exclusive spec */
+  .card-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 560px) { .card-pair { grid-template-columns: 1fr; } }
+  .biz-card {
+    aspect-ratio: 1.72 / 1;
+    background: linear-gradient(160deg, #f1ede5, #ece6de);
+    border: 1px solid var(--line);
+    padding: 1.6rem;
+    display: grid; grid-template-rows: auto 1fr auto;
+    overflow: hidden; box-shadow: 0 18px 40px rgba(17,15,11,0.08);
+    border-radius: 2px;
+  }
+  .biz-card--back {
+    background: var(--charcoal); color: #f4f0e8;
+    display: flex; align-items: center; justify-content: center;
+    padding: 1.6rem;
+  }
+  .biz-card__corner { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+  .biz-card__wm {
+    align-self: center; justify-self: center;
+    display: block; margin: 0 auto;
+    width: 44%; height: auto; max-width: 260px;
+    color: var(--text-primary);
+  }
+  .biz-card__meta { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--text-secondary); letter-spacing: 0.06em; }
+  .biz-card__pearl-back { width: 38%; max-width: 110px; color: #f4f0e8; }
+
+  /* Email signature */
+  .email-mock {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 1.4rem 1.6rem;
+  }
+  .email-mock__line {
+    font-size: 0.78rem; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1.1rem;
+  }
+  .email-mock__body { font-size: 0.88rem; color: var(--text-primary); line-height: 1.62; margin-bottom: 1.4rem; }
+  .email-mock__sig-row { display: flex; align-items: center; gap: 0.7rem; }
+  .email-mock__sig-pearl { width: 22px; height: 22px; flex-shrink: 0; color: var(--text-primary); }
+  .email-mock__sig-stack {
+    display: flex; flex-direction: column;
+    font-family: var(--font-display); font-weight: 800;
+    font-size: 0.82rem; letter-spacing: 0.04em; line-height: 0.9;
+  }
+  .email-mock__sig-meta { margin-top: 0.5rem; font-size: 0.74rem; color: var(--text-secondary); letter-spacing: 0.04em; }
+
+  /* Letterhead */
+  .letterhead {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: clamp(2rem, 3.5vw, 2.6rem);
+    min-height: 280px;
+    display: flex; flex-direction: column; gap: 1.8rem;
+  }
+  .letterhead__head {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    padding-bottom: 1.2rem; border-bottom: 1px solid var(--line);
+  }
+  .letterhead__wm {
+    width: 160px; color: var(--text-primary);
+  }
+  .letterhead__pearl { width: 28px; height: 28px; color: var(--text-primary); }
+  .letterhead__meta { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.12em; text-transform: uppercase; }
+  .letterhead__body {
+    flex: 1;
+    display: flex; flex-direction: column; gap: 0.4rem;
+  }
+  .letterhead__body-line {
+    height: 7px; background: var(--bg-strong); border-radius: 2px;
+  }
+  .letterhead__body-line--short { width: 62%; }
+
+  /* Social avatar */
+  .avatar-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+  }
+  .avatar-cell {
+    display: flex; flex-direction: column; align-items: center; gap: 0.8rem;
+  }
+  .avatar-cell__box {
+    position: relative;
+    aspect-ratio: 1/1; width: 100%; max-width: 100px;
+    background: var(--charcoal);
+    border-radius: 50%;
+  }
+  .avatar-cell__box::after {
+    content: '';
+    position: absolute;
+    width: 22%;
+    height: 22%;
+    top: 21%;
+    left: 23%;
+    border-radius: 50%;
+    background: #f4f0e8;
+  }
+  .avatar-cell__box--cream {
+    background: var(--bg);
+    border: 1px solid var(--line);
+  }
+  .avatar-cell__box--cream::after { background: var(--charcoal); }
+  .avatar-cell__box--sq { border-radius: 22%; }
+  .avatar-cell__label { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); }
+
+  /* ── On charcoal ── */
+  .on-dark {
+    margin-top: clamp(4rem, 6vw, 5rem);
+    padding: clamp(4rem, 8vw, 7rem) clamp(2rem, 5vw, 5rem);
+    background: var(--charcoal);
+    color: #f4f0e8;
+    border-radius: 2px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+  @media (max-width: 900px) { .on-dark { grid-template-columns: 1fr; } }
+  .on-dark__wm { width: 100%; max-width: 520px; color: #f4f0e8; margin: 0 auto; display: block; }
+  .on-dark__pearl { width: 100%; max-width: 220px; color: #f4f0e8; margin: 0 auto; display: block; }
+
+  /* ── Rules ── */
+  .rules {
+    margin-top: clamp(4rem, 6vw, 5rem);
+    padding: clamp(2rem, 4vw, 3rem);
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+  }
+  .rules h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.5rem, 2.4vw, 2rem); margin: 0 0 0.8rem; letter-spacing: -0.015em; }
+  .rules p.rules__sub { margin: 0 0 1.8rem; color: var(--text-secondary); max-width: 70ch; }
+  .rule-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(1rem, 2vw, 1.6rem);
+  }
+  @media (max-width: 820px) { .rule-grid { grid-template-columns: 1fr; } }
+  .rule {
+    padding: 1.2rem 1.4rem 1.2rem 1.6rem;
+    background: var(--bg);
+    border-left: 2px solid var(--text-primary);
+    border-radius: 2px;
+  }
+  .rule__no { font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 0.3rem; }
+  .rule h3 { font-family: var(--font-display); font-weight: 800; font-size: 1.05rem; letter-spacing: -0.005em; margin: 0 0 0.4rem; }
+  .rule p { margin: 0; font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; }
+  .rule p em { font-style: italic; color: var(--text-primary); }
+
+  /* Don'ts */
+  .donts {
+    margin-top: clamp(2rem, 3vw, 2.4rem);
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(0.8rem, 1.6vw, 1.2rem);
+  }
+  @media (max-width: 820px) { .donts { grid-template-columns: repeat(2, 1fr); } }
+  .dont {
+    padding: 1.4rem 1rem 1rem;
+    background: var(--bg);
+    border: 1px solid rgba(193, 45, 45, 0.22);
+    border-radius: 2px;
+    display: flex; flex-direction: column; align-items: center; gap: 0.8rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .dont__ex {
+    height: 70px; display: flex; align-items: center; justify-content: center; width: 100%;
+    margin-bottom: 0.4rem;
+  }
+  .dont__label { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); }
+  .dont__title { font-family: var(--font-display); font-weight: 800; font-size: 0.92rem; letter-spacing: -0.005em; }
+  .dont__slash {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+  }
+  .dont__slash::after {
+    content: '';
+    position: absolute; top: 10%; left: 10%; width: 80%; height: 1px;
+    background: rgba(193, 45, 45, 0.35);
+    transform: rotate(-32deg); transform-origin: left top;
+  }
+
+  /* Nav */
+  .concept-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: clamp(4rem, 7vw, 6rem);
+    padding-top: 2rem; border-top: 1px solid var(--line);
+    font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .concept-nav a { color: var(--text-primary); text-decoration: none; padding: 0.6rem 1rem; border: 1px solid var(--line); transition: all 200ms ease; border-radius: 2px; }
+  .concept-nav a:hover { background: var(--text-primary); color: var(--bg); border-color: var(--text-primary); }
+</style>
+</head>
+<body>
+
+<!--
+  DESIGN SHEET — Taylor Maison identity system.
+  Locked pair: Bet F (stacked TAYLOR/MAISON wordmark, Cabinet 800) + Bet B (pearl).
+  The pearl is two hard-edged SVG circles — solid disc + subtractive highlight.
+  No gradients. No photorealism. The 2D crystallization of the 3D orb.
+-->
+
+<svg width="0" height="0" style="position: absolute;" aria-hidden="true">
+  <defs>
+    <!-- Pearl · primary cream variant (highlight uses cream bg) -->
+    <symbol id="pearl" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="48" fill="currentColor" />
+      <circle cx="44" cy="42" r="12" fill="#f4f0e8" />
+    </symbol>
+    <!-- Pearl · bg-strong variant (highlight uses bg-strong for cards) -->
+    <symbol id="pearl-strong" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="48" fill="currentColor" />
+      <circle cx="44" cy="42" r="12" fill="#ece6de" />
+    </symbol>
+    <!-- Pearl · dark variant (highlight uses charcoal bg) -->
+    <symbol id="pearl-dark" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="48" fill="currentColor" />
+      <circle cx="44" cy="42" r="12" fill="#0d1015" />
+    </symbol>
+    <!-- Wordmark · stacked TAYLOR / MAISON, equal-width.
+         font-family is set via the CSS class .wm-text (not attribute) so it tracks webfont load events. -->
+    <symbol id="wm-stacked" viewBox="0 0 600 290">
+      <text class="wm-text" x="300" y="128" text-anchor="middle" textLength="560" lengthAdjust="spacing"
+            fill="currentColor">TAYLOR</text>
+      <text class="wm-text" x="300" y="260" text-anchor="middle" textLength="560" lengthAdjust="spacing"
+            fill="currentColor">MAISON</text>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <!-- ── Header ── -->
+  <header>
+    <div class="eyebrow">Design sheet · Taylor Maison · 2026</div>
+    <h1 class="kicker">The identity system.</h1>
+    <p class="lead">A <em>maison</em> identity runs on two marks doing two jobs. The wordmark is the voice — carved, permanent, unmistakable — and goes wherever the full name fits. The pearl is the seal — a single still glyph that carries the brand where the wordmark can't: <em>favicon, avatar, sign-off, stamp.</em> Together they cover every surface the brand will ever touch.</p>
+  </header>
+
+  <!-- ── Split hero ── -->
+  <section class="hero">
+    <div class="hero__cell">
+      <span class="hero__label">The wordmark · primary</span>
+      <svg class="hero__wm" viewBox="0 0 600 290" role="img" aria-label="Taylor Maison wordmark"><use href="#wm-stacked"/></svg>
+      <span class="hero__caption">Cabinet Grotesk 800 · stacked · equal-width</span>
+    </div>
+    <div class="hero__cell">
+      <span class="hero__label">The pearl · anchor</span>
+      <svg class="hero__pearl" viewBox="0 0 120 120" role="img" aria-label="Taylor Maison pearl"><use href="#pearl"/></svg>
+      <span class="hero__caption">Two circles · disc + subtractive highlight</span>
+    </div>
+  </section>
+
+  <!-- ── Roles ── -->
+  <section class="roles">
+    <div class="role">
+      <span class="role__tag">Role · 01 · Primary</span>
+      <h3 class="role__title">The wordmark carries the name.</h3>
+      <p class="role__idea">"The house, named."</p>
+      <p class="role__body">Both words locked to identical width via SVG <code>textLength</code>. The stack forms a single typographic block — not two words but one shape. This is the default face of the brand; it shows up everywhere the wordmark fits, and that's most surfaces.</p>
+      <ul class="role__use">
+        <li>Site header and nav</li>
+        <li>Homepage masthead</li>
+        <li>Case study titles</li>
+        <li>Business card fronts</li>
+        <li>Invoices, letterheads, legal</li>
+        <li>Email signature header</li>
+        <li>Deck covers and handoffs</li>
+      </ul>
+    </div>
+    <div class="role">
+      <span class="role__tag">Role · 02 · Anchor</span>
+      <h3 class="role__title">The pearl carries the signature.</h3>
+      <p class="role__idea">"The seal the house stamps."</p>
+      <p class="role__body">A single glyph for the places the wordmark can't live — browser tabs, profile avatars, app icons, the end of an email. Built with two circles only: a solid disc plus a smaller, hard-edged highlight that uses the background color. Deliberately still — the calm counterweight to the ferrofluid orb's motion on the homepage.</p>
+      <ul class="role__use">
+        <li>Favicon + app icon</li>
+        <li>Social profile avatars</li>
+        <li>Email sign-off mark</li>
+        <li>Business card reverse</li>
+        <li>Watermark on images + exports</li>
+        <li>Closing stamp on documents</li>
+        <li>Stationery seal</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── Lockups ── -->
+  <div class="section-heading">
+    <h2>Lockups</h2>
+    <span>When the two marks appear together</span>
+  </div>
+  <p class="section-sub">Most of the time, the marks don't meet — F lives on wordmark surfaces, B lives on glyph surfaces. <em>Lockups are ceremonial.</em> Use them on letterheads, formal correspondence, certificates, deck covers — places where the brand is signing something. Three approved configurations.</p>
+
+  <div class="lockup-grid">
+    <div class="lockup">
+      <span class="lockup__label">Lockup A · Stacked seal</span>
+      <div class="lockup__stage">
+        <div class="lockup-stacked">
+          <svg class="lockup-stacked__pearl" viewBox="0 0 120 120" style="color: var(--text-primary);"><use href="#pearl-strong"/></svg>
+          <svg class="lockup-stacked__wm" viewBox="0 0 600 290" style="color: var(--text-primary);"><use href="#wm-stacked"/></svg>
+        </div>
+      </div>
+      <p class="lockup__caption">Pearl above wordmark, centered. The canonical lockup — reads as coat-of-arms or couture label. Use on letterheads, deck covers, certificates.</p>
+    </div>
+
+    <div class="lockup">
+      <span class="lockup__label">Lockup B · Horizontal</span>
+      <div class="lockup__stage">
+        <div class="lockup-horiz">
+          <svg class="lockup-horiz__pearl" viewBox="0 0 120 120" style="color: var(--text-primary);"><use href="#pearl-strong"/></svg>
+          <svg class="lockup-horiz__wm" viewBox="0 0 600 290" style="color: var(--text-primary);"><use href="#wm-stacked"/></svg>
+        </div>
+      </div>
+      <p class="lockup__caption">Pearl left of wordmark, vertically centered. For horizontal contexts: narrow headers, invoice tops, email-signature header rows.</p>
+    </div>
+
+    <div class="lockup">
+      <span class="lockup__label">Lockup C · Rule</span>
+      <div class="lockup__stage">
+        <div class="lockup-rule" style="color: var(--text-primary);">
+          <span class="lockup-rule__wm">TAYLOR MAISON</span>
+          <span class="lockup-rule__rule"></span>
+          <svg class="lockup-rule__pearl" viewBox="0 0 120 120"><use href="#pearl-strong"/></svg>
+          <span class="lockup-rule__meta">EST. MMXXV</span>
+        </div>
+      </div>
+      <p class="lockup__caption">Wordmark set inline, thin rule, pearl, establishment line. For formal ceremonies: awards, signed correspondence, imprimatur.</p>
+    </div>
+  </div>
+
+  <!-- ── Scale library ── -->
+  <div class="section-heading">
+    <h2>Scale library</h2>
+    <span>Both marks across sizes</span>
+  </div>
+  <p class="section-sub">Every placement has a canonical size. These strips are the reference — if your placement doesn't match one of these scales, you're probably using the wrong mark for the job.</p>
+
+  <div class="scale-lib">
+    <div class="scale-block">
+      <div class="scale-block__head">
+        <h3 class="scale-block__title">Wordmark (F)</h3>
+        <p class="scale-block__sub">From nav strip to masthead.</p>
+      </div>
+      <div class="scale-row">
+        <div class="scale-row__item"><svg width="80" viewBox="0 0 600 290"><use href="#wm-stacked"/></svg><span class="scale-row__label">Nav · 80px</span></div>
+        <div class="scale-row__item"><svg width="140" viewBox="0 0 600 290"><use href="#wm-stacked"/></svg><span class="scale-row__label">Header · 140px</span></div>
+        <div class="scale-row__item"><svg width="220" viewBox="0 0 600 290"><use href="#wm-stacked"/></svg><span class="scale-row__label">Card · 220px</span></div>
+        <div class="scale-row__item"><svg width="340" viewBox="0 0 600 290"><use href="#wm-stacked"/></svg><span class="scale-row__label">Hero · 340px</span></div>
+        <div class="scale-row__item"><svg width="480" viewBox="0 0 600 290"><use href="#wm-stacked"/></svg><span class="scale-row__label">Masthead · 480px</span></div>
+      </div>
+    </div>
+
+    <div class="scale-block">
+      <div class="scale-block__head">
+        <h3 class="scale-block__title">Pearl (B)</h3>
+        <p class="scale-block__sub">From favicon to hero seal.</p>
+      </div>
+      <div class="scale-row">
+        <div class="scale-row__item"><svg width="16" height="16" viewBox="0 0 120 120"><use href="#pearl-strong"/></svg><span class="scale-row__label">Favicon · 16px</span></div>
+        <div class="scale-row__item"><svg width="24" height="24" viewBox="0 0 120 120"><use href="#pearl-strong"/></svg><span class="scale-row__label">Inline · 24px</span></div>
+        <div class="scale-row__item"><svg width="40" height="40" viewBox="0 0 120 120"><use href="#pearl-strong"/></svg><span class="scale-row__label">Nav · 40px</span></div>
+        <div class="scale-row__item"><svg width="72" height="72" viewBox="0 0 120 120"><use href="#pearl-strong"/></svg><span class="scale-row__label">Avatar · 72px</span></div>
+        <div class="scale-row__item"><svg width="140" height="140" viewBox="0 0 120 120"><use href="#pearl-strong"/></svg><span class="scale-row__label">Card · 140px</span></div>
+        <div class="scale-row__item"><svg width="220" height="220" viewBox="0 0 120 120"><use href="#pearl-strong"/></svg><span class="scale-row__label">Hero · 220px</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Favicon + app icon ── -->
+  <div class="section-heading">
+    <h2>Favicon + app icon</h2>
+    <span>Where the pearl does its best work</span>
+  </div>
+  <p class="section-sub">The browser tab, iOS home screen, Slack sidebar, Figma avatar. Four configurations — light, light rounded, dark, dark rounded — cover every environment the brand appears in at thumb scale.</p>
+
+  <div class="favicon-grid">
+    <div class="favi-cell">
+      <span class="favi-cell__label">Browser tab</span>
+      <div class="favi-cell__box"><svg width="100%" viewBox="0 0 120 120" style="color: var(--text-primary);"><use href="#pearl"/></svg></div>
+    </div>
+    <div class="favi-cell">
+      <span class="favi-cell__label">iOS home</span>
+      <div class="favi-cell__box favi-cell__box--ios"><svg width="100%" viewBox="0 0 120 120" style="color: var(--text-primary);"><use href="#pearl"/></svg></div>
+    </div>
+    <div class="favi-cell">
+      <span class="favi-cell__label">Dark mode tab</span>
+      <div class="favi-cell__box favi-cell__box--dark"><svg width="100%" viewBox="0 0 120 120"><use href="#pearl-dark"/></svg></div>
+    </div>
+    <div class="favi-cell">
+      <span class="favi-cell__label">Dark · iOS</span>
+      <div class="favi-cell__box favi-cell__box--dark favi-cell__box--ios"><svg width="100%" viewBox="0 0 120 120"><use href="#pearl-dark"/></svg></div>
+    </div>
+  </div>
+
+  <!-- ── In context ── -->
+  <div class="section-heading">
+    <h2>In context</h2>
+    <span>Every surface, one system</span>
+  </div>
+  <p class="section-sub">Five real applications. The question each one answers: when you see the brand in the wild, which mark shows up, and how.</p>
+
+  <div class="contexts">
+    <!-- Site header -->
+    <div class="context-card">
+      <span class="context-card__label">Site header · Desktop</span>
+      <div class="ctx-header">
+        <div class="ctx-header__brand">
+          <div class="ctx-header__brand-wm">
+            <span>TAYLOR</span>
+            <span>MAISON</span>
+          </div>
+        </div>
+        <nav class="ctx-header__nav">
+          <span>Work</span><span>About</span><span>Contact</span>
+        </nav>
+      </div>
+      <p class="lockup__caption">Wordmark only. The header has space for the name; the pearl lives in the favicon (browser tab), not the nav.</p>
+    </div>
+
+    <!-- Mobile header -->
+    <div class="context-card">
+      <span class="context-card__label">Site header · Mobile / narrow</span>
+      <div class="ctx-header" style="padding: 0.8rem 1rem;">
+        <div class="ctx-header__brand">
+          <svg class="ctx-header__brand-pearl" viewBox="0 0 120 120"><use href="#pearl"/></svg>
+          <span style="font-family: var(--font-display); font-weight: 800; font-size: 0.82rem; letter-spacing: 0.06em;">TAYLOR MAISON</span>
+        </div>
+        <span style="font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.14em;">MENU</span>
+      </div>
+      <p class="lockup__caption">When the stacked wordmark can't fit, flatten to horizontal and anchor with the pearl. A rare case where both appear together at small scale.</p>
+    </div>
+
+    <!-- Business card -->
+    <div class="context-card" style="grid-column: 1 / -1;">
+      <span class="context-card__label">Business card · Front + back</span>
+      <div class="card-pair">
+        <div class="biz-card">
+          <div style="display: flex; justify-content: space-between;">
+            <span class="biz-card__corner">— Est. 2025</span>
+            <span class="biz-card__corner">N° 001</span>
+          </div>
+          <svg class="biz-card__wm" viewBox="0 0 600 290"><use href="#wm-stacked"/></svg>
+          <div class="biz-card__meta">
+            <span>Creative Director</span>
+            <span>t4ylormaison@gmail.com</span>
+          </div>
+        </div>
+        <div class="biz-card biz-card--back">
+          <svg class="biz-card__pearl-back" viewBox="0 0 120 120"><use href="#pearl-dark"/></svg>
+        </div>
+      </div>
+      <p class="lockup__caption">Wordmark on front, pearl on back. Charcoal reverse makes the pearl read as a pressed stamp or wax seal — formal, singular.</p>
+    </div>
+
+    <!-- Email signature -->
+    <div class="context-card">
+      <span class="context-card__label">Email signature</span>
+      <div class="email-mock">
+        <div class="email-mock__line">From · Taylor Maison</div>
+        <div class="email-mock__body">Happy to move forward on the Roman Sanford extension. I'll send the updated brief Thursday, and we can circle on the motion tests the week after.</div>
+        <div class="email-mock__sig-row">
+          <svg class="email-mock__sig-pearl" viewBox="0 0 120 120"><use href="#pearl"/></svg>
+          <div class="email-mock__sig-stack">
+            <span>TAYLOR</span>
+            <span>MAISON</span>
+          </div>
+        </div>
+        <div class="email-mock__sig-meta">Creative Director · Brand · Web · AI</div>
+      </div>
+      <p class="lockup__caption">Horizontal lockup at signature scale. The pearl functions as a signature dot — the mark that says "signed by the house."</p>
+    </div>
+
+    <!-- Letterhead -->
+    <div class="context-card">
+      <span class="context-card__label">Letterhead</span>
+      <div class="letterhead">
+        <div class="letterhead__head">
+          <svg class="letterhead__wm" viewBox="0 0 600 290"><use href="#wm-stacked"/></svg>
+          <svg class="letterhead__pearl" viewBox="0 0 120 120"><use href="#pearl"/></svg>
+        </div>
+        <div class="letterhead__body">
+          <div class="letterhead__body-line"></div>
+          <div class="letterhead__body-line"></div>
+          <div class="letterhead__body-line letterhead__body-line--short"></div>
+          <div class="letterhead__body-line" style="margin-top: 0.8rem;"></div>
+          <div class="letterhead__body-line letterhead__body-line--short"></div>
+        </div>
+      </div>
+      <p class="lockup__caption">Wordmark left, pearl right — the two marks frame the head of the page like the two ends of a ribbon. Formal correspondence, contracts, signed deliverables.</p>
+    </div>
+
+    <!-- Social avatar -->
+    <div class="context-card">
+      <span class="context-card__label">Social avatar</span>
+      <div class="avatar-grid">
+        <div class="avatar-cell">
+          <div class="avatar-cell__box"></div>
+          <span class="avatar-cell__label">X · Circle</span>
+        </div>
+        <div class="avatar-cell">
+          <div class="avatar-cell__box avatar-cell__box--sq"></div>
+          <span class="avatar-cell__label">LinkedIn · Square</span>
+        </div>
+        <div class="avatar-cell">
+          <div class="avatar-cell__box avatar-cell__box--cream"></div>
+          <span class="avatar-cell__label">Figma · Light</span>
+        </div>
+      </div>
+      <p class="lockup__caption">Pearl-only across all profile surfaces. Charcoal-on-cream for dark platforms; cream-on-charcoal for light ones. Never use the wordmark at avatar scale — it can't hold.</p>
+    </div>
+  </div>
+
+  <!-- ── On charcoal ── -->
+  <div class="section-heading">
+    <h2>On charcoal</h2>
+    <span>The full system inverted</span>
+  </div>
+  <p class="section-sub">Every mark has an inverse. The wordmark holds at any size on charcoal; the pearl uses the dark variant where the highlight circle matches the charcoal background instead of cream.</p>
+
+  <section class="on-dark">
+    <svg class="on-dark__wm" viewBox="0 0 600 290" role="img" aria-label="Wordmark on charcoal"><use href="#wm-stacked"/></svg>
+    <svg class="on-dark__pearl" viewBox="0 0 120 120" role="img" aria-label="Pearl on charcoal"><use href="#pearl-dark"/></svg>
+  </section>
+
+  <!-- ── Rules ── -->
+  <section class="rules">
+    <h2>Rules of the system</h2>
+    <p class="rules__sub">Four rules, one principle. The marks survive through restraint, not decoration. Any treatment that "spices them up" breaks the thing that makes them maison-grade.</p>
+
+    <div class="rule-grid">
+      <div class="rule">
+        <span class="rule__no">Rule · 01</span>
+        <h3>Pick one mark per surface.</h3>
+        <p>Never show the wordmark and pearl in the same space unless it's one of the three approved lockups. <em>Parallel placement reads as competition, not system.</em></p>
+      </div>
+      <div class="rule">
+        <span class="rule__no">Rule · 02</span>
+        <h3>Honor the minimum size.</h3>
+        <p>Wordmark: <em>80px wide minimum.</em> Pearl: <em>16px minimum.</em> Below these sizes the marks start to erode — especially the equal-width lock on the wordmark.</p>
+      </div>
+      <div class="rule">
+        <span class="rule__no">Rule · 03</span>
+        <h3>Clear space = the M-height.</h3>
+        <p>Around any placement, reserve clear space equal to the cap-height of the letter M in the wordmark. This applies to both marks. <em>No text, image, or UI element touches inside that zone.</em></p>
+      </div>
+      <div class="rule">
+        <span class="rule__no">Rule · 04</span>
+        <h3>Only two colorways: cream + charcoal.</h3>
+        <p>Charcoal marks on cream backgrounds, cream marks on charcoal backgrounds. No silver, no gold, no accent-color variants. <em>The brand is monochrome.</em> (Deliberate: Taylor explicitly dislikes gold.)</p>
+      </div>
+    </div>
+
+    <h2 style="margin-top: clamp(2.8rem, 4vw, 3.5rem); font-size: clamp(1.2rem, 2vw, 1.5rem);">Don't.</h2>
+    <p class="rules__sub" style="margin-bottom: 1rem;">Four failures to avoid.</p>
+
+    <div class="donts">
+      <div class="dont">
+        <div class="dont__slash"></div>
+        <div class="dont__ex">
+          <div style="width: 60px; height: 60px; border-radius: 50%;
+            background: radial-gradient(circle at 36% 32%, #f4f0e8 0%, #f4f0e8 3%, #ece6de 12%, #15181b 42%, #0d1015 100%);"></div>
+        </div>
+        <span class="dont__label">No gradients</span>
+        <span class="dont__title">Don't soften.</span>
+      </div>
+      <div class="dont">
+        <div class="dont__slash"></div>
+        <div class="dont__ex">
+          <svg width="60" height="60" viewBox="0 0 120 120" style="color: var(--text-primary);">
+            <circle cx="60" cy="60" r="44" fill="none" stroke="currentColor" stroke-width="4"/>
+            <circle cx="44" cy="42" r="10" fill="none" stroke="currentColor" stroke-width="4"/>
+          </svg>
+        </div>
+        <span class="dont__label">No outlines</span>
+        <span class="dont__title">Don't hollow.</span>
+      </div>
+      <div class="dont">
+        <div class="dont__slash"></div>
+        <div class="dont__ex">
+          <svg width="80" height="40" viewBox="0 0 120 60" style="color: var(--text-primary);">
+            <text x="60" y="44" text-anchor="middle"
+                  font-family="'Cabinet Grotesk', sans-serif" font-weight="800"
+                  font-size="48" fill="currentColor"
+                  transform="scale(1, 0.55)" transform-origin="60 44">TAYLOR</text>
+          </svg>
+        </div>
+        <span class="dont__label">No stretching</span>
+        <span class="dont__title">Don't distort.</span>
+      </div>
+      <div class="dont">
+        <div class="dont__slash"></div>
+        <div class="dont__ex">
+          <svg width="60" height="60" viewBox="0 0 120 120" style="color: var(--text-primary); transform: rotate(18deg);">
+            <use href="#pearl"/>
+          </svg>
+        </div>
+        <span class="dont__label">No rotation</span>
+        <span class="dont__title">Don't tilt.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nav back -->
+  <nav class="concept-nav">
+    <a href="./index.html">← All bets</a>
+    <a href="./bet-f-wordmark.html">Bet F detail</a>
+    <a href="./bet-b-symbol.html">Bet B detail →</a>
+  </nav>
+
+</div>
+
+<script>
+  // SVG <text> elements inside a <symbol> (referenced by <use>) often paint before the
+  // webfont is ready and never repaint. Force a real re-resolve after fonts load.
+  function forceSvgRepaint () {
+    // 1. Clone-and-replace every <text> so it re-measures against the now-loaded font.
+    document.querySelectorAll('svg text').forEach(function (t) {
+      var c = t.cloneNode(true);
+      t.parentNode.replaceChild(c, t);
+    });
+    // 2. Re-resolve every <use href="..."> so its shadow tree re-renders from the updated symbol.
+    document.querySelectorAll('svg use').forEach(function (u) {
+      var href = u.getAttribute('href') || u.getAttribute('xlink:href');
+      if (!href) return;
+      u.removeAttribute('href');
+      u.removeAttribute('xlink:href');
+      // force a layout flush
+      void u.getBoundingClientRect();
+      u.setAttribute('href', href);
+    });
+  }
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(forceSvgRepaint);
+    // belt + suspenders: also retry after a short delay in case the font was already
+    // cached and the ready promise resolved before our handler attached.
+    setTimeout(forceSvgRepaint, 500);
+  } else {
+    setTimeout(forceSvgRepaint, 800);
+  }
+</script>
+
+</body>
+</html>

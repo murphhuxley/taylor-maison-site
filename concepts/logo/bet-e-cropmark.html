@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Logo concept — E: The crop mark</title>
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,800&f[]=satoshi@400,500&display=swap" />
+<style>
+  :root {
+    --bg: #f4f0e8;
+    --bg-strong: #ece6de;
+    --text-primary: #15181b;
+    --text-secondary: #5f5951;
+    --text-muted: #8a8278;
+    --accent: #6f8190;
+    --line: rgba(21, 24, 27, 0.12);
+    --charcoal: #0d1015;
+    --font-display: 'Cabinet Grotesk', ui-serif, Georgia, serif;
+    --font-body: 'Satoshi', 'Helvetica Neue', sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text-primary); font-family: var(--font-body); font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+
+  .wrap { max-width: 1320px; margin: 0 auto; padding: clamp(2.5rem, 6vw, 6rem) clamp(1.5rem, 4vw, 4rem); }
+
+  .eyebrow { font-family: var(--font-body); font-weight: 500; text-transform: uppercase; letter-spacing: 0.24em; font-size: 0.78rem; color: var(--text-muted); }
+  .kicker { font-family: var(--font-display); font-weight: 800; font-size: clamp(2.3rem, 5vw, 4.4rem); line-height: 1.02; letter-spacing: -0.02em; margin: 0.4rem 0 1.6rem; color: var(--text-primary); }
+  .subtext { font-size: 1.08rem; color: var(--text-secondary); max-width: 62ch; }
+  .subtext em { font-style: italic; color: var(--text-primary); }
+
+  .brand-brief {
+    margin-top: clamp(1.4rem, 2.5vw, 2rem);
+    padding: 1.2rem 1.4rem;
+    border-left: 2px solid var(--text-primary);
+    background: var(--bg-strong);
+  }
+  .brand-brief strong { font-family: var(--font-display); font-weight: 800; letter-spacing: 0; }
+
+  .stage {
+    position: relative;
+    margin-top: clamp(3rem, 6vw, 5rem);
+    padding: clamp(4rem, 9vw, 8rem) 0;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .stage__mark { width: clamp(260px, 40vw, 520px); height: auto; display: block; color: var(--text-primary); }
+  .stage__caption {
+    position: absolute;
+    bottom: clamp(1.2rem, 2.5vw, 2rem);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted);
+  }
+
+  .section { margin-top: clamp(3.5rem, 7vw, 6.5rem); }
+  .section__title { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem, 2.2vw, 1.9rem); letter-spacing: -0.01em; margin: 0 0 0.4rem; }
+  .section__sub { color: var(--text-secondary); margin: 0 0 1.8rem; max-width: 60ch; }
+
+  /* ── Variations row — shows the crop-mark family ── */
+  .variations {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(0.8rem, 1.6vw, 1.4rem);
+    margin-top: 1.5rem;
+  }
+  @media (max-width: 820px) { .variations { grid-template-columns: 1fr; } }
+  .var-cell {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 2rem 1.4rem 1.4rem;
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+  }
+  .var-cell svg { display: block; color: var(--text-primary); }
+  .var-cell__name { margin-top: 1.2rem; font-family: var(--font-display); font-weight: 800; font-size: 1rem; }
+  .var-cell__note { margin-top: 0.2rem; font-size: 0.78rem; color: var(--text-muted); text-align: center; }
+
+  .scale-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: clamp(0.6rem, 1.4vw, 1.2rem);
+    align-items: end;
+  }
+  .scale-cell {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 1.4rem 0.8rem 1.1rem;
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    min-height: 180px;
+    justify-content: end;
+    border-radius: 2px;
+  }
+  .scale-cell svg { display: block; color: var(--text-primary); }
+  .scale-cell .scale-label { margin-top: 1rem; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); }
+  @media (max-width: 900px) { .scale-row { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 560px) { .scale-row { grid-template-columns: repeat(2, 1fr); } }
+
+  .on-dark {
+    margin-top: clamp(3.5rem, 7vw, 6.5rem);
+    padding: clamp(4rem, 9vw, 8rem) clamp(1.5rem, 4vw, 4rem);
+    background: var(--charcoal);
+    color: #f4f0e8;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 2px;
+  }
+  .on-dark svg { color: #f4f0e8; }
+
+  .contexts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.2rem, 2.5vw, 2rem);
+    margin-top: clamp(2rem, 4vw, 3rem);
+  }
+  @media (max-width: 780px) { .contexts { grid-template-columns: 1fr; } }
+
+  .header-mock {
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    padding: 1.2rem 1.6rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    border-radius: 2px;
+  }
+  .header-mock__brand { display: flex; align-items: center; gap: 0.7rem; }
+  .header-mock__brand span { font-family: var(--font-display); font-weight: 800; font-size: 0.95rem; letter-spacing: 0.05em; }
+  .header-mock__nav { display: flex; gap: 1.2rem; font-size: 0.82rem; color: var(--text-secondary); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  .card-mock {
+    aspect-ratio: 1.72 / 1;
+    background: linear-gradient(160deg, #f1ede5, #ece6de);
+    border: 1px solid var(--line);
+    padding: 1.6rem;
+    display: grid; grid-template-rows: auto 1fr auto;
+    overflow: hidden; box-shadow: 0 18px 40px rgba(17,15,11,0.08);
+    border-radius: 2px;
+  }
+  .card-mock__top { display: flex; justify-content: space-between; align-items: start; }
+  .card-mock__name { font-family: var(--font-display); font-weight: 800; font-size: 1.35rem; letter-spacing: -0.01em; align-self: end; }
+  .card-mock__meta { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--text-secondary); letter-spacing: 0.06em; }
+
+  .sig-mock {
+    grid-column: 1 / -1;
+    margin-top: clamp(2rem, 3vw, 2.6rem);
+    background: var(--bg);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: clamp(3rem, 6vw, 5rem) 0;
+    display: flex; flex-direction: column; align-items: center; gap: 1.2rem;
+  }
+  .sig-mock__line { font-size: 0.8rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); }
+
+  .concept-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: clamp(4rem, 7vw, 6rem);
+    padding-top: 2rem; border-top: 1px solid var(--line);
+    font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .concept-nav a { color: var(--text-primary); text-decoration: none; padding: 0.6rem 1rem; border: 1px solid var(--line); transition: all 200ms ease; border-radius: 2px; }
+  .concept-nav a:hover { background: var(--text-primary); color: var(--bg); border-color: var(--text-primary); }
+
+  /* Special hero variation: crop marks with the wordmark framed between */
+  .framed {
+    display: inline-grid;
+    grid-template-columns: auto auto auto;
+    align-items: center;
+    justify-items: center;
+    gap: clamp(1.5rem, 4vw, 3rem);
+  }
+  .framed__word {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.6rem, 4vw, 3.2rem);
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+</style>
+</head>
+<body>
+
+<!--
+  Bet E — THE CROP MARK.
+  Two printer's corner brackets — the creative director's signature tool.
+  The brackets imply a rectangle they never draw. What's inside is what Taylor
+  has chosen to keep; everything else was cut. The logo is the FRAME of
+  consideration itself.
+-->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Default "keep" mark — two diagonal corners -->
+    <symbol id="mark-e" viewBox="0 0 120 120">
+      <g fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="butt">
+        <!-- Upper-left corner -->
+        <path d="M 20 36 L 40 36" />
+        <path d="M 24 20 L 24 40" />
+        <!-- Lower-right corner -->
+        <path d="M 80 84 L 100 84" />
+        <path d="M 96 80 L 96 100" />
+      </g>
+    </symbol>
+
+    <!-- Bold variant for favicon / tiny scales -->
+    <symbol id="mark-e-bold" viewBox="0 0 120 120">
+      <g fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="butt">
+        <path d="M 16 36 L 42 36" />
+        <path d="M 22 14 L 22 42" />
+        <path d="M 78 84 L 104 84" />
+        <path d="M 98 78 L 98 106" />
+      </g>
+    </symbol>
+
+    <!-- Four-corner variant (all brackets visible) -->
+    <symbol id="mark-e-four" viewBox="0 0 120 120">
+      <g fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="butt">
+        <!-- UL -->
+        <path d="M 20 36 L 40 36" />
+        <path d="M 24 20 L 24 40" />
+        <!-- UR -->
+        <path d="M 80 36 L 100 36" />
+        <path d="M 96 20 L 96 40" />
+        <!-- LL -->
+        <path d="M 20 84 L 40 84" />
+        <path d="M 24 80 L 24 100" />
+        <!-- LR -->
+        <path d="M 80 84 L 100 84" />
+        <path d="M 96 80 L 96 100" />
+      </g>
+    </symbol>
+
+    <!-- TM centered between two corner marks (lockup variant) -->
+    <symbol id="mark-e-tm" viewBox="0 0 200 120">
+      <g fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="butt">
+        <!-- UL -->
+        <path d="M 20 36 L 40 36" />
+        <path d="M 24 20 L 24 40" />
+        <!-- LR -->
+        <path d="M 160 84 L 180 84" />
+        <path d="M 176 80 L 176 100" />
+      </g>
+      <text x="100" y="74" text-anchor="middle"
+            font-family="'Cabinet Grotesk', sans-serif"
+            font-weight="800"
+            font-size="42"
+            letter-spacing="1"
+            fill="currentColor">TM</text>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Logo ideation · Bet E · Round 2</div>
+    <h1 class="kicker">The crop mark.</h1>
+    <p class="subtext">Every designer knows these — the two L-shaped brackets that define a trim edge before a page goes to print. <em>What's inside is what you chose to keep. Everything else was cut.</em> Taylor's logo is the frame of consideration itself — the most insider editorial mark possible.</p>
+
+    <div class="brand-brief">
+      <strong>The idea:</strong> a creative director's job is judgment — knowing what to keep, knowing what to cut. Crop marks are the most intimate tool of that craft. Using them as the identity says "I am the frame" without ever speaking. Designers know what they mean; clients feel the taste.
+    </div>
+  </header>
+
+  <div class="stage">
+    <svg class="stage__mark" viewBox="0 0 120 120" role="img" aria-label="Taylor Maison crop mark"><use href="#mark-e"/></svg>
+    <span class="stage__caption">Hero scale · 520px</span>
+  </div>
+
+  <section class="section">
+    <h2 class="section__title">Variations</h2>
+    <p class="section__sub">The mark has a family — two corners, four corners, or a frame around the wordmark as a lockup.</p>
+    <div class="variations">
+      <div class="var-cell">
+        <svg width="140" height="140" viewBox="0 0 120 120"><use href="#mark-e"/></svg>
+        <div class="var-cell__name">Two-corner</div>
+        <div class="var-cell__note">The primary mark. Upper-left + lower-right.</div>
+      </div>
+      <div class="var-cell">
+        <svg width="140" height="140" viewBox="0 0 120 120"><use href="#mark-e-four"/></svg>
+        <div class="var-cell__name">Four-corner</div>
+        <div class="var-cell__note">Full registration frame. Seals, invoices, letterheads.</div>
+      </div>
+      <div class="var-cell">
+        <svg width="230" height="140" viewBox="0 0 200 120"><use href="#mark-e-tm"/></svg>
+        <div class="var-cell__name">With TM lockup</div>
+        <div class="var-cell__note">Corners frame the initials. Headers, signage.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">Scale test</h2>
+    <p class="section__sub">The thinnest-line mark of the three — it needs bolder strokes below 32px to stay visible.</p>
+    <div class="scale-row">
+      <div class="scale-cell">
+        <svg width="16" height="16" viewBox="0 0 120 120"><use href="#mark-e-bold"/></svg>
+        <span class="scale-label">Favicon · 16</span>
+      </div>
+      <div class="scale-cell">
+        <svg width="32" height="32" viewBox="0 0 120 120"><use href="#mark-e-bold"/></svg>
+        <span class="scale-label">Nav · 32</span>
+      </div>
+      <div class="scale-cell">
+        <svg width="56" height="56" viewBox="0 0 120 120"><use href="#mark-e"/></svg>
+        <span class="scale-label">Header · 56</span>
+      </div>
+      <div class="scale-cell">
+        <svg width="96" height="96" viewBox="0 0 120 120"><use href="#mark-e"/></svg>
+        <span class="scale-label">Seal · 96</span>
+      </div>
+      <div class="scale-cell">
+        <svg width="140" height="140" viewBox="0 0 120 120"><use href="#mark-e"/></svg>
+        <span class="scale-label">Stamp · 140</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">Framing device</h2>
+    <p class="section__sub">Because the mark is brackets, it naturally becomes a page treatment — anything you put between them reads as "considered, approved, kept."</p>
+    <div style="padding: clamp(2rem, 4vw, 3.5rem) 0; background: var(--bg-strong); border: 1px solid var(--line); border-radius: 2px; text-align: center;">
+      <div class="framed">
+        <svg width="56" height="56" viewBox="0 0 120 120" style="color: var(--text-primary);">
+          <g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="butt">
+            <path d="M 20 36 L 50 36" />
+            <path d="M 28 16 L 28 44" />
+          </g>
+        </svg>
+        <div class="framed__word">Taylor Maison</div>
+        <svg width="56" height="56" viewBox="0 0 120 120" style="color: var(--text-primary);">
+          <g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="butt">
+            <path d="M 70 84 L 100 84" />
+            <path d="M 92 76 L 92 104" />
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">On charcoal</h2>
+    <div class="on-dark">
+      <svg width="260" height="260" viewBox="0 0 120 120"><use href="#mark-e"/></svg>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">In context</h2>
+    <p class="section__sub">Header, card, signature.</p>
+
+    <div class="contexts">
+      <div class="header-mock">
+        <div class="header-mock__brand">
+          <svg width="34" height="34" viewBox="0 0 120 120" style="color: var(--text-primary);"><use href="#mark-e"/></svg>
+          <span>TAYLOR MAISON</span>
+        </div>
+        <nav class="header-mock__nav">
+          <span>Work</span><span>About</span><span>Contact</span>
+        </nav>
+      </div>
+
+      <div class="card-mock">
+        <div class="card-mock__top">
+          <svg width="44" height="44" viewBox="0 0 120 120" style="color: var(--text-primary);"><use href="#mark-e"/></svg>
+          <div style="text-align: right; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted);">Est. 2025</div>
+        </div>
+        <div class="card-mock__name">Taylor Maison</div>
+        <div class="card-mock__meta">
+          <span>Creative Director</span>
+          <span>t4ylormaison@gmail.com</span>
+        </div>
+      </div>
+
+      <div class="sig-mock">
+        <svg width="74" height="74" viewBox="0 0 120 120" style="color: var(--text-primary);"><use href="#mark-e"/></svg>
+        <div class="sig-mock__line">Taylor Maison · Brand, Web, AI</div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="concept-nav">
+    <a href="./bet-d-threshold.html">← Bet D · Threshold</a>
+    <a href="./index.html">All bets</a>
+    <a href="./bet-f-wordmark.html">Bet F · Wordmark →</a>
+  </nav>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Research Swing · Four answers to the research — Taylor Maison</title>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin="anonymous" />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&f[]=satoshi@400,500&display=swap" />
+<style>
+  :root {
+    --bg: #f4f0e8;
+    --bg-strong: #ece6de;
+    --text-primary: #15181b;
+    --text-muted: #8a8278;
+    --text-secondary: #5f5951;
+    --line: rgba(21, 24, 27, 0.12);
+    --charcoal: #0d1015;
+    --font-display: 'Cabinet Grotesk', 'Helvetica Neue', sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: 'Satoshi', 'Helvetica Neue', sans-serif;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: clamp(2rem, 5vw, 5rem) clamp(1.5rem, 4vw, 3.5rem);
+  }
+
+  header.page {
+    padding-bottom: 1.6rem;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  .meta { font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+
+  .intro {
+    max-width: 760px;
+    color: var(--text-secondary);
+    font-size: 1.02rem;
+    line-height: 1.55;
+    margin-bottom: clamp(3rem, 5vw, 5rem);
+  }
+  .intro strong { color: var(--text-primary); font-weight: 500; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.4rem, 2.5vw, 2.2rem);
+  }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: clamp(2rem, 3vw, 2.8rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+  }
+
+  .card__head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding-bottom: 1rem; border-bottom: 1px solid var(--line);
+  }
+  .card__name {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .card__tag {
+    font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-muted);
+  }
+
+  .hero-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+  }
+  .hero-panel {
+    aspect-ratio: 1/1;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 2px;
+    padding: clamp(1rem, 2vw, 2rem);
+  }
+  .hero-panel--light {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    color: var(--text-primary);
+  }
+  .hero-panel--dark {
+    background: var(--charcoal);
+    color: var(--bg);
+  }
+  .hero-panel svg { width: 72%; height: 72%; display: block; }
+  .hero-panel--wm {
+    padding: 1.4rem;
+  }
+  .hero-panel--wm .wm-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.4rem, 4.2vw, 3rem);
+    line-height: 0.86;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .hero-panel--wm .wm-period {
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 50%;
+    background: currentColor;
+    vertical-align: baseline;
+    margin-left: 0.08em;
+    transform: translateY(0.08em);
+  }
+
+  .size-row {
+    display: flex; align-items: flex-end; justify-content: space-around;
+    gap: 1.2rem;
+    padding-top: 1.2rem;
+    border-top: 1px dashed var(--line);
+    color: var(--text-primary);
+  }
+  .size-cell { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+  .size-cell__label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+  .size-cell svg { display: block; }
+
+  .lockup {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1.2rem 1rem;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+  }
+  .lockup svg { width: 38px; height: 38px; flex-shrink: 0; color: var(--text-primary); display: block; }
+  .lockup__wm {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.9rem;
+    line-height: 0.88;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    display: flex; flex-direction: column;
+  }
+
+  .note {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+  .note strong { color: var(--text-primary); font-weight: 500; }
+  .note em { color: var(--text-primary); font-style: italic; }
+
+  .research-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 0.3rem 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    margin-top: 0.4rem;
+  }
+
+  .back {
+    display: inline-block;
+    margin-top: clamp(3rem, 5vw, 4rem);
+    font-size: 0.82rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2px;
+  }
+  .back:hover { color: var(--text-primary); border-color: var(--text-primary); }
+</style>
+</head>
+<body>
+
+<!-- ── SVG LIBRARY ──
+     Custom letterform work (paths and polygons, not stock SVG <text>) so each mark
+     is proprietary geometry the research says monograms need in order to escape
+     stock-type genericness.
+─────────────────────────────── -->
+<svg width="0" height="0" style="position: absolute; overflow: hidden;" aria-hidden="true">
+  <defs>
+
+    <!-- 1 · TM LIGATURE
+         T and M share a vertical stem. The T's single stem IS the M's left stem.
+         One continuous glyph. Proprietary — cannot exist in any stock typeface.
+         Outline traced clockwise from top-left of crossbar. -->
+    <symbol id="rs-tm-ligature" viewBox="0 0 120 120">
+      <polygon fill="currentColor" points="
+        14,20
+        106,20
+        106,92
+        94,92
+        94,32
+        88,32
+        80,60
+        72,32
+        66,32
+        66,92
+        54,92
+        54,32
+        14,32
+      " />
+    </symbol>
+
+    <!-- 2 · THE MAISON M
+         Single-letter mark. Heavy sans M with architectural proportions.
+         Escapes the ™ trap entirely. "Maison" is the distinctive half of the name. -->
+    <symbol id="rs-maison-m" viewBox="0 0 120 120">
+      <polygon fill="currentColor" points="
+        24,20
+        40,20
+        60,56
+        80,20
+        96,20
+        96,100
+        82,100
+        82,44
+        66,72
+        54,72
+        38,44
+        38,100
+        24,100
+      " />
+    </symbol>
+
+    <!-- 3 · WORDMARK glyph (for lockups only — the primary mark is the stacked wordmark
+         rendered in HTML below). This is a small period-dot used beside the
+         wordmark and as an alternate favicon. -->
+    <symbol id="rs-period" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="18" fill="currentColor" />
+    </symbol>
+
+    <!-- 4 · THE HORIZON
+         Reduction of Taylor's favorite sunset pearl (Classic, top-solid/bottom-slatted)
+         to its essential form: a solid upper semicircle + one horizontal rule.
+         Bauhaus-minimum. -->
+    <symbol id="rs-horizon" viewBox="0 0 120 120">
+      <!-- solid upper semicircle -->
+      <path d="M 12 60 A 48 48 0 0 1 108 60 Z" fill="currentColor" />
+      <!-- single horizon line, spanning edge-to-edge just below -->
+      <rect x="6" y="68" width="108" height="5" fill="currentColor" />
+    </symbol>
+
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <header class="page">
+    <h1 class="title">Research swing · Four custom-letterform answers</h1>
+    <span class="meta">Round 5 · 2026-04-18 · post-research</span>
+  </header>
+
+  <p class="intro">
+    The research surfaced four directives: <strong>custom letterform work beats stock type</strong> (Chanel, Fendi, YSL); <strong>if you keep a monogram, the letters must mechanically interact</strong> (not two letters in a frame); <strong>kill uppercase TM standalone</strong> (™ read); <strong>the dominant peer pattern is wordmark, not seal</strong>. These four concepts respond directly — each is a distinct archetype that would hold up under a Sagi Haviv or Michael Bierut critique, in a way the pearl+stock-letter approach would not. Pick the direction, then we pressure-test against the eight-question framework.
+  </p>
+
+  <div class="grid">
+
+    <!-- 1 · TM LIGATURE -->
+    <div class="card">
+      <div class="card__head">
+        <h2 class="card__name">1 · TM ligature</h2>
+        <span class="card__tag">Shared-stem custom glyph</span>
+      </div>
+      <div class="hero-row">
+        <div class="hero-panel hero-panel--light">
+          <svg viewBox="0 0 120 120"><use href="#rs-tm-ligature"/></svg>
+        </div>
+        <div class="hero-panel hero-panel--dark">
+          <svg viewBox="0 0 120 120"><use href="#rs-tm-ligature"/></svg>
+        </div>
+      </div>
+      <div class="size-row">
+        <div class="size-cell"><svg width="16" height="16" viewBox="0 0 120 120"><use href="#rs-tm-ligature"/></svg><span class="size-cell__label">16</span></div>
+        <div class="size-cell"><svg width="24" height="24" viewBox="0 0 120 120"><use href="#rs-tm-ligature"/></svg><span class="size-cell__label">24</span></div>
+        <div class="size-cell"><svg width="40" height="40" viewBox="0 0 120 120"><use href="#rs-tm-ligature"/></svg><span class="size-cell__label">40</span></div>
+        <div class="size-cell"><svg width="64" height="64" viewBox="0 0 120 120"><use href="#rs-tm-ligature"/></svg><span class="size-cell__label">64</span></div>
+      </div>
+      <div class="lockup">
+        <svg viewBox="0 0 120 120"><use href="#rs-tm-ligature"/></svg>
+        <span class="lockup__wm"><span>TAYLOR</span><span>MAISON</span></span>
+      </div>
+      <p class="note">
+        <strong>The move:</strong> T and M share a vertical stem — the T's single stem literally <em>is</em> the M's left stem. One continuous glyph. A full horizontal top serves as the T's crossbar <em>and</em> the M's cap. The middle of the glyph has an inverted-V that reads as the M's interior.<br/>
+        <strong>Why it works:</strong> this is the Chanel / Fendi / VW move — a proprietary interlock you couldn't type in any stock font. Escapes the ™ trap because it reads as one glyph, not two letters + symbol. The shared stem is the signature mechanic.<br/>
+        <span class="research-tag">Research: §2 custom ligature · §3 distinctive under stress</span>
+      </p>
+    </div>
+
+    <!-- 2 · THE MAISON M -->
+    <div class="card">
+      <div class="card__head">
+        <h2 class="card__name">2 · The Maison M</h2>
+        <span class="card__tag">Single letter, architectural</span>
+      </div>
+      <div class="hero-row">
+        <div class="hero-panel hero-panel--light">
+          <svg viewBox="0 0 120 120"><use href="#rs-maison-m"/></svg>
+        </div>
+        <div class="hero-panel hero-panel--dark">
+          <svg viewBox="0 0 120 120"><use href="#rs-maison-m"/></svg>
+        </div>
+      </div>
+      <div class="size-row">
+        <div class="size-cell"><svg width="16" height="16" viewBox="0 0 120 120"><use href="#rs-maison-m"/></svg><span class="size-cell__label">16</span></div>
+        <div class="size-cell"><svg width="24" height="24" viewBox="0 0 120 120"><use href="#rs-maison-m"/></svg><span class="size-cell__label">24</span></div>
+        <div class="size-cell"><svg width="40" height="40" viewBox="0 0 120 120"><use href="#rs-maison-m"/></svg><span class="size-cell__label">40</span></div>
+        <div class="size-cell"><svg width="64" height="64" viewBox="0 0 120 120"><use href="#rs-maison-m"/></svg><span class="size-cell__label">64</span></div>
+      </div>
+      <div class="lockup">
+        <svg viewBox="0 0 120 120"><use href="#rs-maison-m"/></svg>
+        <span class="lockup__wm"><span>TAYLOR</span><span>MAISON</span></span>
+      </div>
+      <p class="note">
+        <strong>The move:</strong> just M. Heavy, architectural, with a deep V that meets near the midline. Drawn proprietary (not Cabinet M) — sharper proportions, thicker stems, dramatic interior.<br/>
+        <strong>Why it works:</strong> "Taylor" is the common half of the name; "Maison" is the distinctive half. The M is the differentiating letter. <em>Maison</em> = house / atelier — a creative director's studio. Escapes the ™ confusion entirely. Reduces the problem from "two letters in a frame" to "one letter with presence."<br/>
+        <span class="research-tag">Research: §1 peer whitespace · §2 sidesteps ™ · §4 Scher type-led</span>
+      </p>
+    </div>
+
+    <!-- 3 · WORDMARK + PERIOD -->
+    <div class="card">
+      <div class="card__head">
+        <h2 class="card__name">3 · Wordmark with period</h2>
+        <span class="card__tag">Type-first, pearl as punctuation</span>
+      </div>
+      <div class="hero-row">
+        <div class="hero-panel hero-panel--light hero-panel--wm">
+          <span class="wm-block"><span>TAYLOR</span><span>MAISON<span class="wm-period" aria-hidden="true"></span></span></span>
+        </div>
+        <div class="hero-panel hero-panel--dark hero-panel--wm">
+          <span class="wm-block"><span>TAYLOR</span><span>MAISON<span class="wm-period" aria-hidden="true"></span></span></span>
+        </div>
+      </div>
+      <div class="size-row">
+        <div class="size-cell"><svg width="16" height="16" viewBox="0 0 120 120"><use href="#rs-period"/></svg><span class="size-cell__label">16</span></div>
+        <div class="size-cell"><svg width="24" height="24" viewBox="0 0 120 120"><use href="#rs-period"/></svg><span class="size-cell__label">24</span></div>
+        <div class="size-cell"><svg width="40" height="40" viewBox="0 0 120 120"><use href="#rs-period"/></svg><span class="size-cell__label">40</span></div>
+        <div class="size-cell"><svg width="64" height="64" viewBox="0 0 120 120"><use href="#rs-period"/></svg><span class="size-cell__label">64</span></div>
+      </div>
+      <div class="lockup">
+        <svg viewBox="0 0 120 120"><use href="#rs-period"/></svg>
+        <span class="lockup__wm"><span>TAYLOR</span><span>MAISON.</span></span>
+      </div>
+      <p class="note">
+        <strong>The move:</strong> the wordmark <em>is</em> the mark. No seal, no glyph. But the period after MAISON — a filled pearl-like dot — becomes the signature punctuation. The period is the pearl; the pearl is the period. For favicons/avatars, use just the dot.<br/>
+        <strong>Why it works:</strong> matches the dominant peer archetype (~12 of 25 peers use pure wordmarks). Sidesteps every monogram pitfall. The period keeps the pearl in the system as a secondary motif — used as bullet points, section breaks, drop-caps — without asking it to carry the business alone. Scher-aligned: type-led, decisive.<br/>
+        <span class="research-tag">Research: §1 peer pattern · §4 Rand/Scher · §5 primary recommendation</span>
+      </p>
+    </div>
+
+    <!-- 4 · THE HORIZON -->
+    <div class="card">
+      <div class="card__head">
+        <h2 class="card__name">4 · The horizon</h2>
+        <span class="card__tag">Classic reduced to essence</span>
+      </div>
+      <div class="hero-row">
+        <div class="hero-panel hero-panel--light">
+          <svg viewBox="0 0 120 120"><use href="#rs-horizon"/></svg>
+        </div>
+        <div class="hero-panel hero-panel--dark">
+          <svg viewBox="0 0 120 120"><use href="#rs-horizon"/></svg>
+        </div>
+      </div>
+      <div class="size-row">
+        <div class="size-cell"><svg width="16" height="16" viewBox="0 0 120 120"><use href="#rs-horizon"/></svg><span class="size-cell__label">16</span></div>
+        <div class="size-cell"><svg width="24" height="24" viewBox="0 0 120 120"><use href="#rs-horizon"/></svg><span class="size-cell__label">24</span></div>
+        <div class="size-cell"><svg width="40" height="40" viewBox="0 0 120 120"><use href="#rs-horizon"/></svg><span class="size-cell__label">40</span></div>
+        <div class="size-cell"><svg width="64" height="64" viewBox="0 0 120 120"><use href="#rs-horizon"/></svg><span class="size-cell__label">64</span></div>
+      </div>
+      <div class="lockup">
+        <svg viewBox="0 0 120 120"><use href="#rs-horizon"/></svg>
+        <span class="lockup__wm"><span>TAYLOR</span><span>MAISON</span></span>
+      </div>
+      <p class="note">
+        <strong>The move:</strong> take your favorite sunset pearl (Classic — top solid, bottom slatted) and reduce ruthlessly. Solid upper semicircle + one horizontal rule extending edge-to-edge. Two elements total. Max reduction.<br/>
+        <strong>Why it works:</strong> passes every distinctiveness test — phone-describable ("dome over a line"), memorable, silhouette-proof at 16px, one-color-stable. Keeps the semantic content of the sunset direction (sun / horizon / architectural threshold) without asking viewers to parse slats. Rand would approve: simplicity as byproduct.<br/>
+        <span class="research-tag">Research: §3 silhouette test · §3 phone test · §4 Rand reduction</span>
+      </p>
+    </div>
+
+  </div>
+
+  <a href="./system.html" class="back">← Back to system sheet</a>
+
+</div>
+
+</body>
+</html>

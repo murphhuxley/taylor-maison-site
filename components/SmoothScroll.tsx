@@ -2,6 +2,10 @@
 
 import { useEffect } from 'react'
 import Lenis from 'lenis'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 export default function SmoothScroll() {
   useEffect(() => {
@@ -11,16 +15,26 @@ export default function SmoothScroll() {
       smoothWheel: true,
     })
 
-    function raf(time: number) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
+    // Bridge Lenis -> ScrollTrigger: update on every scroll event.
+    lenis.on('scroll', ScrollTrigger.update)
+
+    // Drive Lenis off the GSAP ticker so both share one RAF loop.
+    const tickerCb = (time: number) => lenis.raf(time * 1000)
+    gsap.ticker.add(tickerCb)
+    gsap.ticker.lagSmoothing(0)
+
+    // Refresh ScrollTrigger once more after images/fonts finish loading.
+    const onLoad = () => ScrollTrigger.refresh()
+    if (document.readyState === 'complete') {
+      ScrollTrigger.refresh()
+    } else {
+      window.addEventListener('load', onLoad)
     }
 
-    requestAnimationFrame(raf)
-
     // Handle anchor links
+    const anchorClicks: Array<{ el: Element; handler: (e: Event) => void }> = []
     document.querySelectorAll('a[href^="#"]').forEach((el) => {
-      el.addEventListener('click', (e) => {
+      const handler = (e: Event) => {
         e.preventDefault()
         const href = el.getAttribute('href')
         if (!href) return
@@ -28,10 +42,15 @@ export default function SmoothScroll() {
         if (target) {
           lenis.scrollTo(target as HTMLElement, { offset: -100 })
         }
-      })
+      }
+      el.addEventListener('click', handler)
+      anchorClicks.push({ el, handler })
     })
 
     return () => {
+      gsap.ticker.remove(tickerCb)
+      window.removeEventListener('load', onLoad)
+      anchorClicks.forEach(({ el, handler }) => el.removeEventListener('click', handler))
       lenis.destroy()
     }
   }, [])

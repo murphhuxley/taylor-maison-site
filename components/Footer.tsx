@@ -5,7 +5,7 @@ export default function Footer() {
         <div className="footer__block">
           <span className="footer__wordmark">Taylor Maison</span>
           <p className="footer__note">
-            Creative direction, brand consulting, websites, and AI support.
+            Brand direction, custom websites, and practical AI workflows.
           </p>
         </div>
 

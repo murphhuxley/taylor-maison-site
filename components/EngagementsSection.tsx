@@ -3,48 +3,49 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import TransitionLink from './TransitionLink'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const engagements = [
   {
     idx: '01',
-    name: 'Brand direction',
+    name: 'Focused Refresh',
     summary:
-      'Strategy and visual identity for businesses that care how they present. Naming, positioning, wordmarks, systems — and the reasoning that binds them.',
+      'For businesses with real reputation whose website no longer reflects it. We sharpen the story, homepage, visual system, and inquiry path.',
     includes: [
-      'Positioning + voice',
-      'Visual identity system',
-      'Wordmark + typography',
-      'Rollout roadmap',
+      'Story + positioning audit',
+      'Homepage rebuild',
+      'Visual system tightening',
+      'Inquiry flow refresh',
     ],
-    fit: 'Best when you have a real business but the brand is catching up.',
+    fit: 'Best when the business has earned trust the website doesn’t reflect.',
   },
   {
     idx: '02',
-    name: 'Custom websites',
+    name: 'Flagship Build',
     summary:
-      'Design and build for marketing sites, portfolios, and product storytelling. Every detail considered — from the grid to the cursor.',
+      'A complete digital presence: positioning, website, motion, content structure, and lead flow built around how the business actually wins trust.',
     includes: [
-      'Bespoke design + build',
-      'Animation + interaction',
-      'CMS integration',
-      'Performance + SEO',
+      'Positioning + brand direction',
+      'Custom design + build',
+      'Motion + interaction system',
+      'Content architecture + lead flow',
     ],
-    fit: 'Best when your site has to match the quality of the work behind it.',
+    fit: 'Best when the website needs to do the work of a senior team.',
   },
   {
     idx: '03',
-    name: 'AI workflows',
+    name: 'Ongoing Partner',
     summary:
-      'Practical AI fluency for non-technical teams. Real workflows that save hours per week — research, drafting, review — wired into the tools you already use.',
+      'Monthly creative, web, and workflow support for founder-led teams that need senior taste and steady output without building an internal department.',
     includes: [
-      'Workflow audit',
-      'Tooling selection + setup',
-      'Prompts + playbooks',
-      'Team training + coaching',
+      'Async-first weekly cadence',
+      'Design + web maintenance',
+      'AI + workflow support',
+      'Senior judgment on call',
     ],
-    fit: 'Best for teams who know AI matters and want to stop watching from the sidelines.',
+    fit: 'Best for founder-led teams that want a senior partner, not another hire.',
   },
 ]
 
@@ -98,11 +99,11 @@ export default function EngagementsSection() {
           Engagements
         </span>
         <h2 className="engagements__title" style={{ opacity: 0, visibility: 'hidden' }}>
-          Three pillars. Every engagement custom.
+          Choose the right depth of change.
         </h2>
         <p className="engagements__description" style={{ opacity: 0, visibility: 'hidden' }}>
-          Most work begins with a conversation, not a scope. Pricing is shaped by
-          ambition, timeline, and fit — told directly once we&rsquo;ve met.
+          Some clients need the digital presence sharpened. Some need the whole
+          system rebuilt. Some need a steady partner after launch.
         </p>
       </div>
 
@@ -130,11 +131,12 @@ export default function EngagementsSection() {
 
       <div className="engagements__footer">
         <p className="engagements__footnote">
-          Retainers, ongoing advisory, and multi-pillar engagements available.
+          Pricing stays conversational; the delivery model does not. Every engagement has a
+          clear cadence, decision path, and owner.
         </p>
-        <a href="/contact" className="engagements__cta">
+        <TransitionLink href="/contact" className="engagements__cta">
           Start a conversation
-        </a>
+        </TransitionLink>
       </div>
     </section>
   )

@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Logo concept — C: The orb is the logo</title>
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,800&f[]=satoshi@400,500&display=swap" />
+<style>
+  :root {
+    --bg: #f4f0e8;
+    --bg-strong: #ece6de;
+    --text-primary: #15181b;
+    --text-secondary: #5f5951;
+    --text-muted: #8a8278;
+    --accent: #6f8190;
+    --line: rgba(21, 24, 27, 0.12);
+    --charcoal: #0d1015;
+    --font-display: 'Cabinet Grotesk', ui-serif, Georgia, serif;
+    --font-body: 'Satoshi', 'Helvetica Neue', sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text-primary); font-family: var(--font-body); font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+
+  .wrap { max-width: 1320px; margin: 0 auto; padding: clamp(2.5rem, 6vw, 6rem) clamp(1.5rem, 4vw, 4rem); }
+
+  .eyebrow { font-family: var(--font-body); font-weight: 500; text-transform: uppercase; letter-spacing: 0.24em; font-size: 0.78rem; color: var(--text-muted); }
+  .kicker { font-family: var(--font-display); font-weight: 800; font-size: clamp(2.3rem, 5vw, 4.4rem); line-height: 1.02; letter-spacing: -0.02em; margin: 0.4rem 0 1.6rem; color: var(--text-primary); }
+  .subtext { font-size: 1.08rem; color: var(--text-secondary); max-width: 58ch; }
+
+  /* ── Hero stage with living orb ── */
+  .stage {
+    position: relative;
+    margin-top: clamp(3rem, 6vw, 5rem);
+    padding: clamp(4rem, 9vw, 8rem) 0;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    min-height: 560px;
+  }
+  .stage__caption {
+    position: absolute;
+    bottom: clamp(1.2rem, 2.5vw, 2rem);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted);
+  }
+
+  /* The orb — CSS-rendered lit sphere with ferrofluid jitter */
+  .orb {
+    --size: clamp(280px, 42vw, 480px);
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 32% 28%,
+        rgba(255,255,255,0.92) 0%,
+        rgba(220,220,220,0.6) 4%,
+        rgba(150,150,150,0.25) 12%,
+        rgba(60,62,68,0.9) 38%,
+        #15181b 72%,
+        #0d1015 100%);
+    box-shadow:
+      inset -24px -24px 60px rgba(0,0,0,0.55),
+      inset 12px 14px 32px rgba(255,255,255,0.04),
+      0 28px 80px rgba(17,15,11,0.28),
+      0 2px 6px rgba(17,15,11,0.12);
+    position: relative;
+    animation: jitter 8s ease-in-out infinite, driftHL 11s ease-in-out infinite;
+    will-change: border-radius, transform, background;
+  }
+  .orb::after {
+    /* Faint secondary highlight to feel like a viscous surface */
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(ellipse at 28% 22%,
+      rgba(255,255,255,0.35) 0%,
+      rgba(255,255,255,0) 26%);
+    mix-blend-mode: screen;
+    pointer-events: none;
+  }
+  @keyframes jitter {
+    0%, 100% { border-radius: 50%; }
+    20% { border-radius: 49% 51% 48% 52% / 50% 49% 51% 50%; }
+    40% { border-radius: 51% 49% 52% 48% / 48% 52% 50% 50%; }
+    60% { border-radius: 48% 52% 49% 51% / 52% 48% 49% 51%; }
+    80% { border-radius: 50% 50% 51% 49% / 49% 51% 48% 52%; }
+  }
+  @keyframes driftHL {
+    0%, 100% { background-position: 0 0; }
+    50% { background-position: 2% 1%; }
+  }
+
+  .section { margin-top: clamp(3.5rem, 7vw, 6.5rem); }
+  .section__title { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem, 2.2vw, 1.9rem); letter-spacing: -0.01em; margin: 0 0 0.4rem; }
+  .section__sub { color: var(--text-secondary); margin: 0 0 1.8rem; }
+
+  /* Scale row — transition from 3D orb to frozen 2D silhouette */
+  .scale-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: clamp(0.6rem, 1.4vw, 1.2rem);
+    align-items: end;
+  }
+  .scale-cell {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 1.4rem 0.8rem 1.1rem;
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    min-height: 200px;
+    justify-content: end;
+    border-radius: 2px;
+  }
+  .scale-cell .scale-label { margin-top: 1rem; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); }
+  @media (max-width: 900px) { .scale-row { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 560px) { .scale-row { grid-template-columns: repeat(2, 1fr); } }
+
+  /* Mini orb for scale tests */
+  .mini-orb {
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 32% 28%,
+        rgba(255,255,255,0.92) 0%,
+        rgba(150,150,150,0.3) 12%,
+        rgba(60,62,68,0.9) 38%,
+        #0d1015 100%);
+    box-shadow: inset -4px -4px 10px rgba(0,0,0,0.55), 0 3px 8px rgba(17,15,11,0.2);
+    flex-shrink: 0;
+  }
+  .mini-orb--xxs { width: 16px; height: 16px; box-shadow: inset -2px -2px 4px rgba(0,0,0,0.55), 0 1px 3px rgba(17,15,11,0.2); }
+  .mini-orb--xs { width: 32px; height: 32px; box-shadow: inset -3px -3px 6px rgba(0,0,0,0.55), 0 2px 5px rgba(17,15,11,0.2); }
+  .mini-orb--sm { width: 56px; height: 56px; }
+  .mini-orb--md { width: 96px; height: 96px; box-shadow: inset -6px -6px 14px rgba(0,0,0,0.55), 0 4px 10px rgba(17,15,11,0.22); }
+  .mini-orb--lg { width: 140px; height: 140px; box-shadow: inset -8px -8px 20px rgba(0,0,0,0.55), 0 8px 18px rgba(17,15,11,0.25); }
+
+  /* Frozen flat silhouette — for print / small favicon (when gradients cannot render) */
+  .flat-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(0.6rem, 1.4vw, 1.2rem);
+    margin-top: 1.5rem;
+  }
+  .flat-cell {
+    padding: 1.2rem 0.8rem 1rem;
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    display: flex; flex-direction: column; align-items: center;
+    border-radius: 2px;
+  }
+  .flat-cell svg { display: block; color: var(--text-primary); }
+  .flat-cell span { margin-top: 0.7rem; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); }
+  @media (max-width: 720px) { .flat-row { grid-template-columns: repeat(2, 1fr); } }
+
+  /* Dark stage */
+  .on-dark {
+    margin-top: clamp(3.5rem, 7vw, 6.5rem);
+    padding: clamp(4rem, 9vw, 8rem) clamp(1.5rem, 4vw, 4rem);
+    background: var(--charcoal);
+    color: #f4f0e8;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 2px;
+    min-height: 360px;
+  }
+  .orb--on-dark {
+    --size: clamp(200px, 32vw, 300px);
+    background:
+      radial-gradient(circle at 32% 28%,
+        rgba(255,255,255,0.95) 0%,
+        rgba(220,220,220,0.55) 5%,
+        rgba(170,170,170,0.2) 15%,
+        rgba(80,82,88,0.85) 42%,
+        #1d2127 78%,
+        #2a2e35 100%);
+    box-shadow:
+      inset -16px -16px 40px rgba(0,0,0,0.6),
+      inset 8px 10px 22px rgba(255,255,255,0.06),
+      0 20px 60px rgba(0,0,0,0.4);
+  }
+
+  /* Context mocks */
+  .contexts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.2rem, 2.5vw, 2rem);
+    margin-top: clamp(2rem, 4vw, 3rem);
+  }
+  @media (max-width: 780px) { .contexts { grid-template-columns: 1fr; } }
+
+  .header-mock {
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    padding: 1.2rem 1.6rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    border-radius: 2px;
+  }
+  .header-mock__brand { display: flex; align-items: center; gap: 0.7rem; }
+  .header-mock__brand span { font-family: var(--font-display); font-weight: 800; font-size: 0.95rem; letter-spacing: 0.05em; }
+  .header-mock__nav { display: flex; gap: 1.2rem; font-size: 0.82rem; color: var(--text-secondary); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  .card-mock {
+    aspect-ratio: 1.72 / 1;
+    background: linear-gradient(160deg, #f1ede5, #ece6de);
+    border: 1px solid var(--line);
+    padding: 1.6rem;
+    display: grid; grid-template-rows: auto 1fr auto;
+    overflow: hidden; box-shadow: 0 18px 40px rgba(17,15,11,0.08);
+    border-radius: 2px;
+  }
+  .card-mock__top { display: flex; justify-content: space-between; align-items: start; }
+  .card-mock__name { font-family: var(--font-display); font-weight: 800; font-size: 1.35rem; letter-spacing: -0.01em; align-self: end; }
+  .card-mock__meta { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--text-secondary); letter-spacing: 0.06em; }
+
+  .sig-mock {
+    grid-column: 1 / -1;
+    margin-top: clamp(2rem, 3vw, 2.6rem);
+    background: var(--bg);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: clamp(3rem, 6vw, 5rem) 0;
+    display: flex; flex-direction: column; align-items: center; gap: 1.2rem;
+  }
+  .sig-mock__line { font-size: 0.8rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); }
+
+  .concept-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: clamp(4rem, 7vw, 6rem);
+    padding-top: 2rem; border-top: 1px solid var(--line);
+    font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .concept-nav a { color: var(--text-primary); text-decoration: none; padding: 0.6rem 1rem; border: 1px solid var(--line); transition: all 200ms ease; border-radius: 2px; }
+  .concept-nav a:hover { background: var(--text-primary); color: var(--bg); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .orb { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Logo ideation · Bet C</div>
+    <h1 class="kicker">The orb is the logo.</h1>
+    <p class="subtext">The mark isn't a drawing. It's a behavior. The 3D ferrofluid orb that already lives on the home page IS the identity — no separate monogram needed. Where it can't render live (print, 16px favicon, email signature), a single flat silhouette with a specular highlight stands in, a frozen frame of the same object. One brand. Two states.</p>
+  </header>
+
+  <div class="stage">
+    <div class="orb" role="img" aria-label="Taylor Maison orb mark"></div>
+    <span class="stage__caption">Hero scale · ~480px · CSS approximation of the live WebGL orb</span>
+  </div>
+
+  <section class="section">
+    <h2 class="section__title">Scale — the living mark</h2>
+    <p class="section__sub">The orb retains its depth cue — specular highlight upper-left, shadow lower-right — all the way down to 16px.</p>
+    <div class="scale-row">
+      <div class="scale-cell">
+        <div class="mini-orb mini-orb--xxs"></div>
+        <span class="scale-label">Favicon · 16</span>
+      </div>
+      <div class="scale-cell">
+        <div class="mini-orb mini-orb--xs"></div>
+        <span class="scale-label">Nav · 32</span>
+      </div>
+      <div class="scale-cell">
+        <div class="mini-orb mini-orb--sm"></div>
+        <span class="scale-label">Header · 56</span>
+      </div>
+      <div class="scale-cell">
+        <div class="mini-orb mini-orb--md"></div>
+        <span class="scale-label">Seal · 96</span>
+      </div>
+      <div class="scale-cell">
+        <div class="mini-orb mini-orb--lg"></div>
+        <span class="scale-label">Stamp · 140</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">The frozen fallback</h2>
+    <p class="section__sub">One-color silhouette for single-color print, stamps, embroidery, and contexts where gradients can't render. A single highlight notch preserves the orb's reading.</p>
+    <div class="flat-row">
+      <div class="flat-cell">
+        <svg width="72" height="72" viewBox="0 0 120 120" aria-hidden="true">
+          <!-- Flat silhouette with subtractive highlight -->
+          <circle cx="60" cy="60" r="48" fill="currentColor"/>
+          <path d="M 36 34 a 14 14 0 0 1 18 -4" fill="none" stroke="#ece6de" stroke-width="5" stroke-linecap="round"/>
+        </svg>
+        <span>Print · stroke</span>
+      </div>
+      <div class="flat-cell">
+        <svg width="72" height="72" viewBox="0 0 120 120" aria-hidden="true">
+          <circle cx="60" cy="60" r="48" fill="currentColor"/>
+          <circle cx="44" cy="42" r="10" fill="#ece6de"/>
+        </svg>
+        <span>Print · dot</span>
+      </div>
+      <div class="flat-cell">
+        <svg width="72" height="72" viewBox="0 0 120 120" aria-hidden="true">
+          <circle cx="60" cy="60" r="48" fill="none" stroke="currentColor" stroke-width="6"/>
+          <circle cx="44" cy="42" r="6" fill="currentColor"/>
+        </svg>
+        <span>Engraved · ring</span>
+      </div>
+      <div class="flat-cell">
+        <svg width="72" height="72" viewBox="0 0 120 120" aria-hidden="true">
+          <defs>
+            <radialGradient id="orb-gr" cx="32%" cy="28%">
+              <stop offset="0%" stop-color="#f4f0e8"/>
+              <stop offset="30%" stop-color="#676973"/>
+              <stop offset="100%" stop-color="#0d1015"/>
+            </radialGradient>
+          </defs>
+          <circle cx="60" cy="60" r="48" fill="url(#orb-gr)"/>
+        </svg>
+        <span>Digital · grad</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">On charcoal</h2>
+    <p class="section__sub">The orb shifts surface material on dark backgrounds — brighter specular, lighter midtones.</p>
+    <div class="on-dark">
+      <div class="orb orb--on-dark"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">In context</h2>
+    <p class="section__sub">Living mark in digital, frozen silhouette on print.</p>
+
+    <div class="contexts">
+      <div class="header-mock">
+        <div class="header-mock__brand">
+          <div class="mini-orb" style="width:34px;height:34px;"></div>
+          <span>TAYLOR MAISON</span>
+        </div>
+        <nav class="header-mock__nav">
+          <span>Work</span><span>About</span><span>Contact</span>
+        </nav>
+      </div>
+
+      <div class="card-mock">
+        <div class="card-mock__top">
+          <svg width="42" height="42" viewBox="0 0 120 120" style="color: var(--text-primary);">
+            <circle cx="60" cy="60" r="48" fill="currentColor"/>
+            <circle cx="44" cy="42" r="10" fill="#ece6de"/>
+          </svg>
+          <div style="text-align: right; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted);">Est. 2025</div>
+        </div>
+        <div class="card-mock__name">Taylor Maison</div>
+        <div class="card-mock__meta">
+          <span>Creative Director</span>
+          <span>t4ylormaison@gmail.com</span>
+        </div>
+      </div>
+
+      <div class="sig-mock">
+        <div class="mini-orb" style="width:72px;height:72px;"></div>
+        <div class="sig-mock__line">Taylor Maison · Brand, Web, AI</div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="concept-nav">
+    <a href="./bet-b-symbol.html">← Bet B · Pearl</a>
+    <a href="./index.html">All bets</a>
+    <a href="./bet-a-monogram.html">Bet A · Monogram →</a>
+  </nav>
+</div>
+
+</body>
+</html>

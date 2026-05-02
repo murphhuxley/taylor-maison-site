@@ -39,27 +39,27 @@ export const projects: Project[] = [
     category: 'Web Design / Digital Security',
     year: '2026',
     description:
-      'A digital presence built to earn trust before anyone says a word — for a security consultancy whose clients can\'t afford the wrong first impression.',
+      'The referral already carried weight. The website needed to make that trust visible, qualify the right clients, and make the first conversation easier to win.',
     color: '#232323',
     url: 'https://romansanford.vercel.app',
     thumbnail: '/images/projects/roman-sanford/hero.png',
     headline:
-      'A digital presence engineered to build trust before a single conversation begins.',
+      'Turning a quiet security reputation into a digital trust system.',
     audience:
-      'High-net-worth individuals, family offices, and private estates choosing security partners on instinct and signal.',
+      'High-net-worth individuals, family offices, and private estates where one wrong signal can end the conversation.',
     signatureMove:
-      'Use restraint as a status signal: architectural structure, darkness, and zero wasted explanation.',
+      'Use the site as pre-qualification: restraint, authority, and a direct path from instinctive trust to inquiry.',
     impact:
-      'Roman Sanford went from generic web presence to a site that feels like quiet intelligence infrastructure.',
+      'The new presence turns a sensitive service business into a sharper trust engine: clearer positioning, stronger authority, and less explanation required on the first call.',
     highlights: [
-      { label: 'Signal', value: 'Authority without noise' },
-      { label: 'Build', value: 'Custom Next.js front-end' },
-      { label: 'Focus', value: 'Trust before contact' },
+      { label: 'Before', value: 'A generic presence for a high-stakes buyer' },
+      { label: 'After', value: 'Trust before the first contact' },
+      { label: 'Mechanism', value: 'Inquiry path built around discretion' },
     ],
     brief:
-      'Roman Sanford serves high-net-worth individuals and families who require a different level of security expertise - private, precise, and rarely discussed. The challenge was not just design. It was engineering a digital presence that communicates elite competence to a clientele that reads status signals in milliseconds. The existing presence simply did not hold up to that standard.',
+      'Roman Sanford already had serious capability and referral weight. The problem was that the digital presence did not carry the same authority. For a security consultancy serving high-net-worth individuals, family offices, and private estates, the website had to reduce doubt before anyone reached out. It needed to make the business feel credible, discreet, and operationally sharp in seconds.',
     challenge:
-      'Security at this level operates on trust built long before a contract is signed. Every element of the design had to work as a credentialing mechanism - signaling authority without aggression, expertise without exposition, and discretion without hiding. We built a visual language borrowed from architecture and intelligence: clean structure, controlled hierarchy, and restraint that says we do not need to explain ourselves.',
+      'This was not a brochure problem. It was a trust conversion problem. Security buyers do not want noise, gimmicks, or over-explanation; they want to feel that every detail is controlled. The site had to act like a quiet intake screen: strong enough to reassure the right client, restrained enough to protect the brand, and structured enough to move serious inquiries toward a conversation.',
     services: ['Web Design', 'Brand Identity', 'Digital Strategy', 'Art Direction'],
     gallery: [
       {
@@ -105,26 +105,26 @@ export const projects: Project[] = [
     category: 'Web Design / Brand Identity',
     year: '2026',
     description:
-      'The classified tier. A site that doesn\'t explain itself — because if you need to ask, you\'re not the audience.',
+      'An invitation-only offer needed a digital experience that filters the room before a conversation starts.',
     color: '#0a0a0a',
     thumbnail: '/images/projects/rs-black/hero.png',
     headline:
-      'A classified-feeling digital experience for an offer that should never feel public.',
+      'A premium security offer turned into a qualification system.',
     audience:
-      'Invitation-only clients looking for discretion, training depth, and the feeling that everything is tightly controlled.',
+      'Private clients and partners who should feel selected, not sold to.',
     signatureMove:
-      'Turn the interface into a filter: sparse copy, dense atmosphere, and no unnecessary sales behavior.',
+      'Make the interface do qualification work: sparse information, controlled atmosphere, and clear signal for the right visitor.',
     impact:
-      'The site behaves less like a pitch deck and more like a litmus test for exactly the right kind of visitor.',
+      'RS Black became less of a hidden page and more of a controlled doorway: intrigue for the right audience, friction for everyone else.',
     highlights: [
-      { label: 'Mood', value: 'Controlled darkness' },
-      { label: 'Role', value: 'Brand filter, not brochure' },
-      { label: 'Result', value: 'Exclusivity without cliche' },
+      { label: 'Before', value: 'Too much access for the wrong visitor' },
+      { label: 'After', value: 'Premium perception without overselling' },
+      { label: 'Mechanism', value: 'A brand page designed as qualification UX' },
     ],
     brief:
-      'RS Black is the invitation-only tier of Roman Sanford\'s security operation - a program that does not recruit clients, it selects them. The digital experience needed to function as a filter: welcoming enough to intrigue, exclusive enough to deter the wrong inquiry. The brand language had to do the qualification before any human conversation began.',
+      'RS Black is the invitation-only tier of Roman Sanford\'s security operation. It is not a public-facing offer in the normal sense; it is a controlled signal for a narrow audience. The digital experience had to help the business protect its own attention by making the right people lean in and the wrong people move on.',
     challenge:
-      'The design constraint was almost paradoxical: create a compelling online presence for something that specifically should not be easily discoverable. We leaned into controlled sparsity - minimal text, near-black palette, and precise typographic hierarchy that implies extreme focus. No stock photography. No corporate softness. The experience was designed to feel like a classified brief: everything you need, nothing you do not.',
+      'Most websites try to explain more. This one needed to explain less and still create desire. The business value came from qualification: reducing noise, raising perceived seriousness, and making the page feel like a door that only opens for the right person. The result is a brand system that behaves more like a filter than a pitch deck.',
     services: ['Web Design', 'Brand Identity', 'UX Design', 'Creative Direction'],
     gallery: [
       {
@@ -170,27 +170,27 @@ export const projects: Project[] = [
     category: 'Creative Direction / IP Development',
     year: '2025-2026',
     description:
-      'A multi-century comic universe — from world-building to 3D web reader — built from a blank page.',
+      'A story universe needed infrastructure: a brand world, reader experience, and community front door that could grow with the IP.',
     color: '#17352b',
     url: 'https://www.genuineundeadcomics.com',
     thumbnail: '/images/projects/genuine-undead/homepage.png',
     headline:
-      'Creative direction, narrative architecture, and digital world-building for an original comic universe.',
+      'Building audience infrastructure for an original IP, not just a comic site.',
     audience:
-      'Readers, collectors, and early believers stepping into a brand-new world with no inherited IP equity.',
+      'Readers, collectors, collaborators, and early believers evaluating whether the world is worth entering.',
     signatureMove:
-      'Make the story architecture and the interface reinforce each other so the world feels coherent at every scroll.',
+      'Treat the universe like an operating system: narrative, visual identity, reader flow, and community touchpoints all reinforcing each other.',
     impact:
-      'The project became more than a comic site - it reads like the front door to an expanding universe.',
+      'Genuine Undead now has a digital foundation for attention, sales, and community: not just a place to read, but a front door to the world.',
     highlights: [
-      { label: 'Scope', value: 'Brand, product, and narrative' },
-      { label: 'Experience', value: 'Immersive reader storytelling' },
-      { label: 'World', value: 'A unified identity across eras' },
+      { label: 'Before', value: 'A new IP needed reasons to believe' },
+      { label: 'After', value: 'World-building became a conversion asset' },
+      { label: 'Mechanism', value: 'Brand, reader, lore, and community in one frame' },
     ],
     brief:
-      'Genuine Undead is not a comic series. It is an intellectual property architecture - narrative threads, visual systems, character universes, and world-building mechanics that needed to cohere across time periods, media formats, and community touchpoints. The brief covered everything from the story\'s internal logic to how a reader would experience it alone at 2am on a phone. Full creative direction meant owning all of it.',
+      'Genuine Undead was not starting with inherited audience trust. It needed to earn belief from scratch: story, design, reader experience, commerce, and community all had to make the universe feel real. The work was less about launching a comic page and more about building the infrastructure around an original IP so attention could turn into fandom.',
     challenge:
-      'The technical and creative problems here were inseparable. The reader experience had to handle dense sequential art while making the interaction feel cinematic rather than mechanical. The brand identity had to function across Ancient Egypt and cyberpunk Tokyo while remaining unmistakably one universe. We built the narrative architecture first and let that structure dictate the visual language.',
+      'A universe breaks when the parts feel unrelated. The design system had to carry Ancient Egypt, feudal Japan, the American frontier, and cyberpunk Tokyo without losing coherence. The reader experience had to make the act of reading feel cinematic, not mechanical. The system thinking mattered as much as the visuals: every touchpoint needed to answer the same question for a new audience — is this world worth my time?',
     services: ['Creative Direction', 'Web Development', '3D Reader', 'Brand Identity', 'Community Building'],
     gallery: [
       {
@@ -236,26 +236,26 @@ export const projects: Project[] = [
     category: 'Web Design / Brand Strategy',
     year: '2026',
     description:
-      'A brand that captures what a perfect Hamptons afternoon actually feels like — built for the people who host them.',
+      'A local luxury brand needed its digital presence to sell confidence before the host ever asked about logistics.',
     color: '#536648',
     thumbnail: '/images/projects/hampton-garden-party/homepage.png',
     headline:
-      'A Hamptons-facing brand system designed to sell a feeling before the client asks for details.',
+      'Turning atmosphere into an inquiry engine for a Hamptons-facing brand.',
     audience:
-      'Hosts, event clients, and premium local businesses who buy based on atmosphere as much as logistics.',
+      'Hosts, event clients, and premium local partners who buy taste, calm, and confidence before they buy logistics.',
     signatureMove:
-      'Translate a summer-garden feeling into a restrained visual system without falling into coastal cliche.',
+      'Make the site slow the buyer down while quietly moving them toward inquiry.',
     impact:
-      'The work gives a local luxury brand the kind of visual calm that makes people assume the experience itself will be handled well.',
+      'Hampton Garden Party gained a calmer, more premium presence that makes the experience feel handled before the first email.',
     highlights: [
-      { label: 'Market', value: 'Hamptons and East End hospitality' },
-      { label: 'Mood', value: 'Warm, editorial, unhurried' },
-      { label: 'Use', value: 'Brand world for web and collateral' },
+      { label: 'Before', value: 'Luxury service was harder to feel online' },
+      { label: 'After', value: 'Higher confidence before inquiry' },
+      { label: 'Mechanism', value: 'Mood, proof, and contact path working together' },
     ],
     brief:
-      'Hampton Garden Party exists at the intersection of two of the East End\'s most competitive service categories - events and landscape design - and needed a brand that felt native to both without being generic to either. The brief: capture the sensory experience of a Hamptons summer garden the way a song captures a mood. Warm, specific, and unhurried.',
+      'Hampton Garden Party sells an experience before it sells a service. In a market where taste is part of the product, the digital presence had to create confidence before the first email: this will feel beautiful, this will be handled, and these people understand the world they are serving.',
     challenge:
-      'The hardest design challenge is designing for a feeling. The identity had to evoke dappled afternoon light, midsummer greens, and the social ease of people who know exactly how they want the room to feel. The site needed to slow visitors down without losing clarity or conversion.',
+      'The hardest design challenge is making atmosphere useful. The site had to evoke a Hamptons garden afternoon without falling into local cliche, while still giving visitors a clear path to inquire. The system needed to balance softness and conversion: enough calm to feel premium, enough structure to turn interest into a real conversation.',
     services: ['Brand Strategy', 'Web Design', 'Visual Identity', 'Art Direction'],
     gallery: [
       {

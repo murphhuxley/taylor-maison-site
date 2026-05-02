@@ -1,15 +1,30 @@
 import type { Metadata } from 'next'
+import localFont from 'next/font/local'
 import './globals.css'
 import PageTransition from '@/components/PageTransition'
 
+const cabinetGrotesk = localFont({
+  src: '../public/fonts/CabinetGrotesk-Variable.woff2',
+  variable: '--font-cabinet',
+  display: 'swap',
+  weight: '100 900',
+})
+
+const satoshi = localFont({
+  src: '../public/fonts/Satoshi-Variable.woff2',
+  variable: '--font-satoshi',
+  display: 'swap',
+  weight: '300 900',
+})
+
 export const metadata: Metadata = {
-  title: 'Taylor Maison — Creative, Brand, Website, and AI Consulting',
+  title: 'Taylor Maison — Creative Systems for Founder-Led Businesses',
   description:
-    'Creative direction, brand consulting, websites, and AI workflow support.',
+    'Brand direction, custom websites, and practical AI workflows for founder-led businesses.',
   openGraph: {
     title: 'Taylor Maison',
     description:
-      'Creative direction, brand consulting, websites, and AI workflow support.',
+      'Brand direction, custom websites, and practical AI workflows for founder-led businesses.',
     type: 'website',
   },
 }
@@ -20,15 +35,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="anonymous" />
-        <link
-          rel="stylesheet"
-          href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&f[]=satoshi@300,400,500,700,900&display=swap"
-        />
-      </head>
+    <html lang="en" className={`${cabinetGrotesk.variable} ${satoshi.variable}`}>
       <body>
         <PageTransition>{children}</PageTransition>
       </body>

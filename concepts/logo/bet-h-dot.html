@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Logo concept — H: The dot</title>
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,800&f[]=satoshi@400,500&display=swap" />
+<style>
+  :root {
+    --bg: #f4f0e8;
+    --bg-strong: #ece6de;
+    --text-primary: #15181b;
+    --text-secondary: #5f5951;
+    --text-muted: #8a8278;
+    --accent: #6f8190;
+    --line: rgba(21, 24, 27, 0.12);
+    --charcoal: #0d1015;
+    --font-display: 'Cabinet Grotesk', ui-serif, Georgia, serif;
+    --font-body: 'Satoshi', 'Helvetica Neue', sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text-primary); font-family: var(--font-body); font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+
+  .wrap { max-width: 1320px; margin: 0 auto; padding: clamp(2.5rem, 6vw, 6rem) clamp(1.5rem, 4vw, 4rem); }
+
+  .eyebrow { font-family: var(--font-body); font-weight: 500; text-transform: uppercase; letter-spacing: 0.24em; font-size: 0.78rem; color: var(--text-muted); }
+  .kicker { font-family: var(--font-display); font-weight: 800; font-size: clamp(2.3rem, 5vw, 4.4rem); line-height: 1.02; letter-spacing: -0.02em; margin: 0.4rem 0 1.6rem; color: var(--text-primary); }
+  .subtext { font-size: 1.08rem; color: var(--text-secondary); max-width: 62ch; }
+  .subtext em { font-style: italic; color: var(--text-primary); }
+
+  .brand-brief {
+    margin-top: clamp(1.4rem, 2.5vw, 2rem);
+    padding: 1.2rem 1.4rem;
+    border-left: 2px solid var(--text-primary);
+    background: var(--bg-strong);
+  }
+  .brand-brief strong { font-family: var(--font-display); font-weight: 800; letter-spacing: 0; }
+
+  .stage {
+    position: relative;
+    margin-top: clamp(3rem, 6vw, 5rem);
+    padding: clamp(5rem, 10vw, 9rem) clamp(2rem, 5vw, 5rem);
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .stage__caption {
+    position: absolute;
+    bottom: clamp(1.2rem, 2.5vw, 2rem);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted);
+  }
+
+  /* ── The dot ── */
+  .dot {
+    display: block;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: var(--text-primary);
+  }
+
+  /* The full-stop treatment — name + dot glyph */
+  .fullstop-stage {
+    padding: clamp(4rem, 9vw, 7rem) clamp(2rem, 5vw, 5rem);
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    display: flex; flex-direction: column; gap: 2rem; align-items: center; justify-content: center;
+    border-radius: 2px;
+    margin-top: 1.5rem;
+  }
+  .fullstop {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.6rem, 7vw, 5.8rem);
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    color: var(--text-primary);
+    display: flex; align-items: baseline; gap: 0.06em;
+  }
+  .fullstop__dot {
+    display: inline-block;
+    width: 0.3em; height: 0.3em;
+    border-radius: 50%;
+    background: currentColor;
+    transform: translateY(0.02em);
+  }
+  .fullstop__sub {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .section { margin-top: clamp(3.5rem, 7vw, 6.5rem); }
+  .section__title { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem, 2.2vw, 1.9rem); letter-spacing: -0.01em; margin: 0 0 0.4rem; }
+  .section__sub { color: var(--text-secondary); margin: 0 0 1.8rem; max-width: 60ch; }
+
+  /* Scale strip — the dot at every useful size */
+  .scale-col {
+    display: flex; flex-direction: column; gap: clamp(1rem, 2vw, 1.6rem);
+    margin-top: 1.5rem;
+  }
+  .scale-strip {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: clamp(1.2rem, 2.5vw, 2rem);
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    gap: 1.5rem;
+    min-height: 80px;
+  }
+  .scale-strip__label { font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); flex-shrink: 0; }
+  .scale-strip__dot { border-radius: 50%; background: var(--text-primary); flex-shrink: 0; }
+  @media (max-width: 680px) { .scale-strip { flex-direction: column-reverse; align-items: start; } }
+
+  /* Horizontal lockup — dot + wordmark */
+  .lockup-row {
+    padding: clamp(3rem, 6vw, 5rem) clamp(2rem, 4vw, 4rem);
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    margin-top: 1.5rem;
+    display: flex; flex-direction: column; gap: 2.4rem;
+  }
+  .lockup-row__item {
+    display: flex; align-items: center; justify-content: center;
+    gap: 1.4rem;
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    color: var(--text-primary);
+    text-transform: uppercase;
+  }
+  .lockup-row__item .d {
+    display: inline-block;
+    border-radius: 50%;
+    background: currentColor;
+  }
+  .lockup-row__item--l { font-size: clamp(2rem, 5vw, 3.6rem); }
+  .lockup-row__item--l .d { width: 1.05em; height: 1.05em; }
+  .lockup-row__item--m { font-size: clamp(1.3rem, 3vw, 2rem); }
+  .lockup-row__item--m .d { width: 1.05em; height: 1.05em; }
+  .lockup-row__item--s { font-size: clamp(0.95rem, 2vw, 1.15rem); letter-spacing: 0.14em; }
+  .lockup-row__item--s .d { width: 1.05em; height: 1.05em; }
+
+  /* Favicon grid — the dot as the universal glyph */
+  .favicon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: clamp(1rem, 2vw, 1.6rem);
+    margin-top: 1.5rem;
+  }
+  .favi-cell {
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 2rem 1.4rem;
+    display: flex; flex-direction: column; align-items: center; gap: 1.2rem;
+  }
+  .favi-cell__label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+  .favi-cell__box {
+    aspect-ratio: 1/1;
+    width: 100%;
+    max-width: 120px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 14%;
+  }
+  .favi-cell__box--ios { border-radius: 22%; }
+  .favi-cell__box--dark { background: var(--charcoal); border-color: var(--charcoal); }
+  .favi-cell__box--dark .favi-dot { background: var(--bg) !important; }
+  .favi-dot {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    background: var(--text-primary);
+  }
+
+  /* On charcoal */
+  .on-dark {
+    margin-top: clamp(3.5rem, 7vw, 6.5rem);
+    padding: clamp(5rem, 10vw, 9rem) clamp(2rem, 5vw, 5rem);
+    background: var(--charcoal);
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 2px;
+  }
+  .on-dark .dot { background: #f4f0e8; width: 280px; height: 280px; }
+
+  /* Email sign-off mock */
+  .email-mock {
+    margin-top: 1.5rem;
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: clamp(2rem, 4vw, 3rem);
+    font-family: var(--font-body);
+    max-width: 720px;
+  }
+  .email-mock__from { font-size: 0.78rem; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.4rem; }
+  .email-mock__body { color: var(--text-primary); font-size: 1rem; line-height: 1.65; margin-bottom: 2.4rem; }
+  .email-mock__sig { display: flex; flex-direction: column; gap: 0.6rem; }
+  .email-mock__sig-line {
+    display: flex; align-items: center; gap: 0.6rem;
+    font-family: var(--font-display); font-weight: 800;
+    font-size: 1rem; letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .email-mock__sig-line .d {
+    display: inline-block; width: 0.8em; height: 0.8em; border-radius: 50%; background: currentColor;
+  }
+  .email-mock__sig-meta { font-size: 0.82rem; color: var(--text-secondary); }
+
+  /* Contexts */
+  .contexts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.2rem, 2.5vw, 2rem);
+    margin-top: clamp(2rem, 4vw, 3rem);
+  }
+  @media (max-width: 780px) { .contexts { grid-template-columns: 1fr; } }
+
+  .header-mock {
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    padding: 1.2rem 1.6rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    border-radius: 2px;
+  }
+  .header-mock__brand {
+    font-family: var(--font-display); font-weight: 800;
+    font-size: 0.96rem; letter-spacing: 0.04em;
+    text-transform: uppercase;
+    display: flex; align-items: center; gap: 0.55em;
+  }
+  .header-mock__brand .d {
+    width: 0.85em; height: 0.85em; border-radius: 50%; background: currentColor;
+  }
+  .header-mock__nav { display: flex; gap: 1.2rem; font-size: 0.82rem; color: var(--text-secondary); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  .card-mock {
+    aspect-ratio: 1.72 / 1;
+    background: linear-gradient(160deg, #f1ede5, #ece6de);
+    border: 1px solid var(--line);
+    padding: 1.6rem;
+    display: grid; grid-template-rows: auto 1fr auto;
+    overflow: hidden; box-shadow: 0 18px 40px rgba(17,15,11,0.08);
+    border-radius: 2px;
+  }
+  .card-mock__corner { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+  .card-mock__center {
+    align-self: center;
+    display: flex; align-items: baseline; justify-content: center; gap: 0.08em;
+    font-family: var(--font-display); font-weight: 800;
+    font-size: clamp(1.6rem, 4vw, 2.4rem); letter-spacing: -0.01em; text-transform: uppercase;
+  }
+  .card-mock__center .d { display: inline-block; width: 0.34em; height: 0.34em; border-radius: 50%; background: currentColor; transform: translateY(0.02em); }
+  .card-mock__meta { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--text-secondary); letter-spacing: 0.06em; }
+
+  .note {
+    margin-top: 1.2rem;
+    padding: 1rem 1.2rem;
+    background: rgba(111, 129, 144, 0.08);
+    border-left: 2px solid var(--accent);
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    max-width: 62ch;
+  }
+
+  .concept-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: clamp(4rem, 7vw, 6rem);
+    padding-top: 2rem; border-top: 1px solid var(--line);
+    font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .concept-nav a { color: var(--text-primary); text-decoration: none; padding: 0.6rem 1rem; border: 1px solid var(--line); transition: all 200ms ease; border-radius: 2px; }
+  .concept-nav a:hover { background: var(--text-primary); color: var(--bg); border-color: var(--text-primary); }
+</style>
+</head>
+<body>
+
+<!--
+  Bet H — THE DOT.
+  The pearl stripped to its irreducible essence. No dimension, no highlight,
+  no "object." Just a filled circle — which, in every writing system on earth,
+  is a period. A full stop. The end of a considered thought.
+
+  The dot is a signature without handwriting. The mark of "this is finished,
+  this is authored, this is mine." It's paired with the wordmark as punctuation —
+  not as a symbol next to the name, but as the name's own full stop.
+-->
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Logo ideation · Bet H · Round 3</div>
+    <h1 class="kicker">The dot.</h1>
+    <p class="subtext">B, stripped. No gradient, no highlight, no dimensionality — just a filled circle, which in every written language on earth is already a symbol: <em>a period, a full stop, the end of a considered thought.</em> The most universal mark humans have ever agreed on.</p>
+
+    <div class="brand-brief">
+      <strong>The mark is punctuation:</strong> "Taylor Maison" with a bold period after it. The dot isn't a logo pretending to be a symbol — it's a symbol the world already reads. That means it's also proprietary by association the moment it lives next to the name. Every time you end a sentence, his brand signs itself.
+    </div>
+  </header>
+
+  <div class="stage">
+    <span class="dot" role="img" aria-label="Taylor Maison mark"></span>
+    <span class="stage__caption">The mark · 280px</span>
+  </div>
+
+  <section class="section">
+    <h2 class="section__title">Full-stop treatment</h2>
+    <p class="section__sub">The dot's real job: not to stand alone, but to end the name. "Taylor Maison." The period IS the logo — lifted, oversized, unmistakable.</p>
+
+    <div class="fullstop-stage">
+      <div class="fullstop">taylormaison<span class="fullstop__dot"></span></div>
+      <div class="fullstop__sub">Lowercase set, one word, one period</div>
+    </div>
+
+    <div class="fullstop-stage" style="margin-top: 1rem;">
+      <div class="fullstop" style="font-size: clamp(2.2rem, 5.5vw, 4.4rem); letter-spacing: 0.01em; text-transform: uppercase;">
+        TAYLOR MAISON<span class="fullstop__dot" style="width: 0.24em; height: 0.24em; margin-left: 0.08em;"></span>
+      </div>
+      <div class="fullstop__sub">Caps set, for header + masthead</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">Horizontal lockups</h2>
+    <p class="section__sub">The dot to the left of the wordmark — read as a bullet, a flag, or an authored stamp. Works at any size, reads at any density.</p>
+
+    <div class="lockup-row">
+      <div class="lockup-row__item lockup-row__item--l">
+        <span class="d"></span>TAYLOR MAISON
+      </div>
+      <div class="lockup-row__item lockup-row__item--m">
+        <span class="d"></span>TAYLOR MAISON
+      </div>
+      <div class="lockup-row__item lockup-row__item--s">
+        <span class="d"></span>TAYLOR MAISON
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">Scale test</h2>
+    <p class="section__sub">The dot's superpower. It survives at every size — from 8px favicon to billboard. No typography to shimmer, no strokes to blur, no detail to lose. This is why the dot wins the durability test.</p>
+
+    <div class="scale-col">
+      <div class="scale-strip">
+        <span class="scale-strip__dot" style="width: 8px; height: 8px;"></span>
+        <span class="scale-strip__label">Inline · 8px</span>
+      </div>
+      <div class="scale-strip">
+        <span class="scale-strip__dot" style="width: 16px; height: 16px;"></span>
+        <span class="scale-strip__label">Favicon · 16px</span>
+      </div>
+      <div class="scale-strip">
+        <span class="scale-strip__dot" style="width: 32px; height: 32px;"></span>
+        <span class="scale-strip__label">Nav · 32px</span>
+      </div>
+      <div class="scale-strip">
+        <span class="scale-strip__dot" style="width: 80px; height: 80px;"></span>
+        <span class="scale-strip__label">Header · 80px</span>
+      </div>
+      <div class="scale-strip">
+        <span class="scale-strip__dot" style="width: 200px; height: 200px;"></span>
+        <span class="scale-strip__label">Hero · 200px</span>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong style="color: var(--text-primary); font-weight: 700;">The honest challenge:</strong> a dot alone is not recognizable as Taylor Maison. Its recognizability is earned only through relentless co-placement with the wordmark. That means H is never the standalone mark — it's always the period on the name, or the flag next to it. The system makes it his. The shape alone doesn't.
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">Favicon + app icon</h2>
+    <p class="section__sub">Where the dot does its best work — the single glyph at the furthest edge of the system. Browser tab, iOS home screen, Figma avatar, Slack sidebar.</p>
+
+    <div class="favicon-grid">
+      <div class="favi-cell">
+        <span class="favi-cell__label">Browser tab</span>
+        <div class="favi-cell__box"><span class="favi-dot"></span></div>
+      </div>
+      <div class="favi-cell">
+        <span class="favi-cell__label">iOS app icon</span>
+        <div class="favi-cell__box favi-cell__box--ios"><span class="favi-dot"></span></div>
+      </div>
+      <div class="favi-cell">
+        <span class="favi-cell__label">Dark mode</span>
+        <div class="favi-cell__box favi-cell__box--dark"><span class="favi-dot"></span></div>
+      </div>
+      <div class="favi-cell">
+        <span class="favi-cell__label">Dark · iOS</span>
+        <div class="favi-cell__box favi-cell__box--dark favi-cell__box--ios"><span class="favi-dot"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">Email signature</h2>
+    <p class="section__sub">Where this really earns its keep — a sign-off that doesn't need a wordmark image attached. Just type.</p>
+
+    <div class="email-mock">
+      <div class="email-mock__from">From · Taylor Maison</div>
+      <div class="email-mock__body">
+        Happy to move forward on the Roman Sanford extension. I'll send the updated brief Thursday, and we can circle on the motion tests the week after.
+      </div>
+      <div class="email-mock__sig">
+        <div class="email-mock__sig-line"><span class="d"></span>TAYLOR MAISON</div>
+        <div class="email-mock__sig-meta">Creative Director · Brand · Web · AI</div>
+        <div class="email-mock__sig-meta">t4ylormaison@gmail.com</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">On charcoal</h2>
+    <div class="on-dark">
+      <span class="dot" role="img" aria-label="Taylor Maison mark on dark"></span>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">In context</h2>
+    <p class="section__sub">Header, business card — the dot paired with the name.</p>
+
+    <div class="contexts">
+      <div class="header-mock">
+        <div class="header-mock__brand">
+          <span class="d"></span>TAYLOR MAISON
+        </div>
+        <nav class="header-mock__nav">
+          <span>Work</span><span>About</span><span>Contact</span>
+        </nav>
+      </div>
+
+      <div class="card-mock">
+        <div style="display: flex; justify-content: space-between;">
+          <span class="card-mock__corner">— Est. 2025</span>
+          <span class="card-mock__corner">N° 001</span>
+        </div>
+        <div class="card-mock__center">
+          taylormaison<span class="d"></span>
+        </div>
+        <div class="card-mock__meta">
+          <span>Creative Director</span>
+          <span>t4ylormaison@gmail.com</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="concept-nav">
+    <a href="./bet-g-serif.html">← Bet G · Editorial serif</a>
+    <a href="./index.html">All bets</a>
+    <a href="./bet-i-ligature.html">Bet I · TM ligature →</a>
+  </nav>
+</div>
+
+</body>
+</html>

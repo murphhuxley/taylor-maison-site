@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pearl-as-O — Wordmark Integration</title>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500&f[]=satoshi@500,400&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f4f0e8;
+    --bg-strong: #ece6de;
+    --ink: #15181b;
+    --muted: #5f5951;
+    --line: rgba(21,24,27,0.12);
+    --charcoal: #0d1015;
+    --cream: #f4f0e8;
+    --font-display: 'Cabinet Grotesk', 'Helvetica Neue', Arial, sans-serif;
+    --font-body: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    padding: 48px 32px 96px;
+  }
+  header.page {
+    max-width: 1320px; margin: 0 auto 48px;
+  }
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 12px;
+  }
+  h1.page-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin: 0 0 18px;
+  }
+  p.page-lede {
+    max-width: 760px;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .grid {
+    max-width: 1320px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+  @media (max-width: 980px) { .grid { grid-template-columns: 1fr; } }
+
+  .card {
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: #fff;
+    overflow: hidden;
+  }
+  .card-head {
+    padding: 22px 26px 18px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .card-head h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .card-head .tag {
+    font-family: var(--font-body);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .hero-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .hero-panel {
+    aspect-ratio: 1 / 1;
+    display: grid;
+    place-items: center;
+    padding: 28px;
+  }
+  .hero-panel--light { background: var(--cream); color: var(--ink); }
+  .hero-panel--dark  { background: var(--charcoal); color: var(--cream); }
+
+  /* Wordmark typography */
+  .wm {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    line-height: 0.92;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .wm .row {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .wm .pearl {
+    display: inline-block;
+    background: currentColor;
+    border-radius: 50%;
+    /* sized to the cap-O of Cabinet Grotesk 800 */
+    width: 0.72em;
+    height: 0.72em;
+    margin: 0 0.01em;
+    vertical-align: middle;
+    position: relative;
+    top: -0.03em;
+  }
+
+  /* Solid pearl (variant A) */
+  .wm--solid .pearl { background: currentColor; }
+
+  /* Ring pearl (variant B) - hollow O matched */
+  .wm--ring .pearl {
+    background: transparent;
+    border: 0.14em solid currentColor;
+    /* shrink the outer size slightly so total width matches solid version */
+    width: 0.7em; height: 0.7em;
+  }
+
+  /* Sunset / slatted pearl (variant C) */
+  .wm--sunset .pearl {
+    background: transparent;
+    overflow: hidden;
+  }
+  .wm--sunset .pearl svg { display: block; width: 100%; height: 100%; }
+
+  /* Dot-in-ring pearl (variant D) */
+  .wm--ringdot .pearl {
+    background: transparent;
+    border: 0.1em solid currentColor;
+    width: 0.7em; height: 0.7em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .wm--ringdot .pearl::after {
+    content: "";
+    width: 28%; height: 28%;
+    background: currentColor;
+    border-radius: 50%;
+  }
+
+  /* Classic two-circle pearl (variant E) */
+  .wm--classic .pearl {
+    background: transparent;
+    overflow: visible;
+  }
+  .wm--classic .pearl svg { display: block; width: 100%; height: 100%; overflow: visible; }
+
+  /* Hero-level scales */
+  .wm--hero { font-size: clamp(44px, 9vw, 86px); }
+  .wm--hero .row + .row { margin-top: 0.02em; }
+
+  /* Sizes row */
+  .sizes {
+    padding: 22px 26px 10px;
+    border-top: 1px solid var(--line);
+    background: #fcfbf8;
+  }
+  .sizes-label {
+    font-family: var(--font-body);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .size-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 28px;
+    flex-wrap: wrap;
+    padding-bottom: 18px;
+  }
+  .size-chip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .size-chip small {
+    font-family: var(--font-body);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .rationale {
+    padding: 18px 26px 26px;
+    border-top: 1px solid var(--line);
+  }
+  .rationale h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.92rem;
+    margin: 0 0 8px;
+    letter-spacing: 0.02em;
+  }
+  .rationale p {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--muted);
+    margin: 0 0 8px;
+  }
+  .rationale .ref {
+    font-family: var(--font-body);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #7a7168;
+    margin-top: 10px;
+    display: block;
+  }
+
+  /* Single-line wordmark variant (bottom compare section) */
+  .compare {
+    max-width: 1320px;
+    margin: 72px auto 0;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: #fff;
+    overflow: hidden;
+  }
+  .compare-head {
+    padding: 22px 26px 18px;
+    border-bottom: 1px solid var(--line);
+  }
+  .compare-head h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin: 0 0 6px;
+  }
+  .compare-head p {
+    color: var(--muted);
+    font-size: 0.92rem;
+    margin: 0;
+  }
+  .compare-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .compare-row .hero-panel { aspect-ratio: 16 / 9; }
+  .wm--line { flex-direction: row; }
+  .wm--line .row { }
+</style>
+</head>
+<body>
+
+<header class="page">
+  <p class="eyebrow">Concept · Pearl as O</p>
+  <h1 class="page-title">The pearl hides inside your name.</h1>
+  <p class="page-lede">Replace the O in TAYLOR with the pearl and the two halves of your identity fuse. The mark stops being an attached signature and becomes a letter — the most distinctive letter in your name. Below: four treatments of the same idea, each tuned to a different tension between integration and legibility.</p>
+</header>
+
+<!-- Shared SVG defs -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <mask id="m-pearl-sunset" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="120">
+      <rect width="120" height="120" fill="white" />
+      <rect x="0" y="72"  width="120" height="5" fill="black" />
+      <rect x="0" y="86"  width="120" height="5" fill="black" />
+      <rect x="0" y="100" width="120" height="5" fill="black" />
+    </mask>
+    <!-- Classic two-circle pearl: big disc with small knockout up-left -->
+    <mask id="m-pearl-classic" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="120">
+      <rect width="120" height="120" fill="white" />
+      <circle cx="44" cy="42" r="12" fill="black" />
+    </mask>
+  </defs>
+</svg>
+
+<section class="grid">
+
+  <!-- Card 1 : Solid pearl -->
+  <article class="card">
+    <div class="card-head">
+      <h2>01 · Solid pearl O</h2>
+      <span class="tag">Most reduced</span>
+    </div>
+
+    <div class="hero-row">
+      <div class="hero-panel hero-panel--light">
+        <div class="wm wm--solid wm--hero">
+          <div class="row">TAYL<span class="pearl"></span>R</div>
+          <div class="row">MAISON</div>
+        </div>
+      </div>
+      <div class="hero-panel hero-panel--dark">
+        <div class="wm wm--solid wm--hero">
+          <div class="row">TAYL<span class="pearl"></span>R</div>
+          <div class="row">MAISON</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sizes">
+      <div class="sizes-label">Scale</div>
+      <div class="size-row">
+        <div class="size-chip">
+          <div class="wm wm--solid" style="font-size:16px"><div class="row">TAYL<span class="pearl"></span>R</div><div class="row">MAISON</div></div>
+          <small>16px</small>
+        </div>
+        <div class="size-chip">
+          <div class="wm wm--solid" style="font-size:24px"><div class="row">TAYL<span class="pearl"></span>R</div><div class="row">MAISON</div></div>
+          <small>24px</small>
+        </div>
+        <div class="size-chip">
+          <div class="wm wm--solid" style="font-size:40px"><div class="row">TAYL<span class="pearl"></span>R</div><div class="row">MAISON</div></div>
+          <small>40px</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="rationale">
+      <h3>The argument</h3>
+      <p>The pearl replaces the O as a solid disc. Maximum integration — the signature motif is now load-bearing inside the name, not hanging off it. At small sizes the disc reads as an O because the brain fills in the counter by context. At hero scale the unfilled disc makes the name look almost branded, like a stamp.</p>
+      <p>Risk: at very small sizes (favicon / 16px) the solid dot can bleed into the adjacent L and R. Tracking may need a touch more air.</p>
+      <span class="ref">Research: §4 Rand reduction · §3 distinctive under stress · §1 pearl only in peer whitespace</span>
+    </div>
+  </article>
+
+  <!-- Card 2 : Ring pearl -->
+  <article class="card">
+    <div class="card-head">
+      <h2>02 · Ring pearl O</h2>
+      <span class="tag">Most legible</span>
+    </div>
+
+    <div class="hero-row">
+      <div class="hero-panel hero-panel--light">
+        <div class="wm wm--ring wm--hero">
+          <div class="row">TAYL<span class="pearl"></span>R</div>
+          <div class="row">MAISON</div>
+        </div>
+      </div>
+      <div class="hero-panel hero-panel--dark">
+        <div class="wm wm--ring wm--hero">
+          <div class="row">TAYL<span class="pearl"></span>R</div>
+          <div class="row">MAISON</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sizes">
+      <div class="sizes-label">Scale</div>
+      <div class="size-row">
+        <div class="size-chip">
+          <div class="wm wm--ring" style="font-size:16px"><div class="row">TAYL<span class="pearl"></span>R</div><div class="row">MAISON</div></div>
+          <small>16px</small>
+        </div>
+        <div class="size-chip">
+          <div class="wm wm--ring" style="font-size:24px"><div class="row">TAYL<span class="pearl"></span>R</div><div class="row">MAISON</div></div>
+          <small>24px</small>
+        </div>
+        <div class="size-chip">
+          <div class="wm wm--ring" style="font-size:40px"><div class="row">TAYL<span class="pearl"></span>R</div><div class="row">MAISON</div></div>
+          <small>40px</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="rationale">
+      <h3>The argument</h3>
+      <p>Keep the counter open — the pearl becomes a ring, geometrically perfect, read as both an O and a coin. Legibility is unchallenged at every size. The intervention is quieter; the name reads first and the circle idea lingers.</p>
+      <p>Risk: quieter = less distinctive. An almost-perfect O in a sans wordmark is a move plenty of brands make; this version trades ownership for safety.</p>
+      <span class="ref">Research: §3 legibility under stress · §4 Haviv simplicity</span>
+    </div>
+  </article>
+
+  <!-- Card 3 : Sunset pearl -->
+  <article class="card">
+    <div class="card-head">
+      <h2>03 · Sunset pearl O</h2>
+      <span class="tag">Loaded motif</span>
+    </div>
+
+    <div class="hero-row">
+      <div class="hero-panel hero-panel--light">
+        <div class="wm wm--sunset wm--hero">
+          <div class="row">TAYL<span class="pearl"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="56" fill="currentColor" mask="url(#m-pearl-sunset)" /></svg></span>R</div>
+          <div class="row">MAISON</div>
+        </div>
+      </div>
+      <div class="hero-panel hero-panel--dark">
+        <div class="wm wm--sunset wm--hero">
+          <div class="row">TAYL<span class="pearl"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="56" fill="currentColor" mask="url(#m-pearl-sunset)" /></svg></span>R</div>
+          <div class="row">MAISON</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sizes">
+      <div class="sizes-label">Scale</div>
+      <div class="size-row">
+        <div class="size-chip">
+          <div class="wm wm--sunset" style="font-size:24px"><div class="row">TAYL<span class="pearl"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="56" fill="currentColor" mask="url(#m-pearl-sunset)" /></svg></span>R</div><div class="row">MAISON</div></div>
+          <small>24px</small>
+        </div>
+        <div class="size-chip">
+          <div class="wm wm--sunset" style="font-size:40px"><div class="row">TAYL<span class="pearl"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="56" fill="currentColor" mask="url(#m-pearl-sunset)" /></svg></span>R</div><div class="row">MAISON</div></div>
+          <small>40px</small>
+        </div>
+        <div class="size-chip">
+          <div class="wm wm--sunset" style="font-size:64px"><div class="row">TAYL<span class="pearl"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="56" fill="currentColor" mask="url(#m-pearl-sunset)" /></svg></span>R</div><div class="row">MAISON</div></div>
+          <small>64px</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="rationale">
+      <h3>The argument</h3>
+      <p>The Classic sunset pearl sits inside the wordmark. Your favorite motif — solid upper hemisphere, three cuts below — now lives as a letter. The wordmark <em>is</em> the logo; the lockup problem disappears.</p>
+      <p>Risk: the slats are too fine under 24px; the O goes muddy and reads as a dirty circle. Useable at hero scale and on social, but a simplified solid or ring is needed for small sizes. (Good news: the simplification IS the other two cards.)</p>
+      <span class="ref">Research: §2 letter interaction · §4 master mark as name</span>
+    </div>
+  </article>
+
+  <!-- Card 5 : Classic two-circle pearl -->
+  <article class="card">
+    <div class="card-head">
+      <h2>05 · Classic two-circle pearl O</h2>
+      <span class="tag">Original motif</span>
+    </div>
+
+    <div class="hero-row">
+      <div class="hero-panel hero-panel--light">
+        <div class="wm wm--classic wm--hero">
+          <div class="row">TAYL<span class="pearl"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="56" fill="currentColor" mask="url(#m-pearl-classic)" /></svg></span>R</div>
+          <div class="row">MAISON</div>
+        </div>
+      </div>
+      <div class="hero-panel hero-panel--dark">
+        <div class="wm wm--classic wm--hero">
+          <div class="row">TAYL<span class="pearl"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="56" fill="currentColor" mask="url(#m-pearl-classic)" /></svg></span>R</div>
+          <div class="row">MAISON</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sizes">
+      <div class="sizes-label">Scale</div>
+      <div class="size-row">
+        <div class="size-chip">
+          <div class="wm wm--classic" style="font-size:16px"><div class="row">TAYL<span class="pearl"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="56" fill="currentColor" mask="url(#m-pearl-classic)" /></svg></span>R</div><div class="row">MAISON</div></div>
+          <small>16px</small>
+        </div>
+        <div class="size-chip">
+          <div class="wm wm--classic" style="font-size:24px"><div class="row">TAYL<span class="pearl"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="56" fill="currentColor" mask="url(#m-pearl-classic)" /></svg></span>R</div><div class="row">MAISON</div></div>
+          <small>24px</small>
+        </div>
+        <div class="size-chip">
+          <div class="wm wm--classic" style="font-size:40px"><div class="row">TAYL<span class="pearl"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="56" fill="currentColor" mask="url(#m-pearl-classic)" /></svg></span>R</div><div class="row">MAISON</div></div>
+          <small>40px</small>
+        </div>
+        <div class="size-chip">
+          <div class="wm wm--classic" style="font-size:64px"><div class="row">TAYL<span class="pearl"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="56" fill="currentColor" mask="url(#m-pearl-classic)" /></svg></span>R</div><div class="row">MAISON</div></div>
+          <small>64px</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="rationale">
+      <h3>The argument</h3>
+      <p>The original pearl — big disc, small knockout up-and-left — now sitting inside your name. The offset inner circle reads as a pearl's highlight, a moon's shadow, or just a charming counter. It's the only variant where the O keeps a real interior shape (not just ring or disc), which makes it the most O-like and also the most distinctive.</p>
+      <p>At small sizes the knockout can close up and revert to the solid pearl (Card 01) — which is again a decent failure mode. At hero scale the highlight turns the wordmark into something that looks almost jeweled.</p>
+      <span class="ref">Research: §2 counter as signature · §4 original mark preserved · §3 most O-like of the five</span>
+    </div>
+  </article>
+
+  <!-- Card 4 : Ring + dot -->
+  <article class="card">
+    <div class="card-head">
+      <h2>04 · Ring + dot pearl O</h2>
+      <span class="tag">Subtle signature</span>
+    </div>
+
+    <div class="hero-row">
+      <div class="hero-panel hero-panel--light">
+        <div class="wm wm--ringdot wm--hero">
+          <div class="row">TAYL<span class="pearl"></span>R</div>
+          <div class="row">MAISON</div>
+        </div>
+      </div>
+      <div class="hero-panel hero-panel--dark">
+        <div class="wm wm--ringdot wm--hero">
+          <div class="row">TAYL<span class="pearl"></span>R</div>
+          <div class="row">MAISON</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sizes">
+      <div class="sizes-label">Scale</div>
+      <div class="size-row">
+        <div class="size-chip">
+          <div class="wm wm--ringdot" style="font-size:16px"><div class="row">TAYL<span class="pearl"></span>R</div><div class="row">MAISON</div></div>
+          <small>16px</small>
+        </div>
+        <div class="size-chip">
+          <div class="wm wm--ringdot" style="font-size:24px"><div class="row">TAYL<span class="pearl"></span>R</div><div class="row">MAISON</div></div>
+          <small>24px</small>
+        </div>
+        <div class="size-chip">
+          <div class="wm wm--ringdot" style="font-size:40px"><div class="row">TAYL<span class="pearl"></span>R</div><div class="row">MAISON</div></div>
+          <small>40px</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="rationale">
+      <h3>The argument</h3>
+      <p>An open ring with a single pupil-dot at the center. Reads as an O with a quirk — a bindi, a bullseye, a pearl on a string. Subtle enough that the name leads; distinctive enough that you have a mark to pull out (the dot becomes your favicon).</p>
+      <p>Risk: at small sizes the center dot can disappear, reverting this to the ring treatment (Card 02). That's actually not a bad failure mode.</p>
+      <span class="ref">Research: §2 counter as signature · §3 distinctive at scale</span>
+    </div>
+  </article>
+
+</section>
+
+<!-- Compare : single-line wordmark -->
+<section class="compare">
+  <div class="compare-head">
+    <h2>Single-line lockup</h2>
+    <p>Same four treatments, rendered as one line instead of stacked — for header / favicon / horizontal use.</p>
+  </div>
+  <div class="compare-row">
+    <div class="hero-panel hero-panel--light">
+      <div class="wm wm--solid" style="font-size:clamp(28px, 5vw, 54px)">
+        <div class="row">TAYL<span class="pearl"></span>R&nbsp;MAISON</div>
+      </div>
+    </div>
+    <div class="hero-panel hero-panel--dark">
+      <div class="wm wm--solid" style="font-size:clamp(28px, 5vw, 54px)">
+        <div class="row">TAYL<span class="pearl"></span>R&nbsp;MAISON</div>
+      </div>
+    </div>
+  </div>
+  <div class="compare-row">
+    <div class="hero-panel hero-panel--light">
+      <div class="wm wm--ring" style="font-size:clamp(28px, 5vw, 54px)">
+        <div class="row">TAYL<span class="pearl"></span>R&nbsp;MAISON</div>
+      </div>
+    </div>
+    <div class="hero-panel hero-panel--dark">
+      <div class="wm wm--ring" style="font-size:clamp(28px, 5vw, 54px)">
+        <div class="row">TAYL<span class="pearl"></span>R&nbsp;MAISON</div>
+      </div>
+    </div>
+  </div>
+  <div class="compare-row">
+    <div class="hero-panel hero-panel--light">
+      <div class="wm wm--sunset" style="font-size:clamp(28px, 5vw, 54px)">
+        <div class="row">TAYL<span class="pearl"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="56" fill="currentColor" mask="url(#m-pearl-sunset)" /></svg></span>R&nbsp;MAISON</div>
+      </div>
+    </div>
+    <div class="hero-panel hero-panel--dark">
+      <div class="wm wm--sunset" style="font-size:clamp(28px, 5vw, 54px)">
+        <div class="row">TAYL<span class="pearl"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="56" fill="currentColor" mask="url(#m-pearl-sunset)" /></svg></span>R&nbsp;MAISON</div>
+      </div>
+    </div>
+  </div>
+  <div class="compare-row">
+    <div class="hero-panel hero-panel--light">
+      <div class="wm wm--ringdot" style="font-size:clamp(28px, 5vw, 54px)">
+        <div class="row">TAYL<span class="pearl"></span>R&nbsp;MAISON</div>
+      </div>
+    </div>
+    <div class="hero-panel hero-panel--dark">
+      <div class="wm wm--ringdot" style="font-size:clamp(28px, 5vw, 54px)">
+        <div class="row">TAYL<span class="pearl"></span>R&nbsp;MAISON</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

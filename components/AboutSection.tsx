@@ -7,10 +7,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 const credentials = [
-  'Grew up in Southampton — knows the market firsthand',
-  'Estate management inside ultra-high-net-worth environments',
+  'Southampton-rooted — local context without local smallness',
+  'Estate management inside high-trust private environments',
   'Seven years in film and television production',
-  'Custom web builds and workflow consulting',
+  'Custom websites, brand direction, and workflow consulting',
 ]
 
 export default function AboutSection() {
@@ -52,17 +52,18 @@ export default function AboutSection() {
             About Taylor
           </span>
           <h2 className="about__title" style={{ opacity: 0, visibility: 'hidden' }}>
-            Built out of real-world operations.
+            Taste shaped by operational reality.
           </h2>
           <p className="about__text" style={{ opacity: 0, visibility: 'hidden' }}>
             Taylor grew up in Southampton. Estate management, film production,
             content strategy, and founder-side operations all shaped the way he
-            approaches digital work. The common thread: understanding how people
-            read trust, timing, and presentation when the details actually matter.
+            approaches digital work. The common thread is knowing how trust gets
+            read before anyone fills out a form.
           </p>
           <p className="about__text" style={{ opacity: 0, visibility: 'hidden' }}>
-            That background shows up in the work as sharper editing, calmer
-            hierarchy, and systems that feel considered instead of bolted on.
+            The work is designed to feel edited, credible, and useful: clear
+            enough for a first call, polished enough for a referral, and practical
+            enough to keep working after launch.
           </p>
 
           <ul className="about__credentials" style={{ opacity: 0, visibility: 'hidden' }}>

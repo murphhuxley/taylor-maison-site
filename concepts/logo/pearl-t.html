@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Pearl + T / TM · Monogrammed pearl — Taylor Maison</title>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin="anonymous" />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&f[]=satoshi@400,500&display=swap" />
+<style>
+  :root {
+    --bg: #f4f0e8;
+    --bg-strong: #ece6de;
+    --text-primary: #15181b;
+    --text-muted: #8a8278;
+    --text-secondary: #5f5951;
+    --line: rgba(21, 24, 27, 0.12);
+    --charcoal: #0d1015;
+    --font-display: 'Cabinet Grotesk', 'Helvetica Neue', sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: 'Satoshi', 'Helvetica Neue', sans-serif;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: clamp(2rem, 5vw, 5rem) clamp(1.5rem, 4vw, 3.5rem);
+  }
+
+  header.page {
+    padding-bottom: 1.6rem;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  .meta { font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+
+  .intro {
+    max-width: 760px;
+    color: var(--text-secondary);
+    font-size: 1.02rem;
+    line-height: 1.55;
+    margin-bottom: clamp(3rem, 5vw, 5rem);
+  }
+  .intro strong { color: var(--text-primary); font-weight: 500; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.4rem, 2.5vw, 2.2rem);
+  }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: clamp(2rem, 3vw, 2.8rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+  }
+
+  .card__head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding-bottom: 1rem; border-bottom: 1px solid var(--line);
+  }
+  .card__name {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .card__tag {
+    font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-muted);
+  }
+
+  .hero-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+  }
+  .hero-panel {
+    aspect-ratio: 1/1;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 2px;
+  }
+  .hero-panel--light {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    color: var(--text-primary);
+  }
+  .hero-panel--dark {
+    background: var(--charcoal);
+    color: var(--bg);
+  }
+  .hero-panel svg { width: 62%; height: 62%; display: block; }
+
+  .size-row {
+    display: flex; align-items: flex-end; justify-content: space-around;
+    gap: 1.2rem;
+    padding-top: 1.2rem;
+    border-top: 1px dashed var(--line);
+    color: var(--text-primary);
+  }
+  .size-cell { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+  .size-cell__label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+  .size-cell svg { display: block; }
+
+  .lockup {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1.2rem 1rem;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+  }
+  .lockup svg { width: 38px; height: 38px; flex-shrink: 0; color: var(--text-primary); display: block; }
+  .lockup__wm {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.9rem;
+    line-height: 0.88;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    display: flex; flex-direction: column;
+  }
+
+  .note {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+  .note strong { color: var(--text-primary); font-weight: 500; }
+
+  .back {
+    display: inline-block;
+    margin-top: clamp(3rem, 5vw, 4rem);
+    font-size: 0.82rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2px;
+  }
+  .back:hover { color: var(--text-primary); border-color: var(--text-primary); }
+</style>
+</head>
+<body>
+
+<!-- ── SVG LIBRARY ──
+     Masks at root defs (outside symbols) so <use> resolves them in every browser.
+     Each T is a pair of rects (crossbar + stem) cut out of the disc — so the
+     panel background shows through, and the mark auto-inverts on light vs dark.
+─────────────────────────────── -->
+<svg width="0" height="0" style="position: absolute; overflow: hidden;" aria-hidden="true">
+  <defs>
+
+    <!-- 1 · DIRECT — tiny T where the original pearl dot sat (upper-left) -->
+    <mask id="m-t-direct" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="120">
+      <rect width="120" height="120" fill="white" />
+      <rect x="39" y="35" width="16" height="4" fill="black" />
+      <rect x="45" y="35" width="4"  height="18" fill="black" />
+    </mask>
+
+    <!-- 2 · UPSCALED — same position, larger T: more assertive version of 1 -->
+    <mask id="m-t-upscaled" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="120">
+      <rect width="120" height="120" fill="white" />
+      <rect x="32" y="30" width="26" height="6" fill="black" />
+      <rect x="42" y="30" width="6"  height="26" fill="black" />
+    </mask>
+
+    <!-- 3 · CENTERED — medium T centered in the disc: monogram-seal reading -->
+    <mask id="m-t-centered" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="120">
+      <rect width="120" height="120" fill="white" />
+      <rect x="44" y="42" width="32" height="7" fill="black" />
+      <rect x="56" y="42" width="8"  height="36" fill="black" />
+    </mask>
+
+    <!-- 4 · GRAND — large T dominates the disc: wordmark / type-forward -->
+    <mask id="m-t-grand" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="120">
+      <rect width="120" height="120" fill="white" />
+      <rect x="30" y="26" width="60" height="11" fill="black" />
+      <rect x="54" y="26" width="12" height="60" fill="black" />
+    </mask>
+
+    <!-- SYMBOLS — disc with T-shaped cutout; currentColor + background-showthrough auto-inverts -->
+    <symbol id="sp-t-direct" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="48" fill="currentColor" mask="url(#m-t-direct)" />
+    </symbol>
+    <symbol id="sp-t-upscaled" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="48" fill="currentColor" mask="url(#m-t-upscaled)" />
+    </symbol>
+    <symbol id="sp-t-centered" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="48" fill="currentColor" mask="url(#m-t-centered)" />
+    </symbol>
+    <symbol id="sp-t-grand" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="48" fill="currentColor" mask="url(#m-t-grand)" />
+    </symbol>
+
+    <!-- TM VARIATIONS · Monogram: both initials rather than just Taylor's.
+         Uses SVG text inside the mask so the letterforms follow Cabinet Grotesk (with
+         Helvetica Bold fallback if the font hasn't loaded yet). -->
+
+    <!-- 5 · TM DIRECT — small uppercase TM in the original pearl-dot position -->
+    <mask id="m-tm-direct" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="120">
+      <rect width="120" height="120" fill="white" />
+      <text x="47" y="45"
+            font-family="'Cabinet Grotesk', 'Helvetica Neue', Arial, sans-serif"
+            font-weight="800" font-size="16"
+            fill="black" text-anchor="middle" dominant-baseline="central"
+            letter-spacing="-0.4">TM</text>
+    </mask>
+
+    <!-- 6 · tm LOWERCASE — lowercase tm in the same upper-left position -->
+    <mask id="m-tm-lower" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="120">
+      <rect width="120" height="120" fill="white" />
+      <text x="47" y="45"
+            font-family="'Cabinet Grotesk', 'Helvetica Neue', Arial, sans-serif"
+            font-weight="800" font-size="18"
+            fill="black" text-anchor="middle" dominant-baseline="central"
+            letter-spacing="-0.3">tm</text>
+    </mask>
+
+    <!-- 7 · TM CENTERED — medium uppercase TM centered in the disc (seal reading) -->
+    <mask id="m-tm-centered" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="120">
+      <rect width="120" height="120" fill="white" />
+      <text x="60" y="60"
+            font-family="'Cabinet Grotesk', 'Helvetica Neue', Arial, sans-serif"
+            font-weight="800" font-size="26"
+            fill="black" text-anchor="middle" dominant-baseline="central"
+            letter-spacing="-0.6">TM</text>
+    </mask>
+
+    <!-- 8 · TM GRAND — large uppercase TM, nearly filling the disc -->
+    <mask id="m-tm-grand" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="120">
+      <rect width="120" height="120" fill="white" />
+      <text x="60" y="60"
+            font-family="'Cabinet Grotesk', 'Helvetica Neue', Arial, sans-serif"
+            font-weight="800" font-size="44"
+            fill="black" text-anchor="middle" dominant-baseline="central"
+            letter-spacing="-1">TM</text>
+    </mask>
+
+    <symbol id="sp-tm-direct" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="48" fill="currentColor" mask="url(#m-tm-direct)" />
+    </symbol>
+    <symbol id="sp-tm-lower" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="48" fill="currentColor" mask="url(#m-tm-lower)" />
+    </symbol>
+    <symbol id="sp-tm-centered" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="48" fill="currentColor" mask="url(#m-tm-centered)" />
+    </symbol>
+    <symbol id="sp-tm-grand" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="48" fill="currentColor" mask="url(#m-tm-grand)" />
+    </symbol>
+
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <header class="page">
+    <h1 class="title">Pearl + T / TM · Monogrammed pearl</h1>
+    <span class="meta">Round 4 · 2026-04-18 · eight constructions</span>
+  </header>
+
+  <p class="intro">
+    The original pearl silhouette with the <strong>small circle replaced by a letter</strong>. Keeps the app-icon feel you liked — but the generic "highlight dot" becomes a signature, locked to your initials. Cards 1–4 use a <strong>T</strong> only (Taylor); cards 5–8 use <strong>TM / tm</strong> (full monogram). Each progresses from a literal dot-swap to a full type takeover.
+  </p>
+
+  <div class="grid">
+
+    <!-- 1 · DIRECT -->
+    <div class="card">
+      <div class="card__head">
+        <h2 class="card__name">1 · Direct swap</h2>
+        <span class="card__tag">Small T, original dot position</span>
+      </div>
+      <div class="hero-row">
+        <div class="hero-panel hero-panel--light">
+          <svg viewBox="0 0 120 120"><use href="#sp-t-direct"/></svg>
+        </div>
+        <div class="hero-panel hero-panel--dark">
+          <svg viewBox="0 0 120 120"><use href="#sp-t-direct"/></svg>
+        </div>
+      </div>
+      <div class="size-row">
+        <div class="size-cell"><svg width="16" height="16" viewBox="0 0 120 120"><use href="#sp-t-direct"/></svg><span class="size-cell__label">16</span></div>
+        <div class="size-cell"><svg width="24" height="24" viewBox="0 0 120 120"><use href="#sp-t-direct"/></svg><span class="size-cell__label">24</span></div>
+        <div class="size-cell"><svg width="40" height="40" viewBox="0 0 120 120"><use href="#sp-t-direct"/></svg><span class="size-cell__label">40</span></div>
+        <div class="size-cell"><svg width="64" height="64" viewBox="0 0 120 120"><use href="#sp-t-direct"/></svg><span class="size-cell__label">64</span></div>
+      </div>
+      <div class="lockup">
+        <svg viewBox="0 0 120 120"><use href="#sp-t-direct"/></svg>
+        <span class="lockup__wm"><span>TAYLOR</span><span>MAISON</span></span>
+      </div>
+      <p class="note">
+        <strong>The move:</strong> 1:1 replacement of the original pearl dot with a small T, same position (upper-left quadrant), same visual weight.<br/>
+        <strong>Why it works:</strong> the silhouette is <em>identical</em> to the pearl you liked — same instinct, same app-icon cleanliness — but now it's undeniably yours. Risk: the T is small enough that at 16–24px it may read as a smudge. Likely needs Upscaled (2) at favicon sizes.
+      </p>
+    </div>
+
+    <!-- 2 · UPSCALED -->
+    <div class="card">
+      <div class="card__head">
+        <h2 class="card__name">2 · Upscaled</h2>
+        <span class="card__tag">Bigger T, same position</span>
+      </div>
+      <div class="hero-row">
+        <div class="hero-panel hero-panel--light">
+          <svg viewBox="0 0 120 120"><use href="#sp-t-upscaled"/></svg>
+        </div>
+        <div class="hero-panel hero-panel--dark">
+          <svg viewBox="0 0 120 120"><use href="#sp-t-upscaled"/></svg>
+        </div>
+      </div>
+      <div class="size-row">
+        <div class="size-cell"><svg width="16" height="16" viewBox="0 0 120 120"><use href="#sp-t-upscaled"/></svg><span class="size-cell__label">16</span></div>
+        <div class="size-cell"><svg width="24" height="24" viewBox="0 0 120 120"><use href="#sp-t-upscaled"/></svg><span class="size-cell__label">24</span></div>
+        <div class="size-cell"><svg width="40" height="40" viewBox="0 0 120 120"><use href="#sp-t-upscaled"/></svg><span class="size-cell__label">40</span></div>
+        <div class="size-cell"><svg width="64" height="64" viewBox="0 0 120 120"><use href="#sp-t-upscaled"/></svg><span class="size-cell__label">64</span></div>
+      </div>
+      <div class="lockup">
+        <svg viewBox="0 0 120 120"><use href="#sp-t-upscaled"/></svg>
+        <span class="lockup__wm"><span>TAYLOR</span><span>MAISON</span></span>
+      </div>
+      <p class="note">
+        <strong>The move:</strong> T stays in the upper-left "highlight" position but grows — confident enough to read at every size.<br/>
+        <strong>Why it works:</strong> keeps the off-center composition that gave the original pearl its charm, but the T is now a <em>statement</em>, not a glint. Probably the most pearl-faithful of the four.
+      </p>
+    </div>
+
+    <!-- 3 · CENTERED -->
+    <div class="card">
+      <div class="card__head">
+        <h2 class="card__name">3 · Centered</h2>
+        <span class="card__tag">Medium T, dead center</span>
+      </div>
+      <div class="hero-row">
+        <div class="hero-panel hero-panel--light">
+          <svg viewBox="0 0 120 120"><use href="#sp-t-centered"/></svg>
+        </div>
+        <div class="hero-panel hero-panel--dark">
+          <svg viewBox="0 0 120 120"><use href="#sp-t-centered"/></svg>
+        </div>
+      </div>
+      <div class="size-row">
+        <div class="size-cell"><svg width="16" height="16" viewBox="0 0 120 120"><use href="#sp-t-centered"/></svg><span class="size-cell__label">16</span></div>
+        <div class="size-cell"><svg width="24" height="24" viewBox="0 0 120 120"><use href="#sp-t-centered"/></svg><span class="size-cell__label">24</span></div>
+        <div class="size-cell"><svg width="40" height="40" viewBox="0 0 120 120"><use href="#sp-t-centered"/></svg><span class="size-cell__label">40</span></div>
+        <div class="size-cell"><svg width="64" height="64" viewBox="0 0 120 120"><use href="#sp-t-centered"/></svg><span class="size-cell__label">64</span></div>
+      </div>
+      <div class="lockup">
+        <svg viewBox="0 0 120 120"><use href="#sp-t-centered"/></svg>
+        <span class="lockup__wm"><span>TAYLOR</span><span>MAISON</span></span>
+      </div>
+      <p class="note">
+        <strong>The move:</strong> T shifts to the center of the disc. Loses the "highlight dot" composition, gains a classic seal/medallion reading.<br/>
+        <strong>Why it works:</strong> most traditionally monogrammed — feels like a stamp, signet, wax seal. More established, less playful than the off-center versions. Favicon-perfect because it's symmetrical.
+      </p>
+    </div>
+
+    <!-- 4 · GRAND -->
+    <div class="card">
+      <div class="card__head">
+        <h2 class="card__name">4 · Grand</h2>
+        <span class="card__tag">Large T fills the disc</span>
+      </div>
+      <div class="hero-row">
+        <div class="hero-panel hero-panel--light">
+          <svg viewBox="0 0 120 120"><use href="#sp-t-grand"/></svg>
+        </div>
+        <div class="hero-panel hero-panel--dark">
+          <svg viewBox="0 0 120 120"><use href="#sp-t-grand"/></svg>
+        </div>
+      </div>
+      <div class="size-row">
+        <div class="size-cell"><svg width="16" height="16" viewBox="0 0 120 120"><use href="#sp-t-grand"/></svg><span class="size-cell__label">16</span></div>
+        <div class="size-cell"><svg width="24" height="24" viewBox="0 0 120 120"><use href="#sp-t-grand"/></svg><span class="size-cell__label">24</span></div>
+        <div class="size-cell"><svg width="40" height="40" viewBox="0 0 120 120"><use href="#sp-t-grand"/></svg><span class="size-cell__label">40</span></div>
+        <div class="size-cell"><svg width="64" height="64" viewBox="0 0 120 120"><use href="#sp-t-grand"/></svg><span class="size-cell__label">64</span></div>
+      </div>
+      <div class="lockup">
+        <svg viewBox="0 0 120 120"><use href="#sp-t-grand"/></svg>
+        <span class="lockup__wm"><span>TAYLOR</span><span>MAISON</span></span>
+      </div>
+      <p class="note">
+        <strong>The move:</strong> T grows until it nearly fills the disc. The pearl becomes a frame for the letter.<br/>
+        <strong>Why it works:</strong> most type-forward — reads as "T in a circle," a very editorial, almost publisher-colophon feel. Least pearl-like of the four. Closer to a monogram mark than a pearl with a monogram in it.
+      </p>
+    </div>
+
+    <!-- 5 · TM DIRECT -->
+    <div class="card">
+      <div class="card__head">
+        <h2 class="card__name">5 · TM direct</h2>
+        <span class="card__tag">Small TM, dot position</span>
+      </div>
+      <div class="hero-row">
+        <div class="hero-panel hero-panel--light">
+          <svg viewBox="0 0 120 120"><use href="#sp-tm-direct"/></svg>
+        </div>
+        <div class="hero-panel hero-panel--dark">
+          <svg viewBox="0 0 120 120"><use href="#sp-tm-direct"/></svg>
+        </div>
+      </div>
+      <div class="size-row">
+        <div class="size-cell"><svg width="16" height="16" viewBox="0 0 120 120"><use href="#sp-tm-direct"/></svg><span class="size-cell__label">16</span></div>
+        <div class="size-cell"><svg width="24" height="24" viewBox="0 0 120 120"><use href="#sp-tm-direct"/></svg><span class="size-cell__label">24</span></div>
+        <div class="size-cell"><svg width="40" height="40" viewBox="0 0 120 120"><use href="#sp-tm-direct"/></svg><span class="size-cell__label">40</span></div>
+        <div class="size-cell"><svg width="64" height="64" viewBox="0 0 120 120"><use href="#sp-tm-direct"/></svg><span class="size-cell__label">64</span></div>
+      </div>
+      <div class="lockup">
+        <svg viewBox="0 0 120 120"><use href="#sp-tm-direct"/></svg>
+        <span class="lockup__wm"><span>TAYLOR</span><span>MAISON</span></span>
+      </div>
+      <p class="note">
+        <strong>The move:</strong> uppercase TM replaces the dot in the original highlight position. Full initials, same off-center composition.<br/>
+        <strong>Why it works:</strong> reads as "Taylor Maison" explicitly — no decoding. Risk: TM is a loaded abbreviation (the trademark symbol). Next to a wordmark it's clear, but standalone at small sizes it may carry that baggage.
+      </p>
+    </div>
+
+    <!-- 6 · tm LOWERCASE -->
+    <div class="card">
+      <div class="card__head">
+        <h2 class="card__name">6 · tm lowercase</h2>
+        <span class="card__tag">Softer, editorial</span>
+      </div>
+      <div class="hero-row">
+        <div class="hero-panel hero-panel--light">
+          <svg viewBox="0 0 120 120"><use href="#sp-tm-lower"/></svg>
+        </div>
+        <div class="hero-panel hero-panel--dark">
+          <svg viewBox="0 0 120 120"><use href="#sp-tm-lower"/></svg>
+        </div>
+      </div>
+      <div class="size-row">
+        <div class="size-cell"><svg width="16" height="16" viewBox="0 0 120 120"><use href="#sp-tm-lower"/></svg><span class="size-cell__label">16</span></div>
+        <div class="size-cell"><svg width="24" height="24" viewBox="0 0 120 120"><use href="#sp-tm-lower"/></svg><span class="size-cell__label">24</span></div>
+        <div class="size-cell"><svg width="40" height="40" viewBox="0 0 120 120"><use href="#sp-tm-lower"/></svg><span class="size-cell__label">40</span></div>
+        <div class="size-cell"><svg width="64" height="64" viewBox="0 0 120 120"><use href="#sp-tm-lower"/></svg><span class="size-cell__label">64</span></div>
+      </div>
+      <div class="lockup">
+        <svg viewBox="0 0 120 120"><use href="#sp-tm-lower"/></svg>
+        <span class="lockup__wm"><span>TAYLOR</span><span>MAISON</span></span>
+      </div>
+      <p class="note">
+        <strong>The move:</strong> same position, but lowercase <em>tm</em>. The ascender of the <em>t</em> and the mid-height of the <em>m</em> create asymmetric vertical rhythm.<br/>
+        <strong>Why it works:</strong> more editorial, less corporate — feels like a colophon or a book-publisher mark. Escapes the "trademark symbol" read of uppercase TM. Risk: lowercase can feel too casual next to the all-caps wordmark lockup.
+      </p>
+    </div>
+
+    <!-- 7 · TM CENTERED -->
+    <div class="card">
+      <div class="card__head">
+        <h2 class="card__name">7 · TM centered</h2>
+        <span class="card__tag">Medium TM, middle of disc</span>
+      </div>
+      <div class="hero-row">
+        <div class="hero-panel hero-panel--light">
+          <svg viewBox="0 0 120 120"><use href="#sp-tm-centered"/></svg>
+        </div>
+        <div class="hero-panel hero-panel--dark">
+          <svg viewBox="0 0 120 120"><use href="#sp-tm-centered"/></svg>
+        </div>
+      </div>
+      <div class="size-row">
+        <div class="size-cell"><svg width="16" height="16" viewBox="0 0 120 120"><use href="#sp-tm-centered"/></svg><span class="size-cell__label">16</span></div>
+        <div class="size-cell"><svg width="24" height="24" viewBox="0 0 120 120"><use href="#sp-tm-centered"/></svg><span class="size-cell__label">24</span></div>
+        <div class="size-cell"><svg width="40" height="40" viewBox="0 0 120 120"><use href="#sp-tm-centered"/></svg><span class="size-cell__label">40</span></div>
+        <div class="size-cell"><svg width="64" height="64" viewBox="0 0 120 120"><use href="#sp-tm-centered"/></svg><span class="size-cell__label">64</span></div>
+      </div>
+      <div class="lockup">
+        <svg viewBox="0 0 120 120"><use href="#sp-tm-centered"/></svg>
+        <span class="lockup__wm"><span>TAYLOR</span><span>MAISON</span></span>
+      </div>
+      <p class="note">
+        <strong>The move:</strong> TM centered in the disc — classic monogram seal reading. Symmetrical, balanced, signet-like.<br/>
+        <strong>Why it works:</strong> most traditional monogram form — feels like an embossed stamp or wax seal. Favicon-perfect because symmetrical. Least like the original pearl, most like an established brand mark.
+      </p>
+    </div>
+
+    <!-- 8 · TM GRAND -->
+    <div class="card">
+      <div class="card__head">
+        <h2 class="card__name">8 · TM grand</h2>
+        <span class="card__tag">Type-forward takeover</span>
+      </div>
+      <div class="hero-row">
+        <div class="hero-panel hero-panel--light">
+          <svg viewBox="0 0 120 120"><use href="#sp-tm-grand"/></svg>
+        </div>
+        <div class="hero-panel hero-panel--dark">
+          <svg viewBox="0 0 120 120"><use href="#sp-tm-grand"/></svg>
+        </div>
+      </div>
+      <div class="size-row">
+        <div class="size-cell"><svg width="16" height="16" viewBox="0 0 120 120"><use href="#sp-tm-grand"/></svg><span class="size-cell__label">16</span></div>
+        <div class="size-cell"><svg width="24" height="24" viewBox="0 0 120 120"><use href="#sp-tm-grand"/></svg><span class="size-cell__label">24</span></div>
+        <div class="size-cell"><svg width="40" height="40" viewBox="0 0 120 120"><use href="#sp-tm-grand"/></svg><span class="size-cell__label">40</span></div>
+        <div class="size-cell"><svg width="64" height="64" viewBox="0 0 120 120"><use href="#sp-tm-grand"/></svg><span class="size-cell__label">64</span></div>
+      </div>
+      <div class="lockup">
+        <svg viewBox="0 0 120 120"><use href="#sp-tm-grand"/></svg>
+        <span class="lockup__wm"><span>TAYLOR</span><span>MAISON</span></span>
+      </div>
+      <p class="note">
+        <strong>The move:</strong> TM scaled until it nearly fills the disc. Pearl becomes a container for the monogram.<br/>
+        <strong>Why it works:</strong> most confident / most proprietary — reads as a full letterform mark where the disc is just the frame. Closer to a medallion mark than a pearl. Risk: least pearl-like of the eight.
+      </p>
+    </div>
+
+  </div>
+
+  <a href="./system.html" class="back">← Back to system sheet</a>
+
+</div>
+
+</body>
+</html>

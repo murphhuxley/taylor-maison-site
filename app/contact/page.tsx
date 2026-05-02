@@ -4,9 +4,8 @@ import { useEffect, useRef } from 'react'
 import dynamic from 'next/dynamic'
 import gsap from 'gsap'
 import Header from '@/components/Header'
-import Footer from '@/components/Footer'
+import GlassPill from '@/components/GlassPill'
 import SmoothScroll from '@/components/SmoothScroll'
-import CreatureGlyph from '@/components/CreatureGlyph'
 
 const Ferrofluid = dynamic(() => import('@/components/Ferrofluid'), { ssr: false })
 
@@ -17,28 +16,36 @@ export default function ContactPage() {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ delay: 0.2 })
       tl.fromTo(
-        '.contact-page__copy > *',
-        { autoAlpha: 0, y: 28 },
-        {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.85,
-          ease: 'power3.out',
-          stagger: 0.08,
-          clearProps: 'all',
-        }
-      ).fromTo(
-        '.contact-page__visual',
-        { autoAlpha: 0, scale: 0.92 },
-        {
-          autoAlpha: 1,
-          scale: 1,
-          duration: 1.1,
-          ease: 'power3.out',
-          clearProps: 'all',
-        },
-        '-=0.6'
+        '.contact-page__orb',
+        { autoAlpha: 0, scale: 0.94 },
+        { autoAlpha: 1, scale: 1, duration: 1.4, ease: 'power3.out', clearProps: 'all' }
       )
+        .fromTo(
+          '.contact-page__copy > *',
+          { autoAlpha: 0, y: 28 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.85,
+            ease: 'power3.out',
+            stagger: 0.08,
+            clearProps: 'all',
+          },
+          '-=1.0'
+        )
+        .fromTo(
+          '.contact-page__panel',
+          { autoAlpha: 0, y: 36, scale: 0.98 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            scale: 1,
+            duration: 1.1,
+            ease: 'power3.out',
+            clearProps: 'all',
+          },
+          '-=0.6'
+        )
     }, sectionRef)
 
     return () => ctx.revert()
@@ -62,16 +69,16 @@ export default function ContactPage() {
                 className="contact-page__title"
                 style={{ opacity: 0, visibility: 'hidden' }}
               >
-                Send the current URL<CreatureGlyph>,</CreatureGlyph>
-                <br />
-                and what feels off<CreatureGlyph>.</CreatureGlyph>
+                Bring me the bottleneck.
               </h1>
               <p
                 className="contact-page__lede"
                 style={{ opacity: 0, visibility: 'hidden' }}
               >
-                That&rsquo;s usually enough to tell whether the next step is
-                advisory, a rebuild, or lighter workflow support.
+                Send the current site, the business goal behind the change, and
+                where the business is losing time, trust, or opportunity.
+                I&rsquo;ll reply with the clearest next move: focused refresh, full
+                build, or ongoing creative and AI support.
               </p>
 
               <div
@@ -82,7 +89,7 @@ export default function ContactPage() {
                   href="mailto:hello@taylor.maison?subject=Project%20inquiry"
                   className="contact-page__action contact-page__action--primary"
                 >
-                  Send the brief
+                  Email Taylor
                 </a>
                 <a
                   href="mailto:hello@taylor.maison"
@@ -102,7 +109,7 @@ export default function ContactPage() {
                 </div>
                 <div className="contact-page__meta-block">
                   <span className="contact-page__meta-label">Availability</span>
-                  <span className="contact-page__meta-value">2 engagements · Q2 2026</span>
+                  <span className="contact-page__meta-value">Limited project openings</span>
                 </div>
                 <div className="contact-page__meta-block">
                   <span className="contact-page__meta-label">Scope</span>
@@ -115,16 +122,45 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div
-              className="contact-page__visual"
-              style={{ opacity: 0, visibility: 'hidden' }}
-            >
-              <Ferrofluid />
+            <div className="contact-page__right">
+              <div
+                className="contact-page__orb"
+                aria-hidden="true"
+                style={{ opacity: 0, visibility: 'hidden' }}
+              >
+                <Ferrofluid />
+              </div>
+
+              <aside className="contact-page__panel" style={{ opacity: 0, visibility: 'hidden' }}>
+                <p className="contact-page__panel-label">What to include</p>
+                <ul className="contact-page__brief-list">
+                  <li>
+                    <span>01</span>
+                    <p>The current website, brand, or reference point.</p>
+                  </li>
+                  <li>
+                    <span>02</span>
+                    <p>What feels off: trust, taste, inquiry quality, follow-up, or speed.</p>
+                  </li>
+                  <li>
+                    <span>03</span>
+                    <p>What is changing: launch, season, offer, referral, team, or market pressure.</p>
+                  </li>
+                  <li>
+                    <span>04</span>
+                    <p>What should become easier, faster, or more profitable.</p>
+                  </li>
+                </ul>
+                <p className="contact-page__panel-note">
+                  No form maze. No performance. Just enough context to know whether
+                  this should be a small fix, a full build, or a longer partnership.
+                </p>
+              </aside>
             </div>
           </div>
         </section>
       </main>
-      <Footer />
+      <GlassPill />
     </>
   )
 }

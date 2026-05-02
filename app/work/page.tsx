@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import Header from '@/components/Header'
-import Footer from '@/components/Footer'
+import GlassPill from '@/components/GlassPill'
 import SmoothScroll from '@/components/SmoothScroll'
 import TransitionLink from '@/components/TransitionLink'
 import { projects } from '@/lib/projects'
@@ -15,7 +15,7 @@ export default function WorkIndexPage() {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ delay: 0.2 })
       tl.fromTo(
-        '.work-index__intro > *',
+        '.work-index__eyebrow, .work-index__title, .work-index__description',
         { autoAlpha: 0, y: 28 },
         {
           autoAlpha: 1,
@@ -61,15 +61,17 @@ export default function WorkIndexPage() {
                 className="work-index__title"
                 style={{ opacity: 0, visibility: 'hidden' }}
               >
-                Work that earns its keep.
+                Work that earns the next conversation.
               </h1>
             </div>
             <p
               className="work-index__description"
               style={{ opacity: 0, visibility: 'hidden' }}
             >
-              A short list of engagements across brand, web, and workflow —
-              chosen for what they demanded and what they taught.
+              A short list of brand, web, and workflow projects chosen for what
+              changed after launch: stronger first impressions, cleaner
+              qualification, better follow-up, and more confidence before the
+              first call.
             </p>
           </div>
 
@@ -109,7 +111,7 @@ export default function WorkIndexPage() {
           </div>
         </section>
       </main>
-      <Footer />
+      <GlassPill />
     </>
   )
 }

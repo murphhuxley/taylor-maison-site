@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Logo concept — I: The TM ligature</title>
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,800&f[]=satoshi@400,500&display=swap" />
+<style>
+  :root {
+    --bg: #f4f0e8;
+    --bg-strong: #ece6de;
+    --text-primary: #15181b;
+    --text-secondary: #5f5951;
+    --text-muted: #8a8278;
+    --accent: #6f8190;
+    --line: rgba(21, 24, 27, 0.12);
+    --charcoal: #0d1015;
+    --font-display: 'Cabinet Grotesk', ui-serif, Georgia, serif;
+    --font-body: 'Satoshi', 'Helvetica Neue', sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text-primary); font-family: var(--font-body); font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+
+  .wrap { max-width: 1320px; margin: 0 auto; padding: clamp(2.5rem, 6vw, 6rem) clamp(1.5rem, 4vw, 4rem); }
+
+  .eyebrow { font-family: var(--font-body); font-weight: 500; text-transform: uppercase; letter-spacing: 0.24em; font-size: 0.78rem; color: var(--text-muted); }
+  .kicker { font-family: var(--font-display); font-weight: 800; font-size: clamp(2.3rem, 5vw, 4.4rem); line-height: 1.02; letter-spacing: -0.02em; margin: 0.4rem 0 1.6rem; color: var(--text-primary); }
+  .subtext { font-size: 1.08rem; color: var(--text-secondary); max-width: 62ch; }
+  .subtext em { font-style: italic; color: var(--text-primary); }
+
+  .brand-brief {
+    margin-top: clamp(1.4rem, 2.5vw, 2rem);
+    padding: 1.2rem 1.4rem;
+    border-left: 2px solid var(--text-primary);
+    background: var(--bg-strong);
+  }
+  .brand-brief strong { font-family: var(--font-display); font-weight: 800; letter-spacing: 0; }
+
+  .stage {
+    position: relative;
+    margin-top: clamp(3rem, 6vw, 5rem);
+    padding: clamp(5rem, 10vw, 9rem) clamp(2rem, 5vw, 5rem);
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .stage__caption {
+    position: absolute;
+    bottom: clamp(1.2rem, 2.5vw, 2rem);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted);
+  }
+
+  /* ── The ligature SVG — reusable ── */
+  .tm-mark { display: block; color: currentColor; }
+
+  .section { margin-top: clamp(3.5rem, 7vw, 6.5rem); }
+  .section__title { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem, 2.2vw, 1.9rem); letter-spacing: -0.01em; margin: 0 0 0.4rem; }
+  .section__sub { color: var(--text-secondary); margin: 0 0 1.8rem; max-width: 60ch; }
+
+  /* Anatomy diagram */
+  .anatomy {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    padding: clamp(2.5rem, 5vw, 4rem);
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    align-items: center;
+  }
+  @media (max-width: 780px) { .anatomy { grid-template-columns: 1fr; } }
+  .anatomy__label { font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; }
+  .anatomy__desc { color: var(--text-secondary); font-size: 0.96rem; line-height: 1.7; }
+  .anatomy__desc strong { color: var(--text-primary); font-weight: 700; }
+
+  /* Variant cells */
+  .variants {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1rem, 2vw, 1.6rem);
+    margin-top: 1.5rem;
+  }
+  @media (max-width: 780px) { .variants { grid-template-columns: 1fr; } }
+  .variant {
+    padding: clamp(2.5rem, 4vw, 3.2rem);
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    display: flex; flex-direction: column; gap: 1.4rem; align-items: center;
+    border-radius: 2px;
+  }
+  .variant__label { font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--text-muted); align-self: flex-start; }
+  .variant__caption { font-size: 0.82rem; color: var(--text-secondary); text-align: center; max-width: 22ch; }
+
+  /* Seal variant — ligature in square frame */
+  .seal {
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    padding: 16%;
+    background: var(--text-primary);
+    color: var(--bg);
+    width: 120px; height: 120px;
+    border-radius: 2px;
+  }
+  .seal--big { width: 220px; height: 220px; }
+
+  /* Horizontal lockup */
+  .lockup-row {
+    padding: clamp(3rem, 6vw, 5rem) clamp(2rem, 4vw, 4rem);
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    margin-top: 1.5rem;
+    display: flex; flex-direction: column; gap: 2.6rem; align-items: center;
+  }
+  .lockup-row__item {
+    display: flex; align-items: center; justify-content: center;
+    gap: 1rem;
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .lockup-row__item--l { font-size: clamp(1.8rem, 4.5vw, 3.2rem); }
+  .lockup-row__item--m { font-size: clamp(1.2rem, 2.5vw, 1.7rem); }
+  .lockup-row__item--s { font-size: 0.96rem; letter-spacing: 0.14em; }
+
+  /* Scale test */
+  .scale-col {
+    display: flex; flex-direction: column; gap: clamp(1rem, 2vw, 1.6rem);
+    margin-top: 1.5rem;
+  }
+  .scale-strip {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: clamp(1.2rem, 2.5vw, 2rem);
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    gap: 1.5rem;
+    min-height: 80px;
+  }
+  .scale-strip__label { font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); flex-shrink: 0; }
+  @media (max-width: 680px) { .scale-strip { flex-direction: column-reverse; align-items: start; } }
+
+  /* On dark */
+  .on-dark {
+    margin-top: clamp(3.5rem, 7vw, 6.5rem);
+    padding: clamp(5rem, 10vw, 9rem) clamp(2rem, 5vw, 5rem);
+    background: var(--charcoal);
+    color: #f4f0e8;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 2px;
+  }
+
+  /* Favicon grid */
+  .favicon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: clamp(1rem, 2vw, 1.6rem);
+    margin-top: 1.5rem;
+  }
+  .favi-cell {
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 2rem 1.4rem;
+    display: flex; flex-direction: column; align-items: center; gap: 1.2rem;
+  }
+  .favi-cell__label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+  .favi-cell__box {
+    aspect-ratio: 1/1;
+    width: 100%;
+    max-width: 120px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 12%;
+  }
+  .favi-cell__box--ios { border-radius: 22%; }
+  .favi-cell__box--dark { background: var(--charcoal); border-color: var(--charcoal); color: var(--bg); }
+
+  /* Contexts */
+  .contexts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.2rem, 2.5vw, 2rem);
+    margin-top: clamp(2rem, 4vw, 3rem);
+  }
+  @media (max-width: 780px) { .contexts { grid-template-columns: 1fr; } }
+
+  .header-mock {
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    padding: 1.2rem 1.6rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    border-radius: 2px;
+  }
+  .header-mock__brand {
+    display: flex; align-items: center; gap: 0.7em;
+    font-family: var(--font-display); font-weight: 800;
+    font-size: 0.96rem; letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .header-mock__nav { display: flex; gap: 1.2rem; font-size: 0.82rem; color: var(--text-secondary); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  .card-mock {
+    aspect-ratio: 1.72 / 1;
+    background: linear-gradient(160deg, #f1ede5, #ece6de);
+    border: 1px solid var(--line);
+    padding: 1.6rem;
+    display: grid; grid-template-rows: auto 1fr auto;
+    overflow: hidden; box-shadow: 0 18px 40px rgba(17,15,11,0.08);
+    border-radius: 2px;
+  }
+  .card-mock__corner { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+  .card-mock__mark { align-self: center; display: flex; justify-content: center; }
+  .card-mock__meta { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--text-secondary); letter-spacing: 0.06em; }
+
+  .note {
+    margin-top: 1.2rem;
+    padding: 1rem 1.2rem;
+    background: rgba(111, 129, 144, 0.08);
+    border-left: 2px solid var(--accent);
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    max-width: 62ch;
+  }
+
+  .concept-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: clamp(4rem, 7vw, 6rem);
+    padding-top: 2rem; border-top: 1px solid var(--line);
+    font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .concept-nav a { color: var(--text-primary); text-decoration: none; padding: 0.6rem 1rem; border: 1px solid var(--line); transition: all 200ms ease; border-radius: 2px; }
+  .concept-nav a:hover { background: var(--text-primary); color: var(--bg); border-color: var(--text-primary); }
+</style>
+</head>
+<body>
+
+<!--
+  Bet I — THE TM LIGATURE.
+  T is inscribed INSIDE the M. Three parallel verticals share a top crossbar.
+  The center vertical (the T's stem) is shorter — it terminates at the apex
+  where the M's two inner diagonals meet. The outer two verticals continue
+  down to the baseline as the M's left and right strokes.
+
+  One glyph, both letters, no stacking — a true geometric ligature.
+-->
+
+<svg width="0" height="0" style="position: absolute;" aria-hidden="true">
+  <defs>
+    <!-- Primary mark — TM inscribed -->
+    <symbol id="tm" viewBox="0 0 120 120">
+      <g fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="butt">
+        <!-- T crossbar / top of M -->
+        <path d="M 18 26 L 102 26" />
+        <!-- Left M vertical -->
+        <path d="M 18 26 L 18 102" />
+        <!-- Right M vertical -->
+        <path d="M 102 26 L 102 102" />
+        <!-- Left diagonal (from left-top to center) -->
+        <path d="M 18 26 L 60 74" />
+        <!-- Right diagonal (from right-top to center) -->
+        <path d="M 102 26 L 60 74" />
+        <!-- T stem (center vertical from crossbar to diagonals' apex) -->
+        <path d="M 60 26 L 60 74" />
+      </g>
+    </symbol>
+
+    <!-- Bold variant — thicker strokes for favicon -->
+    <symbol id="tm-bold" viewBox="0 0 120 120">
+      <g fill="none" stroke="currentColor" stroke-width="18" stroke-linecap="butt">
+        <path d="M 14 26 L 106 26" />
+        <path d="M 14 26 L 14 104" />
+        <path d="M 106 26 L 106 104" />
+        <path d="M 14 26 L 60 78" />
+        <path d="M 106 26 L 60 78" />
+        <path d="M 60 26 L 60 78" />
+      </g>
+    </symbol>
+
+    <!-- Filled variant — solid shapes, couture look -->
+    <symbol id="tm-solid" viewBox="0 0 120 120">
+      <path fill="currentColor" d="
+        M 14 20 L 106 20 L 106 30 L 65 30 L 65 74 L 65 74 L 106 30 L 106 104 L 92 104 L 92 46 L 65 80 L 55 80 L 28 46 L 28 104 L 14 104 Z" />
+    </symbol>
+  </defs>
+</svg>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Logo ideation · Bet I · Round 3</div>
+    <h1 class="kicker">The TM ligature.</h1>
+    <p class="subtext">A single custom glyph. Not "T next to M" — <em>T inside M.</em> One crossbar makes the top of both letters. Three parallel verticals descend: the outer two become the M's legs; the center one is the T's stem, stopping short at the apex where the M's diagonals meet. Six strokes, one mark, proprietary by construction.</p>
+
+    <div class="brand-brief">
+      <strong>Why a ligature, not a monogram:</strong> A monogram is two letters sitting near each other — any studio with the initials TM could use one. A ligature is a custom letterform that only exists because Taylor Maison exists. Nobody else has this specific cut. That's what makes it a logo instead of a label.
+    </div>
+  </header>
+
+  <div class="stage">
+    <svg class="tm-mark" width="280" height="280" aria-label="Taylor Maison TM ligature"><use href="#tm" /></svg>
+    <span class="stage__caption">Primary · 280px</span>
+  </div>
+
+  <section class="section">
+    <h2 class="section__title">Anatomy</h2>
+    <p class="section__sub">How the T hides inside the M.</p>
+
+    <div class="anatomy">
+      <div style="display: flex; justify-content: center;">
+        <svg class="tm-mark" width="280" height="280"><use href="#tm" /></svg>
+      </div>
+      <div>
+        <div class="anatomy__label">The six strokes</div>
+        <div class="anatomy__desc">
+          <strong>One crossbar</strong> spans the top — this is both the T's horizontal bar and the top edge of the M.<br><br>
+          <strong>Three verticals</strong> drop from the crossbar. The outer two (left, right) descend all the way to the baseline. These are the M's legs.<br><br>
+          <strong>The center vertical</strong> stops at mid-height — that's the T's stem, terminating at the apex where the M's inner diagonals converge.<br><br>
+          <strong>Two diagonals</strong> travel from the top-outer corners inward and down, meeting the T's stem at its terminus. The negative space between them forms the M's inner triangles.<br><br>
+          Read as a T, you see the crossbar and center stem. Read as an M, you see the outer verticals and inner V. Both readings are simultaneous — the eye flips between them, which is exactly what a good monogram does.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">Weight variants</h2>
+    <p class="section__sub">Regular for signage and large applications. Bold for favicon and sub-32px uses.</p>
+
+    <div class="variants">
+      <div class="variant">
+        <span class="variant__label">Regular</span>
+        <svg class="tm-mark" width="180" height="180"><use href="#tm" /></svg>
+        <div class="variant__caption">Stroke 12. The primary cut — use anywhere above 32px.</div>
+      </div>
+      <div class="variant">
+        <span class="variant__label">Bold</span>
+        <svg class="tm-mark" width="180" height="180"><use href="#tm-bold" /></svg>
+        <div class="variant__caption">Stroke 18. Holds at 16px and below. Favicon weight.</div>
+      </div>
+      <div class="variant">
+        <span class="variant__label">Inverse</span>
+        <div class="seal seal--big"><svg class="tm-mark" width="100%"><use href="#tm" /></svg></div>
+        <div class="variant__caption">The seal. Ligature reversed out of a solid charcoal field. Maker's mark, wax stamp, authentication.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">Horizontal lockups</h2>
+    <p class="section__sub">The ligature beside the wordmark — mark + name, the way every maison signs. Works at three scales from masthead to nav.</p>
+
+    <div class="lockup-row">
+      <div class="lockup-row__item lockup-row__item--l">
+        <svg class="tm-mark" width="1.2em" height="1.2em" style="flex-shrink:0;"><use href="#tm" /></svg>
+        TAYLOR MAISON
+      </div>
+      <div class="lockup-row__item lockup-row__item--m">
+        <svg class="tm-mark" width="1.2em" height="1.2em" style="flex-shrink:0;"><use href="#tm" /></svg>
+        TAYLOR MAISON
+      </div>
+      <div class="lockup-row__item lockup-row__item--s">
+        <svg class="tm-mark" width="1.3em" height="1.3em" style="flex-shrink:0;"><use href="#tm-bold" /></svg>
+        TAYLOR MAISON
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">Scale test</h2>
+    <p class="section__sub">The question: does the T read inside the M when the mark shrinks? Once the diagonals get thin enough to merge, the center stem's shortness becomes less legible — but the bold variant compensates.</p>
+
+    <div class="scale-col">
+      <div class="scale-strip">
+        <svg class="tm-mark" width="16" height="16"><use href="#tm-bold" /></svg>
+        <span class="scale-strip__label">Favicon · 16px · bold</span>
+      </div>
+      <div class="scale-strip">
+        <svg class="tm-mark" width="32" height="32"><use href="#tm-bold" /></svg>
+        <span class="scale-strip__label">Nav · 32px · bold</span>
+      </div>
+      <div class="scale-strip">
+        <svg class="tm-mark" width="64" height="64"><use href="#tm" /></svg>
+        <span class="scale-strip__label">Header · 64px · regular</span>
+      </div>
+      <div class="scale-strip">
+        <svg class="tm-mark" width="160" height="160"><use href="#tm" /></svg>
+        <span class="scale-strip__label">Hero · 160px · regular</span>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong style="color: var(--text-primary); font-weight: 700;">The honest tradeoff:</strong> at very small sizes, the inner diagonals and the center stem can start to read as noise rather than structure. If we go with I, the bold variant becomes the small-size default, and we should probably hand-tune a 16px pixel-exact version rather than scaling the SVG down.
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">Favicon + app icon</h2>
+    <p class="section__sub">Where the ligature does its best work — a single glyph that contains his initials, recognizable even at thumb size.</p>
+
+    <div class="favicon-grid">
+      <div class="favi-cell">
+        <span class="favi-cell__label">Browser tab</span>
+        <div class="favi-cell__box"><svg class="tm-mark" width="100%" style="color: var(--text-primary);"><use href="#tm-bold" /></svg></div>
+      </div>
+      <div class="favi-cell">
+        <span class="favi-cell__label">iOS app icon</span>
+        <div class="favi-cell__box favi-cell__box--ios"><svg class="tm-mark" width="100%" style="color: var(--text-primary);"><use href="#tm-bold" /></svg></div>
+      </div>
+      <div class="favi-cell">
+        <span class="favi-cell__label">Dark mode</span>
+        <div class="favi-cell__box favi-cell__box--dark"><svg class="tm-mark" width="100%"><use href="#tm-bold" /></svg></div>
+      </div>
+      <div class="favi-cell">
+        <span class="favi-cell__label">Dark · iOS</span>
+        <div class="favi-cell__box favi-cell__box--dark favi-cell__box--ios"><svg class="tm-mark" width="100%"><use href="#tm-bold" /></svg></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">On charcoal</h2>
+    <div class="on-dark">
+      <svg class="tm-mark" width="280" height="280" aria-label="TM ligature on dark"><use href="#tm" /></svg>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">In context</h2>
+    <p class="section__sub">Header, business card — the ligature as the anchor.</p>
+
+    <div class="contexts">
+      <div class="header-mock">
+        <div class="header-mock__brand">
+          <svg class="tm-mark" width="1.2em" height="1.2em" style="flex-shrink:0;"><use href="#tm" /></svg>
+          TAYLOR MAISON
+        </div>
+        <nav class="header-mock__nav">
+          <span>Work</span><span>About</span><span>Contact</span>
+        </nav>
+      </div>
+
+      <div class="card-mock">
+        <div style="display: flex; justify-content: space-between;">
+          <span class="card-mock__corner">— Est. 2025</span>
+          <span class="card-mock__corner">N° 001</span>
+        </div>
+        <div class="card-mock__mark">
+          <svg class="tm-mark" width="80" height="80" style="color: var(--text-primary);"><use href="#tm" /></svg>
+        </div>
+        <div class="card-mock__meta">
+          <span>Creative Director</span>
+          <span>t4ylormaison@gmail.com</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="concept-nav">
+    <a href="./bet-h-dot.html">← Bet H · The dot</a>
+    <a href="./index.html">All bets</a>
+    <a href="./bet-g-serif.html">Bet G · Serif →</a>
+  </nav>
+</div>
+
+</body>
+</html>

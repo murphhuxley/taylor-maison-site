@@ -1,10 +1,11 @@
 import Header from '@/components/Header'
 import Hero from '@/components/Hero'
+import AiAdvantageSection from '@/components/AiAdvantageSection'
 import WorkSection from '@/components/WorkSection'
+import SignalGallerySection from '@/components/SignalGallerySection'
 import EngagementsSection from '@/components/EngagementsSection'
-import AboutSection from '@/components/AboutSection'
-import Footer from '@/components/Footer'
 import SmoothScroll from '@/components/SmoothScroll'
+import GlassPill from '@/components/GlassPill'
 
 export default function Home() {
   return (
@@ -13,11 +14,13 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
+        <AiAdvantageSection />
         <WorkSection />
         <EngagementsSection />
-        <AboutSection />
+        <SignalGallerySection />
+        <div className="page-tail" aria-hidden="true" />
       </main>
-      <Footer />
+      <GlassPill autoOpenOnBottom />
     </>
   )
 }

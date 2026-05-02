@@ -84,6 +84,20 @@ export default function PageTransition({ children }: { children: React.ReactNode
   const navigate = (href: string) => {
     if (!href || isTransitioningRef.current) return
 
+    if (typeof window !== 'undefined') {
+      const targetUrl = new URL(href, window.location.origin)
+      const isSamePath =
+        targetUrl.origin === window.location.origin &&
+        targetUrl.pathname === pathname &&
+        targetUrl.search === window.location.search &&
+        !targetUrl.hash
+
+      if (isSamePath) {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+        return
+      }
+    }
+
     if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       router.push(href)
       return

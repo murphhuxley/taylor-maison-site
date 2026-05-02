@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Wordmark A/B — Cabinet Grotesk vs Helvetica</title>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin="anonymous" />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&f[]=satoshi@400,500&display=swap" />
+<style>
+  :root {
+    --bg: #f4f0e8;
+    --bg-strong: #ece6de;
+    --text-primary: #15181b;
+    --text-muted: #8a8278;
+    --line: rgba(21, 24, 27, 0.12);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: 'Satoshi', 'Helvetica Neue', sans-serif;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: clamp(2rem, 5vw, 5rem) clamp(1.5rem, 4vw, 3.5rem);
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+  .header__title {
+    font-family: 'Cabinet Grotesk', 'Helvetica Neue', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.6rem, 3vw, 2.6rem);
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  .header__meta {
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .ab {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+  @media (max-width: 900px) { .ab { grid-template-columns: 1fr; } }
+
+  .panel {
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    padding: clamp(2.5rem, 4vw, 4rem) clamp(2rem, 3vw, 3rem) clamp(2rem, 3vw, 2.5rem);
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    min-height: 520px;
+  }
+
+  .panel__label {
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .wordmark {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .wordmark__line {
+    display: block;
+    line-height: 0.88;
+    color: var(--text-primary);
+  }
+
+  /* Cabinet Grotesk panel */
+  .wm-cabinet .wordmark__line {
+    font-family: 'Cabinet Grotesk', 'Helvetica Neue', sans-serif;
+    font-weight: 800;
+    font-size: clamp(4rem, 8vw, 7.5rem);
+    letter-spacing: -0.01em;
+  }
+
+  /* Helvetica panel */
+  .wm-helvetica .wordmark__line {
+    font-family: 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
+    font-weight: 700;
+    font-size: clamp(4rem, 8vw, 7.5rem);
+    letter-spacing: -0.015em;
+  }
+
+  .panel__notes {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+    letter-spacing: 0;
+    border-top: 1px solid var(--line);
+    padding-top: 1.2rem;
+  }
+  .panel__notes strong {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  /* Smaller scale comparison below */
+  .scale {
+    margin-top: clamp(3rem, 6vw, 5rem);
+    border-top: 1px solid var(--line);
+    padding-top: clamp(2rem, 3vw, 3rem);
+  }
+  .scale__title {
+    font-family: 'Cabinet Grotesk', 'Helvetica Neue', sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    margin: 0 0 0.3rem;
+    letter-spacing: -0.005em;
+  }
+  .scale__sub {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    margin: 0 0 2rem;
+  }
+  .scale__row {
+    display: grid;
+    grid-template-columns: 160px 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+    padding: 1.2rem 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .scale__row:last-child { border-bottom: none; }
+  .scale__label {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .scale__cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    line-height: 0.9;
+  }
+  .scale__cell--cab span {
+    font-family: 'Cabinet Grotesk', 'Helvetica Neue', sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  .scale__cell--hel span {
+    font-family: 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+  }
+
+  .scale__row--sm .scale__cell span { font-size: 1.1rem; }
+  .scale__row--md .scale__cell span { font-size: 2.2rem; }
+  .scale__row--lg .scale__cell span { font-size: 4rem; }
+
+  .back {
+    display: inline-block;
+    margin-top: clamp(2.5rem, 4vw, 4rem);
+    font-size: 0.82rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2px;
+  }
+  .back:hover { color: var(--text-primary); border-color: var(--text-primary); }
+
+  /* FOIT-aware flicker: render nothing until fonts ready, then fade in.
+     Guarantees the visitor never sees a fallback version. */
+  .wordmark__line, .scale__cell span, .header__title { opacity: 0; transition: opacity 0.25s ease-out; }
+  html.fonts-ready .wordmark__line,
+  html.fonts-ready .scale__cell span,
+  html.fonts-ready .header__title { opacity: 1; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="header">
+    <h1 class="header__title">Wordmark · Cabinet Grotesk vs Helvetica</h1>
+    <span class="header__meta">A/B Test · 2026</span>
+  </div>
+
+  <div class="ab">
+
+    <!-- LEFT: Cabinet Grotesk -->
+    <div class="panel wm-cabinet">
+      <span class="panel__label">Cabinet Grotesk · 800</span>
+      <div class="wordmark">
+        <span class="wordmark__line">TAYLOR</span>
+        <span class="wordmark__line">MAISON</span>
+      </div>
+      <p class="panel__notes">
+        <strong>The site's voice.</strong> Contemporary grotesque with personality — slightly
+        quirky geometric construction, wider R, more open apertures. Reads as "a studio
+        with taste." Matches the homepage hero typography exactly.
+      </p>
+    </div>
+
+    <!-- RIGHT: Helvetica -->
+    <div class="panel wm-helvetica">
+      <span class="panel__label">Helvetica Neue · Bold</span>
+      <div class="wordmark">
+        <span class="wordmark__line">TAYLOR</span>
+        <span class="wordmark__line">MAISON</span>
+      </div>
+      <p class="panel__notes">
+        <strong>The classical maison move.</strong> Tighter apertures, neutral and timeless.
+        The logo font of Prada, Ralph Lauren, Helmut Lang, Kith. Ages to zero. Differs
+        slightly from the site's Cabinet Grotesk — by design — so the wordmark feels
+        carved rather than voiced.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="scale">
+    <h2 class="scale__title">Side-by-side at real sizes</h2>
+    <p class="scale__sub">What they feel like at sign-off scale, card-masthead scale, and hero scale.</p>
+
+    <div class="scale__row scale__row--sm">
+      <span class="scale__label">Sign-off · ~18px</span>
+      <div class="scale__cell scale__cell--cab">
+        <span>TAYLOR</span>
+        <span>MAISON</span>
+      </div>
+      <div class="scale__cell scale__cell--hel">
+        <span>TAYLOR</span>
+        <span>MAISON</span>
+      </div>
+    </div>
+
+    <div class="scale__row scale__row--md">
+      <span class="scale__label">Card · ~36px</span>
+      <div class="scale__cell scale__cell--cab">
+        <span>TAYLOR</span>
+        <span>MAISON</span>
+      </div>
+      <div class="scale__cell scale__cell--hel">
+        <span>TAYLOR</span>
+        <span>MAISON</span>
+      </div>
+    </div>
+
+    <div class="scale__row scale__row--lg">
+      <span class="scale__label">Hero · ~64px</span>
+      <div class="scale__cell scale__cell--cab">
+        <span>TAYLOR</span>
+        <span>MAISON</span>
+      </div>
+      <div class="scale__cell scale__cell--hel">
+        <span>TAYLOR</span>
+        <span>MAISON</span>
+      </div>
+    </div>
+  </div>
+
+  <a href="./system.html" class="back">← Back to full system sheet</a>
+
+</div>
+
+<script>
+  // Reveal only when webfonts are actually ready. Prevents ever seeing the fallback.
+  function ready () { document.documentElement.classList.add('fonts-ready'); }
+  if (document.fonts && document.fonts.ready) {
+    Promise.all([
+      document.fonts.load('800 7rem "Cabinet Grotesk"'),
+      document.fonts.load('700 7rem "Helvetica Neue"').catch(function(){})
+    ]).then(ready);
+    // safety: reveal after 1.5s no matter what
+    setTimeout(ready, 1500);
+  } else {
+    setTimeout(ready, 300);
+  }
+</script>
+
+</body>
+</html>

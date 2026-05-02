@@ -1,0 +1,646 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Business Cards — Taylor Maison</title>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500,400&f[]=satoshi@500,400&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f4f0e8;
+    --bg-strong: #ece6de;
+    --ink: #15181b;
+    --muted: #5f5951;
+    --line: rgba(21,24,27,0.12);
+    --charcoal: #0d1015;
+    --cream: #f4f0e8;
+    --font-display: 'Cabinet Grotesk', 'Helvetica Neue', Arial, sans-serif;
+    --font-body: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    padding: 56px 32px 96px;
+  }
+  header.page { max-width: 1320px; margin: 0 auto 56px; }
+  .eyebrow {
+    font-size: 12px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--muted);
+    margin: 0 0 12px;
+  }
+  h1.page-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin: 0 0 18px;
+  }
+  p.page-lede {
+    max-width: 780px;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--muted);
+    margin: 0 0 6px;
+  }
+  p.page-lede b { color: var(--ink); font-weight: 500; }
+
+  /* Card stage */
+  .stage {
+    max-width: 1320px;
+    margin: 80px auto 0;
+  }
+  .stage-head {
+    border-top: 1px solid var(--ink);
+    padding: 26px 0 22px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 32px;
+    align-items: baseline;
+    margin-bottom: 28px;
+  }
+  .stage-num {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2rem, 3.4vw, 2.8rem);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .stage-head h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.3rem, 2.1vw, 1.7rem);
+    margin: 0 0 4px;
+    letter-spacing: -0.01em;
+  }
+  .stage-head .sub {
+    color: var(--muted);
+    font-size: 0.92rem;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 720px;
+  }
+
+  /* Card pair (front + back) */
+  .pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 12px;
+  }
+  @media (max-width: 980px) { .pair { grid-template-columns: 1fr; } }
+
+  /* Standard US business card 3.5 x 2 (1.75 ratio) */
+  .card {
+    aspect-ratio: 3.5 / 2;
+    border-radius: 6px;
+    box-shadow: 0 22px 48px rgba(17,15,11,0.10), 0 2px 6px rgba(17,15,11,0.06);
+    position: relative;
+    overflow: hidden;
+    container-type: inline-size;
+  }
+  .card--cream { background: var(--cream); color: var(--ink); }
+  .card--char  { background: var(--charcoal); color: var(--cream); }
+
+  .face-label {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* Logo SVG sizing helpers (use cqi container queries so internal sizing is proportional to card width) */
+  .logo {
+    display: block;
+    color: currentColor;
+  }
+
+  /* Wordmarks */
+  .wm {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    line-height: 0.95;
+  }
+  .wm--A { font-weight: 800; letter-spacing: -0.035em; }
+  .wm--B { font-weight: 700; letter-spacing: -0.01em; }
+  .wm--C { font-weight: 500; letter-spacing: 0.22em; }
+
+  /* Body copy */
+  .meta {
+    font-family: var(--font-body);
+    font-weight: 500;
+    line-height: 1.45;
+  }
+  .meta-soft { color: var(--muted); }
+  .card--char .meta-soft { color: rgba(244,240,232,0.62); }
+
+  /* ============== Concept 01 — Quiet Mark ============== */
+  .c01-front .logo { position: absolute; top: 8cqi; left: 8cqi; width: 12cqi; }
+  .c01-front .meta-block {
+    position: absolute;
+    right: 8cqi; bottom: 8cqi;
+    text-align: right;
+    font-size: 3.4cqi;
+    line-height: 1.55;
+  }
+  .c01-front .meta-block .name { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.01em; font-size: 4.6cqi; margin-bottom: 0.6cqi; }
+  .c01-back .wm { position: absolute; left: 8cqi; bottom: 8cqi; font-size: 7.5cqi; }
+
+  /* ============== Concept 02 — Logo Hero ============== */
+  .c02-front .logo {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 32cqi;
+    transform: translate(-50%, -50%);
+  }
+  .c02-back .center-block {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 3.4cqi;
+    line-height: 1.6;
+  }
+  .c02-back .center-block .name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 5.2cqi;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.4cqi;
+  }
+  .c02-back .center-block .role {
+    font-size: 2.6cqi;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(244,240,232,0.7);
+    margin-bottom: 1.8cqi;
+  }
+
+  /* ============== Concept 03 — Architectural Grid ============== */
+  .c03-front .top-row {
+    position: absolute;
+    top: 9cqi; left: 9cqi; right: 9cqi;
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 12cqi;
+  }
+  .c03-front .logo { width: 11cqi; }
+  .c03-front .name {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 5cqi;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    text-transform: uppercase;
+  }
+  .c03-front .name small {
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 2.4cqi;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 1cqi;
+  }
+  .c03-front .bottom-row {
+    position: absolute;
+    bottom: 9cqi; left: 9cqi; right: 9cqi;
+    display: flex; justify-content: space-between;
+    font-size: 2.6cqi;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+  .c03-back .wm {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 9cqi;
+    text-align: center;
+    line-height: 1;
+  }
+  .c03-back .wm .row { display: block; }
+  .c03-back .wm .row + .row { margin-top: 0.04em; }
+
+  /* ============== Concept 04 — Editorial Split ============== */
+  .c04-front {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .c04-front .left,
+  .c04-front .right {
+    padding: 8cqi;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .c04-front .left { border-right: 1px solid rgba(21,24,27,0.16); }
+  .c04-front .wm-stack {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 7cqi;
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+  }
+  .c04-front .left .meta-block .role {
+    font-size: 2.5cqi;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .c04-front .right .name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 4.8cqi;
+    letter-spacing: -0.01em;
+  }
+  .c04-front .right .meta-rows {
+    font-size: 3cqi;
+    line-height: 1.6;
+  }
+  .c04-front .right .meta-rows div + div { margin-top: 0.4cqi; }
+  .c04-front .right .meta-rows .label {
+    font-size: 2.2cqi;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .c04-back .logo {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 28cqi;
+  }
+
+  /* ============== Concept 05 — Slim charcoal ============== */
+  .c05-front {
+    display: grid; grid-template-columns: 1fr;
+  }
+  .c05-front .top {
+    padding: 8cqi;
+    border-bottom: 1px solid rgba(244,240,232,0.16);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .c05-front .top .logo { width: 10cqi; }
+  .c05-front .top .wm-inline {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 4cqi;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+  }
+  .c05-front .body {
+    padding: 6cqi 8cqi 8cqi;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    flex: 1;
+    height: 60%;
+  }
+  .c05-front .name {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 6cqi;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    text-transform: uppercase;
+  }
+  .c05-front .role {
+    font-size: 2.4cqi;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(244,240,232,0.6);
+    margin-top: 1.2cqi;
+  }
+  .c05-front .contact {
+    margin-top: 4cqi;
+    font-size: 2.8cqi;
+    line-height: 1.6;
+    color: rgba(244,240,232,0.85);
+  }
+  .c05-back {
+    display: grid; place-items: center;
+  }
+  .c05-back .logo { width: 22cqi; }
+
+  /* ============== Concept 06 — Embossed cream all-over ============== */
+  .c06-front {
+    display: grid; place-items: center;
+  }
+  .c06-front .logo {
+    width: 36cqi;
+    color: rgba(21,24,27,0.10);
+  }
+  .c06-back {
+    padding: 8cqi;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .c06-back .top { display: flex; align-items: center; justify-content: space-between; }
+  .c06-back .top .logo { width: 9cqi; }
+  .c06-back .top .name {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 4.6cqi;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+  .c06-back .bottom {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    font-size: 2.7cqi;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+  .c06-back .bottom .role {
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-size: 2.2cqi;
+  }
+
+  .rationale {
+    margin-top: 16px;
+    padding: 18px 22px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+  }
+  .rationale h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin: 0 0 6px;
+  }
+  .rationale p {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--muted);
+    margin: 0 0 6px;
+  }
+  .rationale .meta-line {
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #7a7168;
+    margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ======================== LOGO SVG (reusable symbol) ======================== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="tm-logo" viewBox="0 0 100 100">
+    <!-- Left: quarter-pearl shape (square with rounded top-right) -->
+    <path d="M 17 17 L 31 17 A 28 28 0 0 1 59 45 L 59 87 L 17 87 Z" fill="currentColor"/>
+    <!-- Top-right: vertical rectangle -->
+    <rect x="66" y="19" width="15" height="33" fill="currentColor"/>
+    <!-- Bottom-right: circle (pearl) -->
+    <circle cx="73.5" cy="71" r="9.5" fill="currentColor"/>
+  </symbol>
+</svg>
+
+<header class="page">
+  <p class="eyebrow">Business cards · explorations</p>
+  <h1 class="page-title">Six ways to put it on a card.</h1>
+  <p class="page-lede">Standard US 3.5″ × 2″. Every concept renders front + back at proportional scale, so what you see is the printed object. The logo is rendered from a vector recreation; we'll swap in your production SVG before going to print. <b>Voice A (heavy tight)</b> is used as the wordmark default — say the word and I'll re-render any concept in B (editorial) or C (wide-tracked).</p>
+  <p class="page-lede">Material assumptions: heavy uncoated stock (Mohawk Superfine ~130lb cover or Colorplan), 2-color (cream + charcoal). Premium options noted per concept where they'd land.</p>
+</header>
+
+<!-- ======================== 01 ======================== -->
+<section class="stage">
+  <div class="stage-head">
+    <div class="stage-num">01</div>
+    <div>
+      <h2>Quiet mark, loud whitespace</h2>
+      <p class="sub">The cream front is mostly negative space. Logo small in the top-left, contact info small in the bottom-right. Back is the wordmark, large and confident, on the same cream. The card is a quiet object — it whispers, then commits.</p>
+    </div>
+  </div>
+  <div class="pair">
+    <div>
+      <div class="card card--cream c01-front">
+        <svg class="logo" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet"><use href="#tm-logo"/></svg>
+        <div class="meta-block">
+          <div class="name">Taylor Maison</div>
+          <div class="meta-soft">Creative Direction</div>
+          <div>t4ylormaison@gmail.com</div>
+          <div>taylormaison.co</div>
+        </div>
+      </div>
+      <div class="face-label">Front</div>
+    </div>
+    <div>
+      <div class="card card--cream c01-back">
+        <div class="wm wm--A"><span>TAYLOR</span><br/><span>MAISON</span></div>
+      </div>
+      <div class="face-label">Back</div>
+    </div>
+  </div>
+  <div class="rationale">
+    <h4>The argument</h4>
+    <p>Maximum restraint. The card looks unfinished at first glance — and that's the point. The whitespace IS the design choice. The wordmark on the back rewards anyone who flips it. Best printed letterpress or blind-deboss to push the restraint further.</p>
+    <p class="meta-line">Production · cream front + back · letterpress impression · pairs well with Mohawk Superfine eggshell</p>
+  </div>
+</section>
+
+<!-- ======================== 02 ======================== -->
+<section class="stage">
+  <div class="stage-head">
+    <div class="stage-num">02</div>
+    <div>
+      <h2>Mark hero · charcoal flip</h2>
+      <p class="sub">Cream front, logo dead center at large scale. Charcoal back with name and contact stacked. The mark does the front-of-house work; the back is the meeting card.</p>
+    </div>
+  </div>
+  <div class="pair">
+    <div>
+      <div class="card card--cream c02-front">
+        <svg class="logo" viewBox="0 0 100 100"><use href="#tm-logo"/></svg>
+      </div>
+      <div class="face-label">Front</div>
+    </div>
+    <div>
+      <div class="card card--char c02-back">
+        <div class="center-block">
+          <div class="name">Taylor Maison</div>
+          <div class="role">Creative Direction</div>
+          <div>t4ylormaison@gmail.com</div>
+          <div>taylormaison.co</div>
+        </div>
+      </div>
+      <div class="face-label">Back</div>
+    </div>
+  </div>
+  <div class="rationale">
+    <h4>The argument</h4>
+    <p>Two opposites. Cream face is a poster of the mark. Charcoal face is a function-first business card. Hand someone the cream face when you want to be remembered; flip to charcoal when they ask for your details. The duotone print is a flex but a sensible one.</p>
+    <p class="meta-line">Production · cream + charcoal duplex · 130lb cover · subtle edge paint optional</p>
+  </div>
+</section>
+
+<!-- ======================== 03 ======================== -->
+<section class="stage">
+  <div class="stage-head">
+    <div class="stage-num">03</div>
+    <div>
+      <h2>Architectural grid</h2>
+      <p class="sub">Logo top-left aligned to a name top-right. Contact in a single tight row at the bottom. Reads like an editorial masthead. Back is the stacked wordmark, centered, set to fill.</p>
+    </div>
+  </div>
+  <div class="pair">
+    <div>
+      <div class="card card--cream c03-front">
+        <div class="top-row">
+          <svg class="logo" viewBox="0 0 100 100"><use href="#tm-logo"/></svg>
+          <div class="name" style="text-align:right">Taylor<br/>Maison<small>Creative Direction</small></div>
+        </div>
+        <div class="bottom-row">
+          <span>t4ylormaison@gmail.com</span>
+          <span>taylormaison.co</span>
+        </div>
+      </div>
+      <div class="face-label">Front</div>
+    </div>
+    <div>
+      <div class="card card--char c03-back">
+        <div class="wm wm--A">
+          <span class="row">TAYLOR</span>
+          <span class="row">MAISON</span>
+        </div>
+      </div>
+      <div class="face-label">Back</div>
+    </div>
+  </div>
+  <div class="rationale">
+    <h4>The argument</h4>
+    <p>Most information-dense without feeling cluttered, because everything sits on a strict grid. The eyebrow under the name (CREATIVE DIRECTION, all caps tracked) does the role-introduction work without needing a separate line. This is the "card that says you take this seriously" version.</p>
+    <p class="meta-line">Production · cream + charcoal duplex · standard 100lb cover works · letterpress optional but not required</p>
+  </div>
+</section>
+
+<!-- ======================== 04 ======================== -->
+<section class="stage">
+  <div class="stage-head">
+    <div class="stage-num">04</div>
+    <div>
+      <h2>Editorial split</h2>
+      <p class="sub">Front splits down the middle: the wordmark + role on the left, contact details on the right. The card behaves like a tiny spread. Back is the logo, large, centered.</p>
+    </div>
+  </div>
+  <div class="pair">
+    <div>
+      <div class="card card--cream c04-front">
+        <div class="left">
+          <div class="wm-stack">TAYLOR<br/>MAISON</div>
+          <div class="meta-block"><div class="role">Creative Direction</div></div>
+        </div>
+        <div class="right">
+          <div class="name">Taylor<br/>Maison</div>
+          <div class="meta-rows">
+            <div><div class="label">Email</div>t4ylormaison@gmail.com</div>
+            <div><div class="label">Web</div>taylormaison.co</div>
+          </div>
+        </div>
+      </div>
+      <div class="face-label">Front</div>
+    </div>
+    <div>
+      <div class="card card--cream c04-back">
+        <svg class="logo" viewBox="0 0 100 100"><use href="#tm-logo"/></svg>
+      </div>
+      <div class="face-label">Back</div>
+    </div>
+  </div>
+  <div class="rationale">
+    <h4>The argument</h4>
+    <p>Most editorial / agency-feeling. Implies you have an art director's eye on every layout, including this one. Best for handing to other designers and creative buyers — they'll register the typography choices. The center rule is optional (drop it for an even more restrained version).</p>
+    <p class="meta-line">Production · cream + cream duplex · subtle blind-deboss for the back logo recommended</p>
+  </div>
+</section>
+
+<!-- ======================== 05 ======================== -->
+<section class="stage">
+  <div class="stage-head">
+    <div class="stage-num">05</div>
+    <div>
+      <h2>Charcoal forward</h2>
+      <p class="sub">Charcoal front is the primary face. Tiny logo + inline wordmark sit in a slim header bar. The name sits as the body copy hero. Back is the logo, large, on cream — a clean recovery from the dark front.</p>
+    </div>
+  </div>
+  <div class="pair">
+    <div>
+      <div class="card card--char c05-front">
+        <div class="top">
+          <svg class="logo" viewBox="0 0 100 100"><use href="#tm-logo"/></svg>
+          <div class="wm-inline">TAYLOR MAISON</div>
+        </div>
+        <div class="body">
+          <div class="name">Taylor<br/>Maison</div>
+          <div class="role">Creative Direction</div>
+          <div class="contact">
+            t4ylormaison@gmail.com<br/>
+            taylormaison.co
+          </div>
+        </div>
+      </div>
+      <div class="face-label">Front</div>
+    </div>
+    <div>
+      <div class="card card--cream c05-back">
+        <svg class="logo" viewBox="0 0 100 100"><use href="#tm-logo"/></svg>
+      </div>
+      <div class="face-label">Back</div>
+    </div>
+  </div>
+  <div class="rationale">
+    <h4>The argument</h4>
+    <p>Most "creative director" of the set. Charcoal forward is a confident move; the slim wordmark bar across the top is restraint, the rest is information stated plainly. Pairs with the dark redesign of your site if you go that direction.</p>
+    <p class="meta-line">Production · cream + charcoal duplex · soft-touch matte coating optional · works best on heavier stock (130lb+)</p>
+  </div>
+</section>
+
+<!-- ======================== 06 ======================== -->
+<section class="stage">
+  <div class="stage-head">
+    <div class="stage-num">06</div>
+    <div>
+      <h2>Blind front · functional back</h2>
+      <p class="sub">Front is a single huge ghosted logo — printed in 10% ink, or executed as blind-deboss on uncoated stock. Almost invisible until you tilt it. Back carries everything you actually need. Most luxurious, most restrained.</p>
+    </div>
+  </div>
+  <div class="pair">
+    <div>
+      <div class="card card--cream c06-front">
+        <svg class="logo" viewBox="0 0 100 100"><use href="#tm-logo"/></svg>
+      </div>
+      <div class="face-label">Front · blind-deboss</div>
+    </div>
+    <div>
+      <div class="card card--cream c06-back">
+        <div class="top">
+          <svg class="logo" viewBox="0 0 100 100"><use href="#tm-logo"/></svg>
+          <div class="name">Taylor<br/>Maison</div>
+        </div>
+        <div class="bottom">
+          <div>
+            <div class="role">Creative Direction</div>
+            t4ylormaison@gmail.com<br/>
+            taylormaison.co
+          </div>
+          <div style="text-align:right">Brand · Web · AI</div>
+        </div>
+      </div>
+      <div class="face-label">Back</div>
+    </div>
+  </div>
+  <div class="rationale">
+    <h4>The argument</h4>
+    <p>The flex move. The front is empty unless you catch it in raking light, which is exactly the kind of detail design buyers notice. Back does the work. This is the version where production cost goes up (deboss + heavier stock) but the card becomes an object people keep.</p>
+    <p class="meta-line">Production · Mohawk Superfine 130lb cover · blind-deboss front · digital print back · ~$2-3 per card at quantity</p>
+  </div>
+</section>
+
+</body>
+</html>

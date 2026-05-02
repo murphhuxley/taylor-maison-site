@@ -1,9 +1,20 @@
 # Taylor Maison Site — Dark Redesign Design Doc
 
-**Date:** 2026-04-16
-**Status:** Design approved, ready for implementation plan
+**Date:** 2026-04-16 (refined 2026-04-26)
+**Status:** Design approved with 2026-04-26 refinements; ready for implementation
 **Predecessor:** `docs/plans/2026-04-16-tm-dark-redesign-brainstorm.md`
+**Companion:** `docs/design-principles.md` (controlled-contrast tensions + ten rules)
 **Reference:** JACK Framer template by Ludovic Losco — `https://jack-template.framer.website/`
+
+## 2026-04-26 refinements (override prior locked decisions where they conflict)
+
+1. **Hero gets a thesis line.** Add plain-language thesis below `BRAND. WEB. AI.`: *"Sharper digital presence and operating systems for founder-led businesses."* Body register, max-width clamped, off-cream tone. The metallic title carries brand expression; the thesis carries immediate legibility.
+2. **Palette adds cream.** Background shifts from surgical near-black `#0a0a0c` to milky black `#0d0c0a` (slight warm undertone). Cream `#f4ecdf` introduced as body type tone and supporting surfaces — not dominant. Three-tone system: milky black = authority, cream = warmth, silver-blue = technical intelligence.
+3. **Ferrofluid restored to hero (restrained).** No longer `/contact`-only. Smaller, calmer hero appearance (~35–40% of `/contact` volume, reduced reactivity). Then full-volume on `/contact` as the reveal. This protects the signature from feeling like an easter egg.
+4. **Engagements copy locked (renamed and rewritten).** Block names: Focused Refresh / Flagship Build / Ongoing Partner. Outcome-driven copy below.
+5. **`/contact` upgraded from mailto-only.** Structured mailto template (pre-fills subject + body skeleton: project type / timeline / scope / budget range / brief description) plus a tasteful "What to include" guide panel beside the orb. No form. Lower friction; clearer signal for serious leads.
+6. **Trust note in hero lower-left.** Replaces TBD tagline: `SOUTHAMPTON, NY  ·  BY REFERRAL` (all-caps tracked, muted silver).
+7. **Identity system locked: wordmark-first.** Primary mark = TAYLOR MAISON stacked wordmark in Cabinet Grotesk 800 (custom letterform refinements deferred to follow-up sprint). Pearl/orb = "memory" layer — secondary motif, never primary. Header `TM dot` is replaced with compact stacked mini-wordmark. Favicon defaults to lowercase `tm` (safest from ™-symbol confusion) until a stronger custom T or pearl glyph earns it. Validated by `concepts/logo/research.md` peer audit + monogram theory + trademark distinctiveness. Uppercase TM monogram in a circle is killed permanently.
 
 ## Goal
 

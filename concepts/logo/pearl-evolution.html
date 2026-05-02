@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Pearl · Four evolutions — Taylor Maison</title>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin="anonymous" />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&f[]=satoshi@400,500&display=swap" />
+<style>
+  :root {
+    --bg: #f4f0e8;
+    --bg-strong: #ece6de;
+    --text-primary: #15181b;
+    --text-muted: #8a8278;
+    --text-secondary: #5f5951;
+    --line: rgba(21, 24, 27, 0.12);
+    --charcoal: #0d1015;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: 'Satoshi', 'Helvetica Neue', sans-serif;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: clamp(2rem, 5vw, 5rem) clamp(1.5rem, 4vw, 3.5rem);
+  }
+
+  header {
+    padding-bottom: 1.6rem;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .title {
+    font-family: 'Cabinet Grotesk', 'Helvetica Neue', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  .meta {
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .intro {
+    max-width: 720px;
+    color: var(--text-secondary);
+    font-size: 1.02rem;
+    line-height: 1.55;
+    margin-bottom: clamp(3rem, 5vw, 5rem);
+  }
+  .intro strong { color: var(--text-primary); font-weight: 500; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.4rem, 2.5vw, 2.2rem);
+  }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--bg-strong);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: clamp(2rem, 3vw, 2.8rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+  }
+
+  .card__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .card__name {
+    font-family: 'Cabinet Grotesk', 'Helvetica Neue', sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .card__tag {
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .showcase {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .showcase__panel {
+    aspect-ratio: 1/1;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 2px;
+    position: relative;
+  }
+  .showcase__panel--light {
+    background: var(--bg);
+    border: 1px solid var(--line);
+  }
+  .showcase__panel--dark {
+    background: var(--charcoal);
+  }
+  .showcase__panel svg {
+    width: 62%;
+    height: 62%;
+  }
+
+  .sizes {
+    display: flex; align-items: flex-end;
+    gap: 1.6rem;
+    padding: 1rem 0 0.4rem;
+    border-top: 1px dashed var(--line);
+    padding-top: 1.4rem;
+  }
+  .sizes__cell { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+  .sizes__cell svg { display: block; }
+  .sizes__label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+
+  .note {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+  .note strong { color: var(--text-primary); font-weight: 500; }
+
+  .back {
+    display: inline-block;
+    margin-top: clamp(3rem, 5vw, 4rem);
+    font-size: 0.82rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2px;
+  }
+  .back:hover { color: var(--text-primary); border-color: var(--text-primary); }
+
+  /* Original reference card, span full width */
+  .card--full { grid-column: 1 / -1; background: var(--bg); }
+  .card--full .showcase { grid-template-columns: repeat(4, 1fr); }
+
+  /* Monogram pearl label baked in */
+  .mono-letter {
+    font-family: 'Cabinet Grotesk', 'Helvetica Neue', sans-serif;
+    font-weight: 800;
+  }
+</style>
+</head>
+<body>
+
+<!-- SVG symbol library -->
+<svg width="0" height="0" style="position: absolute;">
+  <defs>
+
+    <!-- 0 — ORIGINAL PEARL (reference) -->
+    <symbol id="p0-light" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="48" fill="currentColor" />
+      <circle cx="44" cy="42" r="12" fill="var(--shade, #f4f0e8)" />
+    </symbol>
+
+    <!-- 1 — CRESCENT: vertical phase cut, pearl becomes moon in phase -->
+    <symbol id="p1-light" viewBox="0 0 120 120">
+      <defs>
+        <mask id="p1-mask">
+          <rect width="120" height="120" fill="white" />
+          <circle cx="78" cy="60" r="44" fill="black" />
+        </mask>
+      </defs>
+      <circle cx="60" cy="60" r="48" fill="currentColor" mask="url(#p1-mask)" />
+    </symbol>
+
+    <!-- 2 — THRESHOLD: pearl split down the middle, dot crosses the seam -->
+    <symbol id="p2-light" viewBox="0 0 120 120">
+      <defs>
+        <clipPath id="p2-leftclip"><rect x="0" y="0" width="60" height="120" /></clipPath>
+        <clipPath id="p2-rightclip"><rect x="60" y="0" width="60" height="120" /></clipPath>
+      </defs>
+      <!-- left half: solid ink -->
+      <circle cx="60" cy="60" r="48" fill="currentColor" clip-path="url(#p2-leftclip)" />
+      <!-- right half: outline only -->
+      <circle cx="60" cy="60" r="48" fill="none" stroke="currentColor" stroke-width="3" clip-path="url(#p2-rightclip)" />
+      <!-- dot crossing seam -->
+      <circle cx="60" cy="42" r="9" fill="var(--shade, #f4f0e8)" />
+      <circle cx="60" cy="42" r="9" fill="none" stroke="currentColor" stroke-width="2" clip-path="url(#p2-rightclip)" />
+    </symbol>
+
+    <!-- 3 — SEAL: disc with a hard notch cut on the right edge (like a wax-seal nick) -->
+    <symbol id="p3-light" viewBox="0 0 120 120">
+      <defs>
+        <mask id="p3-mask">
+          <rect width="120" height="120" fill="white" />
+          <!-- notch cut on right edge, mid-height -->
+          <path d="M 108,60 L 92,52 L 92,68 Z" fill="black" />
+        </mask>
+      </defs>
+      <circle cx="60" cy="60" r="48" fill="currentColor" mask="url(#p3-mask)" />
+      <circle cx="44" cy="42" r="12" fill="var(--shade, #f4f0e8)" />
+    </symbol>
+
+    <!-- 4 — ORBIT: the dot sits outside the disc, orbital relationship -->
+    <symbol id="p4-light" viewBox="0 0 120 120">
+      <circle cx="54" cy="64" r="42" fill="currentColor" />
+      <circle cx="100" cy="26" r="8" fill="currentColor" />
+    </symbol>
+
+    <!-- 5 — STAMPED: the "highlight" is replaced by a lowercase t (monogram inside the pearl) -->
+    <symbol id="p5-light" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="48" fill="currentColor" />
+      <text x="60" y="76" text-anchor="middle"
+            font-family="Cabinet Grotesk, Helvetica Neue, sans-serif"
+            font-weight="800" font-size="46"
+            fill="var(--shade, #f4f0e8)">t</text>
+    </symbol>
+
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <header>
+    <h1 class="title">Pearl · Four evolutions</h1>
+    <span class="meta">Round 2 · 2026-04-18</span>
+  </header>
+
+  <p class="intro">
+    The original pearl is clean, but Lens returns a flood of near-identical music apps, lighting products, and utility icons — the "solid disc + offset highlight" is a shared visual primitive, not a distinctive mark.
+    <strong>Each evolution below keeps the app-icon-appropriate cleanliness</strong> (proving the UI/UX voice) while adding one specific move that breaks the generic match. Pick a direction.
+  </p>
+
+  <div class="grid">
+
+    <!-- ORIGINAL -->
+    <div class="card card--full">
+      <div class="card__head">
+        <h2 class="card__name">0 · Original</h2>
+        <span class="card__tag">For reference — not a candidate</span>
+      </div>
+      <div class="showcase">
+        <div class="showcase__panel showcase__panel--light">
+          <svg viewBox="0 0 120 120" style="color: var(--text-primary); --shade: var(--bg);"><use href="#p0-light"/></svg>
+        </div>
+        <div class="showcase__panel showcase__panel--dark">
+          <svg viewBox="0 0 120 120" style="color: var(--bg); --shade: var(--charcoal);"><use href="#p0-light"/></svg>
+        </div>
+        <div class="showcase__panel showcase__panel--light">
+          <svg viewBox="0 0 120 120" style="width: 22%; height: 22%; color: var(--text-primary); --shade: var(--bg);"><use href="#p0-light"/></svg>
+        </div>
+        <div class="showcase__panel showcase__panel--dark">
+          <svg viewBox="0 0 120 120" style="width: 22%; height: 22%; color: var(--bg); --shade: var(--charcoal);"><use href="#p0-light"/></svg>
+        </div>
+      </div>
+      <p class="note">The starting point. Two circles. The Lens results show why we're moving.</p>
+    </div>
+
+    <!-- 1 — CRESCENT -->
+    <div class="card">
+      <div class="card__head">
+        <h2 class="card__name">1 · Crescent</h2>
+        <span class="card__tag">Pearl in phase</span>
+      </div>
+      <div class="showcase">
+        <div class="showcase__panel showcase__panel--light">
+          <svg viewBox="0 0 120 120" style="color: var(--text-primary);"><use href="#p1-light"/></svg>
+        </div>
+        <div class="showcase__panel showcase__panel--dark">
+          <svg viewBox="0 0 120 120" style="color: var(--bg);"><use href="#p1-light"/></svg>
+        </div>
+      </div>
+      <div class="sizes">
+        <div class="sizes__cell">
+          <svg width="16" height="16" viewBox="0 0 120 120" style="color: var(--text-primary);"><use href="#p1-light"/></svg>
+          <span class="sizes__label">16</span>
+        </div>
+        <div class="sizes__cell">
+          <svg width="32" height="32" viewBox="0 0 120 120" style="color: var(--text-primary);"><use href="#p1-light"/></svg>
+          <span class="sizes__label">32</span>
+        </div>
+        <div class="sizes__cell">
+          <svg width="72" height="72" viewBox="0 0 120 120" style="color: var(--text-primary);"><use href="#p1-light"/></svg>
+          <span class="sizes__label">72</span>
+        </div>
+      </div>
+      <p class="note">
+        <strong>The move:</strong> drop the highlight, cut a crescent. Pearl becomes a moon-phase — same primitive family, but specifically asymmetric. Reads as motion arrested, not a symmetric app icon.<br/>
+        <strong>Why it works:</strong> removes the thing every music app does. Retains the "clean UI" language. Gains a name.<br/>
+        <strong>Watch:</strong> at 16px the crescent can feel thin — may need the cut tuned tighter.
+      </p>
+    </div>
+
+    <!-- 2 — THRESHOLD -->
+    <div class="card">
+      <div class="card__head">
+        <h2 class="card__name">2 · Threshold</h2>
+        <span class="card__tag">Half-stamped, half-empty</span>
+      </div>
+      <div class="showcase">
+        <div class="showcase__panel showcase__panel--light">
+          <svg viewBox="0 0 120 120" style="color: var(--text-primary);"><use href="#p2-light"/></svg>
+        </div>
+        <div class="showcase__panel showcase__panel--dark">
+          <svg viewBox="0 0 120 120" style="color: var(--bg);"><use href="#p2-light"/></svg>
+        </div>
+      </div>
+      <div class="sizes">
+        <div class="sizes__cell">
+          <svg width="16" height="16" viewBox="0 0 120 120" style="color: var(--text-primary);"><use href="#p2-light"/></svg>
+          <span class="sizes__label">16</span>
+        </div>
+        <div class="sizes__cell">
+          <svg width="32" height="32" viewBox="0 0 120 120" style="color: var(--text-primary);"><use href="#p2-light"/></svg>
+          <span class="sizes__label">32</span>
+        </div>
+        <div class="sizes__cell">
+          <svg width="72" height="72" viewBox="0 0 120 120" style="color: var(--text-primary);"><use href="#p2-light"/></svg>
+          <span class="sizes__label">72</span>
+        </div>
+      </div>
+      <p class="note">
+        <strong>The move:</strong> pearl split vertically. Left half is solid ink, right half is outline. Dot crosses the seam — the part on the outline side is outlined too, the part on the solid side is void.<br/>
+        <strong>Why it works:</strong> ties directly to <em>maison</em> — a threshold, a door half-open, inside/outside. The split is the concept.<br/>
+        <strong>Watch:</strong> stroke thinness is fragile at 16px; may need a solid-only micro-variant for tiny scale.
+      </p>
+    </div>
+
+    <!-- 3 — SEAL -->
+    <div class="card">
+      <div class="card__head">
+        <h2 class="card__name">3 · Seal</h2>
+        <span class="card__tag">Pressed, with a nick</span>
+      </div>
+      <div class="showcase">
+        <div class="showcase__panel showcase__panel--light">
+          <svg viewBox="0 0 120 120" style="color: var(--text-primary); --shade: var(--bg);"><use href="#p3-light"/></svg>
+        </div>
+        <div class="showcase__panel showcase__panel--dark">
+          <svg viewBox="0 0 120 120" style="color: var(--bg); --shade: var(--charcoal);"><use href="#p3-light"/></svg>
+        </div>
+      </div>
+      <div class="sizes">
+        <div class="sizes__cell">
+          <svg width="16" height="16" viewBox="0 0 120 120" style="color: var(--text-primary); --shade: var(--bg);"><use href="#p3-light"/></svg>
+          <span class="sizes__label">16</span>
+        </div>
+        <div class="sizes__cell">
+          <svg width="32" height="32" viewBox="0 0 120 120" style="color: var(--text-primary); --shade: var(--bg);"><use href="#p3-light"/></svg>
+          <span class="sizes__label">32</span>
+        </div>
+        <div class="sizes__cell">
+          <svg width="72" height="72" viewBox="0 0 120 120" style="color: var(--text-primary); --shade: var(--bg);"><use href="#p3-light"/></svg>
+          <span class="sizes__label">72</span>
+        </div>
+      </div>
+      <p class="note">
+        <strong>The move:</strong> keep disc + highlight, add one triangular notch cut into the right edge. The nick is the signature — a pressed wax-seal imperfection.<br/>
+        <strong>Why it works:</strong> minimal deviation from the original, preserves 99% of the recognizability we built, but kills the pixel-match with app icons. A single imperfection tells Lens "not that."<br/>
+        <strong>Watch:</strong> at 16px the notch may disappear — OK if favicon has a "flattened" version.
+      </p>
+    </div>
+
+    <!-- 4 — ORBIT -->
+    <div class="card">
+      <div class="card__head">
+        <h2 class="card__name">4 · Orbit</h2>
+        <span class="card__tag">Dot escapes the body</span>
+      </div>
+      <div class="showcase">
+        <div class="showcase__panel showcase__panel--light">
+          <svg viewBox="0 0 120 120" style="color: var(--text-primary);"><use href="#p4-light"/></svg>
+        </div>
+        <div class="showcase__panel showcase__panel--dark">
+          <svg viewBox="0 0 120 120" style="color: var(--bg);"><use href="#p4-light"/></svg>
+        </div>
+      </div>
+      <div class="sizes">
+        <div class="sizes__cell">
+          <svg width="16" height="16" viewBox="0 0 120 120" style="color: var(--text-primary);"><use href="#p4-light"/></svg>
+          <span class="sizes__label">16</span>
+        </div>
+        <div class="sizes__cell">
+          <svg width="32" height="32" viewBox="0 0 120 120" style="color: var(--text-primary);"><use href="#p4-light"/></svg>
+          <span class="sizes__label">32</span>
+        </div>
+        <div class="sizes__cell">
+          <svg width="72" height="72" viewBox="0 0 120 120" style="color: var(--text-primary);"><use href="#p4-light"/></svg>
+          <span class="sizes__label">72</span>
+        </div>
+      </div>
+      <p class="note">
+        <strong>The move:</strong> the small dot is no longer <em>inside</em> the body — it's outside, upper-right. Two solid elements in gravitational relationship, not one circle with a void.<br/>
+        <strong>Why it works:</strong> mirrors the Ferrofluid orb's "something orbits the main body" logic. Completely breaks the eye/iris/aperture read that every app icon shares.<br/>
+        <strong>Watch:</strong> compositionally more complex, uses more real estate. Less suited to square-crop avatars unless we commit to the full rectangular canvas.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- 5 — STAMPED monogram as a bonus bottom slot -->
+  <div class="grid" style="margin-top: clamp(1.4rem, 2.5vw, 2.2rem);">
+    <div class="card card--full">
+      <div class="card__head">
+        <h2 class="card__name">5 · Stamped · bonus</h2>
+        <span class="card__tag">Monogram hidden inside</span>
+      </div>
+      <div class="showcase">
+        <div class="showcase__panel showcase__panel--light">
+          <svg viewBox="0 0 120 120" style="color: var(--text-primary); --shade: var(--bg);"><use href="#p5-light"/></svg>
+        </div>
+        <div class="showcase__panel showcase__panel--dark">
+          <svg viewBox="0 0 120 120" style="color: var(--bg); --shade: var(--charcoal);"><use href="#p5-light"/></svg>
+        </div>
+        <div class="showcase__panel showcase__panel--light">
+          <svg viewBox="0 0 120 120" style="width: 22%; height: 22%; color: var(--text-primary); --shade: var(--bg);"><use href="#p5-light"/></svg>
+        </div>
+        <div class="showcase__panel showcase__panel--dark">
+          <svg viewBox="0 0 120 120" style="width: 22%; height: 22%; color: var(--bg); --shade: var(--charcoal);"><use href="#p5-light"/></svg>
+        </div>
+      </div>
+      <p class="note">
+        <strong>The move:</strong> replace the highlight dot with a lowercase <em>t</em> in the negative space. Same silhouette as the original pearl — but now there's proprietary type inside. Impossible to match.<br/>
+        <strong>Why it works:</strong> unmistakably yours the moment anyone reads it. Still reads as a "pearl shape" from far away, reads as a signed seal up close.<br/>
+        <strong>Watch:</strong> the <em>t</em> becomes a shape blur at favicon scale — may need a simpler solid-dot variant for 16-24px contexts.
+      </p>
+    </div>
+  </div>
+
+  <a href="./system.html" class="back">← Back to system sheet</a>
+
+</div>
+
+</body>
+</html>

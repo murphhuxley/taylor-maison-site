@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Wordmark System — Two Decisions</title>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500,400&f[]=satoshi@500,400&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f4f0e8;
+    --bg-strong: #ece6de;
+    --ink: #15181b;
+    --muted: #5f5951;
+    --line: rgba(21,24,27,0.12);
+    --charcoal: #0d1015;
+    --cream: #f4f0e8;
+    --font-display: 'Cabinet Grotesk', 'Helvetica Neue', Arial, sans-serif;
+    --font-body: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    padding: 48px 32px 96px;
+  }
+  header.page { max-width: 1320px; margin: 0 auto 56px; }
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 12px;
+  }
+  h1.page-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin: 0 0 18px;
+  }
+  p.page-lede {
+    max-width: 760px;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--muted);
+    margin: 0 0 6px;
+  }
+  p.page-lede b { color: var(--ink); font-weight: 500; }
+
+  /* Section header */
+  .section {
+    max-width: 1320px;
+    margin: 80px auto 0;
+  }
+  .section-head {
+    border-top: 1px solid var(--ink);
+    padding: 28px 0 24px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 32px;
+    align-items: baseline;
+    margin-bottom: 24px;
+  }
+  .section-num {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2rem, 3.6vw, 3rem);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .section-head h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.4rem, 2.4vw, 2rem);
+    letter-spacing: -0.015em;
+    margin: 0 0 6px;
+  }
+  .section-head p {
+    font-family: var(--font-body);
+    color: var(--muted);
+    font-size: 0.96rem;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 720px;
+  }
+
+  /* Voice grid */
+  .voice-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .voice-card {
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: #fff;
+    overflow: hidden;
+  }
+  .voice-head {
+    padding: 22px 28px 18px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .voice-head .label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .voice-head .ref {
+    font-family: var(--font-body);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .voice-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .panel {
+    aspect-ratio: 16 / 10;
+    display: grid;
+    place-items: center;
+    padding: 40px;
+  }
+  .panel--light { background: var(--cream); color: var(--ink); }
+  .panel--dark  { background: var(--charcoal); color: var(--cream); }
+
+  /* Wordmark base */
+  .wm {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 0.96;
+  }
+  .wm .row { display: block; }
+
+  /* Voice A — Heavy, tight (A24 lane) */
+  .wm--A {
+    font-weight: 800;
+    letter-spacing: -0.035em;
+  }
+  .wm--A .row + .row { margin-top: 0.04em; }
+
+  /* Voice B — Medium, editorial (takeagander lane) */
+  .wm--B {
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .wm--B .row + .row { margin-top: 0.06em; }
+
+  /* Voice C — Light, wide (James Perse lane) */
+  .wm--C {
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    /* compensate for tracking so block stays centered */
+    padding-left: 0.22em;
+  }
+  .wm--C .row + .row { margin-top: 0.25em; }
+
+  .wm--hero { font-size: clamp(36px, 7.5vw, 76px); }
+
+  /* Scale row */
+  .scale-row {
+    padding: 22px 28px 22px;
+    border-top: 1px solid var(--line);
+    background: #fcfbf8;
+    display: flex;
+    align-items: flex-end;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .scale-chip { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+  .scale-chip small {
+    font-family: var(--font-body);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* Header mockup */
+  .header-mock {
+    padding: 0;
+    border-top: 1px solid var(--line);
+  }
+  .header-mock-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 28px;
+    background: var(--cream);
+  }
+  .header-mock-strip--dark {
+    background: var(--charcoal);
+    color: var(--cream);
+  }
+  .header-mock-strip .nav {
+    font-family: var(--font-body);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    display: flex;
+    gap: 28px;
+    color: var(--muted);
+  }
+  .header-mock-strip--dark .nav { color: rgba(244,240,232,0.7); }
+  /* Single-line header wordmark uses inline row */
+  .wm--inline { flex-direction: row; }
+  .wm--inline.wm--A .row:first-child::after { content: ""; display: inline-block; width: 0.3em; }
+  .wm--inline .row + .row { margin-top: 0; margin-left: 0.3em; }
+
+  .rationale {
+    padding: 20px 28px 26px;
+    border-top: 1px solid var(--line);
+  }
+  .rationale h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.92rem;
+    margin: 0 0 8px;
+  }
+  .rationale p {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--muted);
+    margin: 0 0 8px;
+  }
+
+  /* Pearl-survives comparison */
+  .survive-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  @media (max-width: 980px) { .survive-grid { grid-template-columns: 1fr; } }
+
+  .survive-card {
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: #fff;
+    overflow: hidden;
+  }
+  .survive-head {
+    padding: 22px 28px 18px;
+    border-bottom: 1px solid var(--line);
+  }
+  .survive-head .verdict {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.3rem;
+    letter-spacing: -0.01em;
+    margin: 0 0 2px;
+  }
+  .survive-head .caption {
+    font-family: var(--font-body);
+    color: var(--muted);
+    font-size: 0.92rem;
+    margin: 0;
+  }
+
+  .artifact-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--line);
+  }
+  @media (max-width: 760px) { .artifact-row { grid-template-columns: repeat(2, 1fr); } }
+  .artifact {
+    aspect-ratio: 1 / 1;
+    display: grid;
+    place-items: center;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 16px;
+    position: relative;
+  }
+  .artifact:last-child { border-right: 0; }
+  .artifact--cream { background: var(--cream); color: var(--ink); }
+  .artifact--char  { background: var(--charcoal); color: var(--cream); }
+  .artifact .tag {
+    position: absolute;
+    bottom: 8px; left: 10px;
+    font-family: var(--font-body);
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .artifact--char .tag { color: rgba(244,240,232,0.5); }
+
+  /* Favicon-size pearl disc (solid) */
+  .pearl-disc {
+    width: 64%;
+    aspect-ratio: 1 / 1;
+    background: currentColor;
+    border-radius: 50%;
+  }
+  /* Classic two-circle pearl as favicon */
+  .pearl-classic {
+    width: 70%;
+    aspect-ratio: 1 / 1;
+  }
+  /* Letterform favicon: T */
+  .favi-T {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(58px, 14vw, 110px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  /* Period favicon */
+  .favi-period {
+    width: 24%;
+    aspect-ratio: 1 / 1;
+    background: currentColor;
+    border-radius: 50%;
+  }
+  /* tm lowercase favicon */
+  .favi-tm {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(40px, 10vw, 80px);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    text-transform: lowercase;
+  }
+
+  /* Case-study corner mock */
+  .case-mock {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(180deg, #c7bdad 0%, #9c8f80 100%);
+    overflow: hidden;
+  }
+  .case-mock .title {
+    position: absolute;
+    left: 28px; bottom: 22px;
+    color: var(--cream);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(24px, 3vw, 36px);
+    letter-spacing: -0.01em;
+    line-height: 0.95;
+  }
+  .case-mock .sub {
+    position: absolute;
+    left: 28px; top: 24px;
+    color: rgba(244,240,232,0.72);
+    font-family: var(--font-body);
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .case-mock .corner {
+    position: absolute;
+    right: 24px; top: 24px;
+    width: 28px; height: 28px;
+    color: var(--cream);
+  }
+  .case-mock .corner-wm {
+    position: absolute;
+    right: 24px; top: 24px;
+    color: var(--cream);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: right;
+    line-height: 1.2;
+  }
+
+  /* Email signature block */
+  .email-mock {
+    padding: 28px;
+    background: #fff;
+    aspect-ratio: 16 / 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .email-mock .sig-wm-A {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    font-size: 18px;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .email-mock .sig-meta {
+    font-family: var(--font-body);
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+  .email-mock .sig-pearl {
+    width: 18px;
+    height: 18px;
+    background: var(--ink);
+    border-radius: 50%;
+    margin-bottom: 14px;
+  }
+
+  /* Decision row (end) */
+  .decision {
+    max-width: 1320px;
+    margin: 72px auto 0;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: #fff;
+    padding: 32px 36px 36px;
+  }
+  .decision h3 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+    margin: 0 0 14px;
+    letter-spacing: -0.015em;
+  }
+  .decision ol {
+    padding-left: 20px;
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+  .decision li + li { margin-top: 10px; }
+  .decision li b { color: var(--ink); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header class="page">
+  <p class="eyebrow">The brief · answered</p>
+  <h1 class="page-title">Two decisions left.</h1>
+  <p class="page-lede">Your references (<b>A24</b>, <b>James Perse</b>, <b>takeagander</b>) are all pure wordmark systems. The direction is clear: the logo is the name, carefully set. What's left to decide is which <b>typographic voice</b> is yours, and whether the pearl <b>survives as a system element</b> outside the lockup.</p>
+  <p class="page-lede">Guardrails observed: no house motifs, no mAIson-caps tricks, no sphere/circle in ideation (the orb already holds that shape).</p>
+</header>
+
+<!-- ===================== SECTION 01 ===================== -->
+<section class="section">
+  <div class="section-head">
+    <div class="section-num">01</div>
+    <div>
+      <h2>Which typographic voice is yours?</h2>
+      <p>Same name, three weights + trackings in Cabinet Grotesk. Each one aligns to one of your references. Pick the register that feels like the business you actually want to run.</p>
+    </div>
+  </div>
+
+  <div class="voice-grid">
+
+    <!-- Voice A : Heavy tight (A24) -->
+    <article class="voice-card">
+      <div class="voice-head">
+        <h3 class="label">Voice A · Heavy, tight</h3>
+        <span class="ref">The A24 lane</span>
+      </div>
+      <div class="voice-hero">
+        <div class="panel panel--light">
+          <div class="wm wm--A wm--hero">
+            <span class="row">TAYLOR</span>
+            <span class="row">MAISON</span>
+          </div>
+        </div>
+        <div class="panel panel--dark">
+          <div class="wm wm--A wm--hero">
+            <span class="row">TAYLOR</span>
+            <span class="row">MAISON</span>
+          </div>
+        </div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-chip">
+          <div class="wm wm--A" style="font-size:14px"><span class="row">TAYLOR</span><span class="row">MAISON</span></div>
+          <small>14px</small>
+        </div>
+        <div class="scale-chip">
+          <div class="wm wm--A" style="font-size:22px"><span class="row">TAYLOR</span><span class="row">MAISON</span></div>
+          <small>22px</small>
+        </div>
+        <div class="scale-chip">
+          <div class="wm wm--A" style="font-size:36px"><span class="row">TAYLOR</span><span class="row">MAISON</span></div>
+          <small>36px</small>
+        </div>
+        <div class="scale-chip">
+          <div class="wm wm--A" style="font-size:22px; flex-direction:row; gap:6px"><span class="row">TAYLOR</span><span class="row">MAISON</span></div>
+          <small>Inline</small>
+        </div>
+      </div>
+      <div class="header-mock">
+        <div class="header-mock-strip">
+          <div class="wm wm--A" style="font-size:16px; flex-direction:row; gap:6px"><span class="row">TAYLOR</span><span class="row">MAISON</span></div>
+          <nav class="nav"><span>Work</span><span>About</span><span>Contact</span></nav>
+        </div>
+        <div class="header-mock-strip header-mock-strip--dark">
+          <div class="wm wm--A" style="font-size:16px; flex-direction:row; gap:6px"><span class="row">TAYLOR</span><span class="row">MAISON</span></div>
+          <nav class="nav"><span>Work</span><span>About</span><span>Contact</span></nav>
+        </div>
+      </div>
+      <div class="rationale">
+        <h3>The argument</h3>
+        <p>Heavy, confident, tight. Reads as a <i>presence</i> — the name sits like a stamp. This is the voice of A24, Aesop (in its wordmark moods), Everlane's earlier identity. It's the most assertive of the three; not loud, but undeniable in the room.</p>
+        <p>Fit check: pairs well with the cream + charcoal palette you've got. Risk: can feel slightly heavy-handed if the rest of the site is restrained — the wordmark will want air around it.</p>
+      </div>
+    </article>
+
+    <!-- Voice B : Medium editorial (takeagander) -->
+    <article class="voice-card">
+      <div class="voice-head">
+        <h3 class="label">Voice B · Medium, editorial</h3>
+        <span class="ref">The takeagander lane</span>
+      </div>
+      <div class="voice-hero">
+        <div class="panel panel--light">
+          <div class="wm wm--B wm--hero">
+            <span class="row">TAYLOR</span>
+            <span class="row">MAISON</span>
+          </div>
+        </div>
+        <div class="panel panel--dark">
+          <div class="wm wm--B wm--hero">
+            <span class="row">TAYLOR</span>
+            <span class="row">MAISON</span>
+          </div>
+        </div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-chip">
+          <div class="wm wm--B" style="font-size:14px"><span class="row">TAYLOR</span><span class="row">MAISON</span></div>
+          <small>14px</small>
+        </div>
+        <div class="scale-chip">
+          <div class="wm wm--B" style="font-size:22px"><span class="row">TAYLOR</span><span class="row">MAISON</span></div>
+          <small>22px</small>
+        </div>
+        <div class="scale-chip">
+          <div class="wm wm--B" style="font-size:36px"><span class="row">TAYLOR</span><span class="row">MAISON</span></div>
+          <small>36px</small>
+        </div>
+        <div class="scale-chip">
+          <div class="wm wm--B" style="font-size:22px; flex-direction:row; gap:8px"><span class="row">TAYLOR</span><span class="row">MAISON</span></div>
+          <small>Inline</small>
+        </div>
+      </div>
+      <div class="header-mock">
+        <div class="header-mock-strip">
+          <div class="wm wm--B" style="font-size:16px; flex-direction:row; gap:8px"><span class="row">TAYLOR</span><span class="row">MAISON</span></div>
+          <nav class="nav"><span>Work</span><span>About</span><span>Contact</span></nav>
+        </div>
+        <div class="header-mock-strip header-mock-strip--dark">
+          <div class="wm wm--B" style="font-size:16px; flex-direction:row; gap:8px"><span class="row">TAYLOR</span><span class="row">MAISON</span></div>
+          <nav class="nav"><span>Work</span><span>About</span><span>Contact</span></nav>
+        </div>
+      </div>
+      <div class="rationale">
+        <h3>The argument</h3>
+        <p>Middle path. Confident but not shouting. Reads as editorial / considered — the voice of an agency that makes careful choices. Pairs with serif body copy or equally-weighted sans; flexible across tones. This is probably the safest lane of the three, which is both its strength and its weakness.</p>
+        <p>Fit check: least visually specific. If every other touchpoint on the site is doing work, this wordmark will hold its own but won't lead.</p>
+      </div>
+    </article>
+
+    <!-- Voice C : Light wide (James Perse) -->
+    <article class="voice-card">
+      <div class="voice-head">
+        <h3 class="label">Voice C · Light, wide-tracked</h3>
+        <span class="ref">The James Perse lane</span>
+      </div>
+      <div class="voice-hero">
+        <div class="panel panel--light">
+          <div class="wm wm--C wm--hero">
+            <span class="row">TAYLOR</span>
+            <span class="row">MAISON</span>
+          </div>
+        </div>
+        <div class="panel panel--dark">
+          <div class="wm wm--C wm--hero">
+            <span class="row">TAYLOR</span>
+            <span class="row">MAISON</span>
+          </div>
+        </div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-chip">
+          <div class="wm wm--C" style="font-size:13px"><span class="row">TAYLOR</span><span class="row">MAISON</span></div>
+          <small>13px</small>
+        </div>
+        <div class="scale-chip">
+          <div class="wm wm--C" style="font-size:20px"><span class="row">TAYLOR</span><span class="row">MAISON</span></div>
+          <small>20px</small>
+        </div>
+        <div class="scale-chip">
+          <div class="wm wm--C" style="font-size:32px"><span class="row">TAYLOR</span><span class="row">MAISON</span></div>
+          <small>32px</small>
+        </div>
+        <div class="scale-chip">
+          <div class="wm wm--C" style="font-size:18px; flex-direction:row; gap:20px; padding-left:0.22em"><span class="row">TAYLOR</span><span class="row">MAISON</span></div>
+          <small>Inline</small>
+        </div>
+      </div>
+      <div class="header-mock">
+        <div class="header-mock-strip">
+          <div class="wm wm--C" style="font-size:13px; flex-direction:row; gap:16px; padding-left:0.22em"><span class="row">TAYLOR</span><span class="row">MAISON</span></div>
+          <nav class="nav"><span>Work</span><span>About</span><span>Contact</span></nav>
+        </div>
+        <div class="header-mock-strip header-mock-strip--dark">
+          <div class="wm wm--C" style="font-size:13px; flex-direction:row; gap:16px; padding-left:0.22em"><span class="row">TAYLOR</span><span class="row">MAISON</span></div>
+          <nav class="nav"><span>Work</span><span>About</span><span>Contact</span></nav>
+        </div>
+      </div>
+      <div class="rationale">
+        <h3>The argument</h3>
+        <p>Thin, wide, stately. Reads as <i>signage</i> — the voice of quiet luxury. James Perse, Calvin Klein's wordmark, Loewe's earlier marks. The widest tracking feels like a storefront; it demands breathing room and rewards it.</p>
+        <p>Fit check: strongest at hero scale, hardest at small sizes. Tracked-out caps can break down under 14px — needs careful kerning and probably a small-size alt (tighter tracking) for UI chrome. It's the most committed-to-a-register of the three; if this is you, it's <i>really</i> you.</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ===================== SECTION 02 ===================== -->
+<section class="section">
+  <div class="section-head">
+    <div class="section-num">02</div>
+    <div>
+      <h2>Does the pearl survive as a system element?</h2>
+      <p>The pearl is not in the logo lockup — that's settled. But it can still live in your brand world. Left: the pearl survives as a secondary graphic. Right: it retires entirely, and the favicon becomes a typographic solution. Both are valid — pick the one that feels right.</p>
+    </div>
+  </div>
+
+  <div class="survive-grid">
+
+    <!-- YES : Pearl survives -->
+    <article class="survive-card">
+      <div class="survive-head">
+        <div class="verdict">YES · Pearl as system element</div>
+        <p class="caption">Wordmark is the logo. Pearl is the signature — appears in favicon, avatar, case study corners, section dividers, email signatures.</p>
+      </div>
+      <div class="artifact-row">
+        <div class="artifact artifact--cream">
+          <div class="pearl-disc"></div>
+          <span class="tag">Favicon</span>
+        </div>
+        <div class="artifact artifact--char">
+          <div class="pearl-disc"></div>
+          <span class="tag">Avatar</span>
+        </div>
+        <div class="artifact artifact--cream" style="padding:0">
+          <div class="case-mock" style="width:100%; height:100%;">
+            <span class="sub">Case · 04</span>
+            <div class="title">Roman<br/>Sanford</div>
+            <svg class="corner" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="currentColor"/></svg>
+          </div>
+          <span class="tag">Case corner</span>
+        </div>
+        <div class="artifact artifact--cream" style="padding:0">
+          <div class="email-mock">
+            <div class="sig-pearl"></div>
+            <div class="sig-wm-A">Taylor Maison</div>
+            <div class="sig-meta">Creative Direction · Brand + Web + AI<br/>taylormaison.co</div>
+          </div>
+          <span class="tag">Email sig</span>
+        </div>
+      </div>
+      <div class="rationale">
+        <h3>Why keep it</h3>
+        <p>Protects your attachment to the pearl without forcing it into the logo. The mark lives in every off-wordmark context: the favicon is the pearl, the Instagram avatar is the pearl, case studies get a subtle pearl stamp in the corner, section dividers use a small pearl as a bullet. Present everywhere, never the logo itself.</p>
+        <p>Risk: every system element is one more thing to maintain and defend. If the pearl doesn't actually mean anything durable to the work, it's decoration.</p>
+      </div>
+    </article>
+
+    <!-- NO : Pearl retires -->
+    <article class="survive-card">
+      <div class="survive-head">
+        <div class="verdict">NO · Pure wordmark system</div>
+        <p class="caption">Pearl retires entirely. Favicon and avatar become typographic. The wordmark, at different sizes, is the only mark you have. Maximum A24.</p>
+      </div>
+      <div class="artifact-row">
+        <div class="artifact artifact--cream">
+          <div class="favi-T">T</div>
+          <span class="tag">Favicon · T</span>
+        </div>
+        <div class="artifact artifact--char">
+          <div class="favi-tm">tm</div>
+          <span class="tag">Avatar · tm</span>
+        </div>
+        <div class="artifact artifact--cream" style="padding:0">
+          <div class="case-mock" style="width:100%; height:100%;">
+            <span class="sub">Case · 04</span>
+            <div class="title">Roman<br/>Sanford</div>
+            <div class="corner-wm">Taylor<br/>Maison</div>
+          </div>
+          <span class="tag">Case corner</span>
+        </div>
+        <div class="artifact artifact--cream" style="padding:0">
+          <div class="email-mock">
+            <div class="sig-wm-A">Taylor Maison</div>
+            <div class="sig-meta">Creative Direction · Brand + Web + AI<br/>taylormaison.co</div>
+          </div>
+          <span class="tag">Email sig</span>
+        </div>
+      </div>
+      <div class="rationale">
+        <h3>Why retire it</h3>
+        <p>One asset. One idea. The wordmark, at every scale, is the system. Favicon is a single "T" (or "tm" lowercase to dodge ™ confusion). Case study corners use the wordmark small. Email signature is the wordmark and nothing else. This is Rand at full commitment: the name does all the work.</p>
+        <p>Risk: you lose a beloved shape. If the pearl actually carries meaning for you that the wordmark doesn't, retiring it is a real cost, not a simplification.</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ===================== DECISION ===================== -->
+<section class="decision">
+  <h3>Pick two things and we're done with logo work.</h3>
+  <ol>
+    <li><b>Voice:</b> A (heavy tight), B (medium editorial), or C (light wide-tracked)?</li>
+    <li><b>Pearl:</b> Survives as system element, or retires entirely?</li>
+  </ol>
+</section>
+
+</body>
+</html>

@@ -2,136 +2,103 @@
 
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
-import CreatureGlyph from './CreatureGlyph'
-
-const pillars = [
-  {
-    idx: '01',
-    name: 'Brand direction',
-    desc: 'Strategy and visual identity for businesses that care how they present.',
-  },
-  {
-    idx: '02',
-    name: 'Custom websites',
-    desc: 'Design + build for marketing sites, portfolios, and product storytelling.',
-  },
-  {
-    idx: '03',
-    name: 'AI workflows',
-    desc: 'Getting non-technical teams fluent with AI tooling — real workflows, not hype.',
-  },
-]
+import TransitionLink from './TransitionLink'
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ delay: 0.15 })
+      const tl = gsap.timeline({ delay: 0.2 })
 
       tl.fromTo(
-        '.hero__top-strip',
-        { autoAlpha: 0, y: 14 },
-        { autoAlpha: 1, y: 0, duration: 0.65, ease: 'power3.out', clearProps: 'all' }
+        '.hero__reveal',
+        { autoAlpha: 0, y: 34 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.95,
+          ease: 'power3.out',
+          stagger: 0.08,
+          clearProps: 'all',
+        }
+      ).fromTo(
+        '.hero__card',
+        { autoAlpha: 0, y: 42, scale: 0.98 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          scale: 1,
+          duration: 1,
+          ease: 'power3.out',
+          clearProps: 'all',
+        },
+        '-=0.55'
       )
-        .fromTo(
-          '.hero__title-line',
-          { autoAlpha: 0, y: 80 },
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 1.1,
-            ease: 'power3.out',
-            stagger: 0.12,
-            clearProps: 'all',
-          },
-          '-=0.2'
-        )
-        .fromTo(
-          '.hero__pillar',
-          { autoAlpha: 0, y: 30 },
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.85,
-            ease: 'power3.out',
-            stagger: 0.08,
-            clearProps: 'all',
-          },
-          '-=0.55'
-        )
-        .fromTo(
-          '.hero__bottom > *',
-          { autoAlpha: 0, y: 22 },
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.75,
-            ease: 'power3.out',
-            stagger: 0.08,
-            clearProps: 'all',
-          },
-          '-=0.4'
-        )
     }, sectionRef)
 
     return () => ctx.revert()
   }, [])
 
   return (
-    <section id="top" ref={sectionRef} className="hero hero--editorial">
-      <div className="hero__top-strip" style={{ opacity: 0, visibility: 'hidden' }}>
-        <span>Taylor Maison — Creative Direction · Websites · AI Workflows</span>
-        <span>Southampton, NY · Est. 2024</span>
-      </div>
+    <section id="top" ref={sectionRef} className="hero">
+      <div className="hero__inner">
+        <div className="hero__copy">
+          <p className="hero__eyebrow hero__reveal" style={{ opacity: 0, visibility: 'hidden' }}>
+            Taylor Maison · Creative Systems
+          </p>
 
-      <div className="hero__type">
-        <h1 className="hero__title">
-          <span className="hero__title-line" style={{ opacity: 0, visibility: 'hidden' }}>
-            Taste<CreatureGlyph>,</CreatureGlyph> applied to
-          </span>
-          <span className="hero__title-line" style={{ opacity: 0, visibility: 'hidden' }}>
-            whatever&rsquo;s
-          </span>
-          <span className="hero__title-line" style={{ opacity: 0, visibility: 'hidden' }}>
-            next<CreatureGlyph>.</CreatureGlyph>
-          </span>
-        </h1>
+          <h1 className="hero__headline hero__reveal" style={{ opacity: 0, visibility: 'hidden' }}>
+            <span>Sharper website.</span>
+            <span>Smarter workflows.</span>
+            <span>More revenue.</span>
+          </h1>
 
-        <div className="hero__pillars">
-          {pillars.map((p) => (
-            <div key={p.idx} className="hero__pillar" style={{ opacity: 0, visibility: 'hidden' }}>
-              <span className="hero__pillar-idx">{p.idx}</span>
-              <span className="hero__pillar-name">{p.name}</span>
-              <p className="hero__pillar-desc">{p.desc}</p>
-            </div>
-          ))}
+          <p className="hero__lede hero__reveal" style={{ opacity: 0, visibility: 'hidden' }}>
+            Taylor Maison rebuilds the digital presence and practical AI systems behind it,
+            so founder-led businesses win better inquiries, follow up faster, and turn more
+            opportunities into revenue.
+          </p>
+
+          <div className="hero__actions hero__reveal" style={{ opacity: 0, visibility: 'hidden' }}>
+            <TransitionLink href="/contact" className="hero__cta hero__cta--primary">
+              Start a conversation
+            </TransitionLink>
+            <TransitionLink href="/work" className="hero__cta hero__cta--secondary">
+              View the work
+            </TransitionLink>
+          </div>
+
+          <p className="hero__trust hero__reveal" style={{ opacity: 0, visibility: 'hidden' }}>
+            Southampton-rooted · Built for warm referrals, serious operators, and quiet leverage.
+          </p>
         </div>
-      </div>
 
-      <div className="hero__bottom">
-        <p className="hero__lede" style={{ opacity: 0, visibility: 'hidden' }}>
-          Built around clarity, restraint, and knowing what to leave out —
-          whether that&rsquo;s a wordmark, a homepage, or how your team actually
-          uses AI.
-        </p>
-        <div className="hero__actions" style={{ opacity: 0, visibility: 'hidden' }}>
-          <a href="/work" className="hero__button hero__button--primary">
-            Selected work
-          </a>
-          <a href="/contact" className="hero__button hero__button--secondary">
-            Start a conversation
-          </a>
-        </div>
-        <div className="hero__signal" style={{ opacity: 0, visibility: 'hidden' }}>
-          <span className="hero__signal-pin" aria-hidden="true" />
-          <span>
-            <strong>Taking on 2 new engagements</strong>
-          </span>
-          <span>Q2 · 2026</span>
-        </div>
+        <aside className="hero__card" style={{ opacity: 0, visibility: 'hidden' }}>
+          <p className="hero__card-label">Where the lift comes from</p>
+          <ul className="hero__card-list">
+            <li>
+              <span>01</span>
+              <strong>The website</strong>
+              <p>Positioning, homepage, proof, and a path that makes inquiry feel obvious.</p>
+            </li>
+            <li>
+              <span>02</span>
+              <strong>The follow-up system</strong>
+              <p>Lead flow, reply structure, and simple automations that stop good opportunities from leaking.</p>
+            </li>
+            <li>
+              <span>03</span>
+              <strong>The AI skill layer</strong>
+              <p>Practical tools and training so the team can move faster without turning into an AI gimmick.</p>
+            </li>
+          </ul>
+          <div className="hero__card-footer">
+            <span>By referral</span>
+            <span>Select engagements · 2026</span>
+          </div>
+        </aside>
       </div>
-
     </section>
   )
 }
